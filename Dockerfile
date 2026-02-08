@@ -7,9 +7,6 @@ COPY bun.lock ./
 COPY . .
 RUN bun install
 
-ARG VUE_APP_API_URL
-ENV VITE_APP_API_URL=${VUE_APP_API_URL}
-
 RUN bun run build-only
 
 FROM nginx:stable-alpine as production-stage

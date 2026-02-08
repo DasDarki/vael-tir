@@ -1,0 +1,15 @@
+﻿services:
+  frontend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "2280:80"
+    networks:
+      - shared-network
+    restart: unless-stopped
+
+networks:
+  shared-network:
+    external: true
