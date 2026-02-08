@@ -481,10 +481,10 @@ onBeforeUnmount(() => {
       <div v-if="isCalibrateMode" class="stat dev">devmode=calibrate</div>
     </div>
 
-    <div class="scale">
+<!--    <div class="scale">
       <div class="scale-bar" :style="{ width: scale.barPx + 'px' }"></div>
       <div class="scale-label">{{ scale.label }}</div>
-    </div>
+    </div>-->
 
     <div v-if="ui.showCopied" class="toast">{{ ui.copiedText }}</div>
   </div>
