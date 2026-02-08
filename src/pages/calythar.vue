@@ -1,21 +1,15 @@
 ﻿<script setup lang="ts">
-import {onMounted} from "vue";
-import router from "@/router.ts";
-
 definePage({
   meta: {
     parent: 'Weltkarte',
-    title: 'Calythar'
+    title: 'Calythar',
+    noContent: true
   }
-});
-
-onMounted(() => {
-  router.push('/map?focus=calythar');
 });
 </script>
 
 <template>
-
+  <RouterView />
 </template>
 
 <style scoped lang="scss">

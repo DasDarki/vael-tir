@@ -1,21 +1,15 @@
 ﻿<script setup lang="ts">
-import {onMounted} from "vue";
-import router from "@/router.ts";
-
 definePage({
   meta: {
     parent: 'Weltkarte',
-    title: 'Varkuun'
+    title: 'Varkuun',
+    noContent: true
   }
-});
-
-onMounted(() => {
-  router.push('/map?focus=varkuun');
 });
 </script>
 
 <template>
-
+  <RouterView />
 </template>
 
 <style scoped lang="scss">

@@ -1,21 +1,15 @@
 ﻿<script setup lang="ts">
-import {onMounted} from "vue";
-import router from "@/router.ts";
-
 definePage({
   meta: {
     parent: 'Weltkarte',
-    title: 'Esh\'Raen'
+    title: 'Esh\'Raen',
+    noContent: true
   }
-});
-
-onMounted(() => {
-  router.push('/map?focus=eshraen');
 });
 </script>
 
 <template>
-
+  <RouterView />
 </template>
 
 <style scoped lang="scss">

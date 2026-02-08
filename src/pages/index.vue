@@ -51,6 +51,9 @@ onMounted(() => {
       });
 
     page.link = route.path;
+    if (route.meta?.noContent === true) {
+      delete page.link;
+    }
 
     if (route.meta.parent) {
       const parentTitle = route.meta.parent as string;
