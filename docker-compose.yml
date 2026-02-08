@@ -3,7 +3,7 @@
     build:
       context: ./
       dockerfile: Dockerfile
-    container_name: frontend
+    container_name: vael-tir-frontend
     ports:
       - "2280:80"
     networks:
