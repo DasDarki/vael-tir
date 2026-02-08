@@ -36,18 +36,18 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       Record<never, never>,
       | '/calythar/varethis'
-      | '/calythar/varethis/nebelviertel'
+      | '/calythar/varethis/map'
     >,
     '/calythar/varethis': RouteRecordInfo<
       '/calythar/varethis',
       '/calythar/varethis',
       Record<never, never>,
       Record<never, never>,
-      | '/calythar/varethis/nebelviertel'
+      | '/calythar/varethis/map'
     >,
-    '/calythar/varethis/nebelviertel': RouteRecordInfo<
-      '/calythar/varethis/nebelviertel',
-      '/calythar/varethis/nebelviertel',
+    '/calythar/varethis/map': RouteRecordInfo<
+      '/calythar/varethis/map',
+      '/calythar/varethis/map',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -96,20 +96,20 @@ declare module 'vue-router/auto-routes' {
       routes:
         | '/calythar'
         | '/calythar/varethis'
-        | '/calythar/varethis/nebelviertel'
+        | '/calythar/varethis/map'
       views:
         | 'default'
     }
     'src/pages/calythar/varethis.vue': {
       routes:
         | '/calythar/varethis'
-        | '/calythar/varethis/nebelviertel'
+        | '/calythar/varethis/map'
       views:
         | 'default'
     }
-    'src/pages/calythar/varethis/nebelviertel.vue': {
+    'src/pages/calythar/varethis/map.vue': {
       routes:
-        | '/calythar/varethis/nebelviertel'
+        | '/calythar/varethis/map'
       views:
         | never
     }

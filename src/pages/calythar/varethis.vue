@@ -1,8 +1,8 @@
 ﻿<script setup lang="ts">
 definePage({
   meta: {
-    parent: 'Weltkarte',
-    title: 'Calythar',
+    parent: 'Calythar',
+    title: 'Varethis',
     noContent: true
   }
 });

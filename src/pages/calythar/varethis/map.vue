@@ -3,8 +3,8 @@ import { onMounted } from "vue";
 
 definePage({
   meta: {
-    parent: 'Calythar',
-    title: 'Varethis'
+    parent: 'Varethis',
+    title: '- Stadtplan',
   }
 })
 
