@@ -75,6 +75,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/money': RouteRecordInfo<
+      '/money',
+      '/money',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/varkuun': RouteRecordInfo<
       '/varkuun',
       '/varkuun',
@@ -139,6 +146,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/map.vue': {
       routes:
         | '/map'
+      views:
+        | never
+    }
+    'src/pages/money.vue': {
+      routes:
+        | '/money'
       views:
         | never
     }
