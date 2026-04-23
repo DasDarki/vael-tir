@@ -68,6 +68,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/flora-fauna': RouteRecordInfo<
+      '/flora-fauna',
+      '/flora-fauna',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/map': RouteRecordInfo<
       '/map',
       '/map',
@@ -140,6 +147,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/eshraen.vue': {
       routes:
         | '/eshraen'
+      views:
+        | never
+    }
+    'src/pages/flora-fauna.vue': {
+      routes:
+        | '/flora-fauna'
       views:
         | never
     }

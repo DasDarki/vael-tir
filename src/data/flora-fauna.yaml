@@ -1,0 +1,2245 @@
+# Kompendium der Flora & Fauna Vael Tirs
+# Quellen: Flora & Fauna.md, Calythar.md, Esh'Raen.md, Varkuun.md
+
+meta:
+  description: >
+    Digitalisiertes Kompendium der bekannten Flora und Fauna Vael Tirs.
+    Regionen sind grobe Landstriche (wie in der Quelle), Orte sind konkrete
+    Siedlungen oder Landmarken, an denen die Art vorkommt oder bekannt ist.
+
+  # Für die Filter-Sidebar – Reihenfolge definiert Gruppierung
+  types:
+    flora:
+      - heilpflanze
+      - giftpflanze
+      - pilz
+      - baum
+      - gewuerz
+      - blume
+      - nutzpflanze
+      - obst
+    fauna:
+      - reittier
+      - hund
+      - nutztier
+      - raubtier
+      - beutetier
+      - vogel
+      - meerestier
+      - insekt
+      - saeugetier
+      - reptil
+      - amphibie
+
+  typeLabels:
+    heilpflanze: Heilpflanze
+    giftpflanze: Giftpflanze
+    pilz: Pilz
+    baum: Baum
+    gewuerz: Gewürz
+    blume: Blume
+    nutzpflanze: Nutzpflanze / Getreide
+    obst: Obst & Gemüse
+    reittier: Reittier
+    hund: Hund
+    nutztier: Nutztier
+    raubtier: Raubtier
+    beutetier: Beutetier
+    vogel: Vogel
+    meerestier: Meerestier
+    insekt: Insekt / Wirbelloses
+    saeugetier: Säugetier
+    reptil: Reptil
+    amphibie: Amphibie
+
+  # Kontinente → Regionen → konkrete Orte
+  # Reihenfolge wird in der UI übernommen.
+  geography:
+    - continent: Calythar
+      regions:
+        - name: Varethianische Ebenen
+          locations: [Varethis, Helioris, Selhaven, Mordrath, Keldrin, Velastum, Molthen, Arendal, Birketh, Damrath, Horathen, Luminfluss, Spiegelsee]
+        - name: Westen & Westebenen
+          locations: [Thesan-Hafen, Calyra, Velenthor, Saltheris, Ankhoral, Ernath, Langeth, Neveth, Soramund, Vaelith, Odiannisches Meer]
+        - name: Süden
+          locations: [Soranthis, Lumendras, Veranthal, Rebendris, Mulbeth, Havelthen, Dorathel, Althenor]
+        - name: Calythische Höhen
+          locations: [Fendrak, Korvash, Sildareth, Tharumund, Gorendal, Stumprath, Nordath, Haldorn, Felsmahr, Vindrath, Korathel, Tiefenthal]
+        - name: Valdorn
+          locations: [Bekannter Rand, Graue Tiefe, Vaelgrund, Schrein von Moldrath, Stille Lichtung, Valendris, Wanderpfad, Haldorn]
+        - name: Ordensmarken
+          locations: [Karsuun, Sturmarak, Nevelthas, Langer Wall, Grenthas, Veltharak, Grathmund, Vendarath, Khorendal, Vaelstrom, Großer Riss]
+    - continent: Varkuun
+      regions:
+        - name: Nordvarkuun
+          locations: [Valdrek, Bran Keth, Kethmund, Branthor, Sturmkap, Grauklamm, Vendrath]
+        - name: Zentralvarkuun (Aschezonen)
+          locations: [Zirkelinsel, Loryn-Ruinen, Aschholm, Thalendris]
+        - name: Südvarkuun
+          locations: [Solveth, Tränenhaven, Thalmunds Rast, Kalveth]
+    - continent: Esh'Raen
+      regions:
+        - name: Jenseits des Nebels
+          locations: [Kosmisches Gebirge, Il'Sereth]
+
+entries:
+
+  # ─── Kräuter & Heilpflanzen: Allgemein verbreitet ─────────────────────
+  - name: Mondblatt
+    scientificName: Lunaria pallens
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen, Süden, Valdorn]
+    locations: [Varethis, Selhaven, Molthen, Soranthis, Bekannter Rand, Haldorn]
+    continents: [Calythar]
+    habitat: Schattige Waldränder, feuchte Wiesen
+    bloom: Frühjahr (3.–5. Monat)
+    harvest: Blätter im Frühjahr, Wurzeln im Herbst
+    appearance: Silbrig-grüne Blätter mit weißer Unterseite, kleine weiße Blüten
+    effects:
+      - Beruhigend, schlaffördernd
+      - Als Tee gegen Schlaflosigkeit und Angstzustände
+      - Äußerlich als Umschlag gegen leichte Verbrennungen
+    tags: [heilend]
+
+  - name: Königsfarn
+    scientificName: Filix regalis
+    category: flora
+    type: heilpflanze
+    regions: [Valdorn, Calythische Höhen]
+    locations: [Vaelgrund, Bekannter Rand, Haldorn, Felsmahr]
+    continents: [Calythar]
+    habitat: Feuchte Waldböden, Bachläufe
+    harvest: Ganzjährig (Wedel), Frühjahr (junge Triebe)
+    appearance: Große gefiederte Wedel, bis zu 1,5m hoch, goldbraune Sporen
+    effects:
+      - Blutstillend
+      - Junge Triebe essbar und nahrhaft
+      - Wurzelextrakt gegen Würmer und Parasiten
+    tags: [heilend, essbar]
+
+  - name: Bitterdistel
+    scientificName: Carduus amarus
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Ordensmarken]
+    locations: [Varethis, Thesan-Hafen, Soramund, Vaelith, Grathmund]
+    continents: [Calythar]
+    habitat: Brachland, Wegränder, Ruinen
+    bloom: Sommer (6.–8. Monat)
+    harvest: Blüten im Sommer, Wurzeln im Herbst
+    appearance: Stachelige Blätter, purpurne Blütenköpfe
+    effects:
+      - Fiebersenkend
+      - Verdauungsfördernd (sehr bitter)
+      - Leberstärkend nach Vergiftungen
+    tags: [heilend, bitter]
+
+  - name: Weißwurz
+    scientificName: Radix alba
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen, Süden]
+    locations: [Varethis, Selhaven, Velastum, Soranthis, Veranthal]
+    continents: [Calythar]
+    habitat: Trockene Wiesen, Feldränder
+    harvest: Herbst (Wurzeln)
+    appearance: Unscheinbare Pflanze mit kleinen gelben Blüten, weiße knollige Wurzel
+    effects:
+      - Entzündungshemmend
+      - Gegen Gelenkschmerzen und Rheuma
+      - Als Wickel gegen Schwellungen
+    tags: [heilend]
+
+  - name: Lavendel
+    scientificName: Lavandula serena
+    category: flora
+    type: heilpflanze
+    regions: [Süden, Westen & Westebenen]
+    locations: [Soranthis, Lumendras, Veranthal, Thesan-Hafen, Calyra, Helioris]
+    continents: [Calythar]
+    habitat: Sonnige, trockene Hänge, Gärten
+    bloom: Frühsommer bis Spätsommer (6.–8. Monat)
+    harvest: Blüten kurz vor dem vollständigen Öffnen
+    appearance: Silbrig-grüne Blätter, violette Blütenähren, intensiver Duft
+    effects:
+      - Beruhigend, angstlösend
+      - Gegen Kopfschmerzen und Migräne
+      - Lavendelöl für Parfüm und Heilzwecke
+      - Getrocknete Blüten gegen Schlaflosigkeit
+      - Antiseptisch bei kleinen Wunden
+      - Mottenschutz in Kleiderschränken
+    cost: 3 Kupfer (getrocknet), 1 Silber (Öl)
+    tags: [heilend, duft, kultiviert]
+
+  - name: Kamille
+    scientificName: Matricaria pacifica
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen, Ordensmarken]
+    locations: [Varethis, Selhaven, Molthen, Arendal, Soranthis, Thesan-Hafen, Haldorn]
+    continents: [Calythar]
+    habitat: Feldränder, Wiesen, Wegränder
+    bloom: Spätes Frühjahr bis Herbst
+    harvest: Blütenköpfe im Sommer
+    appearance: Kleine weiße Blüten mit gelbem Zentrum, apfelähnlicher Duft
+    effects:
+      - Das "Allheilmittel der Armen"
+      - Beruhigend, krampflösend
+      - Gegen Magenbeschwerden und Blähungen
+      - Äußerlich entzündungshemmend
+      - Augenbäder bei Bindehautentzündung
+    cost: 2 Kupfer (Tee)
+    tags: [heilend, alltäglich]
+
+  - name: Pfefferminze
+    scientificName: Mentha piperita
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen]
+    locations: [Varethis, Selhaven, Luminfluss, Molthen, Soranthis, Thesan-Hafen]
+    continents: [Calythar]
+    habitat: Bachläufe, feuchte Gärten
+    harvest: Blätter vor der Blüte (Frühsommer)
+    appearance: Gezahnte, dunkelgrüne Blätter, intensiver Geruch
+    effects:
+      - Verdauungsfördernd
+      - Gegen Kopfschmerzen (Stirn einreiben)
+      - Erfrischend, belebend
+      - Atemverbessernd
+    cost: 8 Kupfer (Öl)
+    tags: [heilend]
+
+  - name: Salbei
+    scientificName: Salvia officinalis
+    category: flora
+    type: heilpflanze
+    regions: [Süden, Varethianische Ebenen]
+    locations: [Soranthis, Veranthal, Lumendras, Varethis, Helioris]
+    continents: [Calythar]
+    habitat: Trockene, sonnige Standorte
+    bloom: Frühsommer
+    harvest: Blätter vor der Blüte
+    appearance: Graugrüne, samtweiche Blätter, blauviolette Blüten
+    effects:
+      - Antiseptisch, antibakteriell
+      - Gegen Halsschmerzen (Gurgeln)
+      - Schweißhemmend
+      - Kulinarisch – Fleischgerichte
+      - Räucherwerk zur Reinigung
+    cost: 3 Kupfer pro Bündel
+    tags: [heilend, kulinarisch, kultiviert]
+
+  - name: Rosmarin
+    scientificName: Rosmarinus memoriae
+    category: flora
+    type: heilpflanze
+    regions: [Süden, Westen & Westebenen]
+    locations: [Soranthis, Lumendras, Thesan-Hafen, Calyra, Velenthor]
+    continents: [Calythar]
+    habitat: Trockene, felsige Hänge
+    bloom: Frühjahr
+    harvest: Ganzjährig (immergrün)
+    appearance: Nadelförmige dunkelgrüne Blätter, hellblaue Blüten
+    effects:
+      - Gedächtnisstärkend ("Kraut der Erinnerung")
+      - Durchblutungsfördernd
+      - Kulinarisch – Fleisch, Brot
+      - Bei Beerdigungen als Symbol der Erinnerung
+    cost: 4 Kupfer pro Bündel
+    tags: [heilend, kulinarisch, rituell]
+
+  - name: Brennnessel
+    scientificName: Urtica fortis
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen, Valdorn, Ordensmarken]
+    locations: [Varethis, Selhaven, Thesan-Hafen, Soranthis, Haldorn, Karsuun]
+    continents: [Calythar]
+    habitat: Nährstoffreiche Böden, Ruinen, Waldränder
+    harvest: Frühjahr (junge Triebe), Sommer (Blätter), Herbst (Samen)
+    appearance: Gezahnte Blätter mit Brennhaaren
+    effects:
+      - Blutreinigend, entgiftend
+      - Reich an Eisen (gegen Blutarmut)
+      - Junge Triebe essbar (wie Spinat)
+      - Fasern für Stoff
+      - Samen als Stärkungsmittel
+    tags: [heilend, essbar, alltäglich]
+
+  - name: Thymian
+    scientificName: Thymus vulgaris
+    category: flora
+    type: heilpflanze
+    regions: [Süden, Westen & Westebenen]
+    locations: [Soranthis, Veranthal, Lumendras, Thesan-Hafen, Helioris]
+    continents: [Calythar]
+    habitat: Trockene, sonnige Standorte
+    bloom: Frühsommer
+    harvest: Vor und während der Blüte
+    appearance: Kleine ovale Blätter, rosa bis violette Blüten
+    effects:
+      - Antiseptisch, schleimlösend
+      - Gegen Husten und Bronchitis
+      - Kulinarisch universal einsetzbar
+      - Konservierend für Fleisch
+    cost: 2 Kupfer pro Bündel
+    tags: [heilend, kulinarisch]
+
+  - name: Schafgarbe
+    scientificName: Achillea militaris
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen, Ordensmarken, Westen & Westebenen, Süden]
+    locations: [Karsuun, Sturmarak, Grathmund, Mordrath, Varethis]
+    continents: [Calythar]
+    habitat: Wiesen, Wegränder, trockene Standorte
+    bloom: Sommer
+    harvest: Blühendes Kraut im Sommer
+    appearance: Fein gefiederte Blätter, weiße oder rosa Doldenblüten
+    effects:
+    - Soldatenkraut
+      – stillt Blutungen
+      - Fiebersenkend
+      - Gegen Menstruationsbeschwerden
+      - Verdauungsfördernd
+    tags: [heilend, militärisch]
+
+  - name: Johanniskraut
+    scientificName: Hypericum solaris
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen]
+    locations: [Varethis, Helioris, Soranthis, Thesan-Hafen, Ernath]
+    continents: [Calythar]
+    habitat: Wiesen, Waldlichtungen
+    bloom: Hochsommer (um die Sommersonnenwende)
+    harvest: Blühende Triebspitzen
+    appearance: Gelbe sternförmige Blüten, beim Zerreiben rotes Öl
+    effects:
+      - Stimmungsaufhellend ("Sonnenkraut")
+      - Gegen leichte Depressionen
+      - Öl für Wundheilung und Nervenschmerzen
+    warning: Macht lichtempfindlich!
+    tags: [heilend, magisch-assoziiert]
+
+  - name: Baldrian
+    scientificName: Valeriana somnifera
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen, Süden, Valdorn]
+    locations: [Luminfluss, Selhaven, Lumendras, Bekannter Rand, Mulbeth]
+    continents: [Calythar]
+    habitat: Bachläufe, feuchte Wiesen
+    harvest: Wurzeln im Herbst (2. Jahr)
+    appearance: Rosa-weiße Doldenblüten, charakteristischer Geruch der Wurzel
+    effects:
+      - Stark beruhigend, schlaffördernd
+      - Gegen Angstzustände
+      - Krampflösend
+      - Für Katzen anziehend
+    cost: 5 Kupfer (Tropfen)
+    tags: [heilend]
+
+  - name: Holunder
+    scientificName: Sambucus protector
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen]
+    locations: [Varethis, Molthen, Arendal, Thesan-Hafen, Soranthis, Haldorn]
+    continents: [Calythar]
+    habitat: Waldränder, Hecken, nahe Siedlungen
+    bloom: Spätes Frühjahr (Blüten), Spätsommer (Beeren)
+    harvest: Blüten im Frühjahr, Beeren im Herbst
+    appearance: Strauch oder kleiner Baum, weiße Doldenblüten, schwarze Beeren
+    effects:
+      - Blüten schweißtreibend, gegen Erkältungen
+      - Beeren reich an Vitaminen, Sirup gegen Husten
+      - Traditionell Schutzpflanze gegen böse Geister
+    warning: Rinde und Blätter roh GIFTIG!
+    cost: 3 Kupfer (Beersirup)
+    tags: [heilend, rituell]
+
+  - name: Arnika
+    scientificName: Arnica montana
+    category: flora
+    type: heilpflanze
+    regions: [Calythische Höhen]
+    locations: [Fendrak, Sildareth, Korathel, Vindrath, Sturmarak]
+    continents: [Calythar]
+    habitat: Alpine Wiesen, karge Böden
+    bloom: Hochsommer
+    harvest: Blüten im Sommer
+    appearance: Gelb-orange Blüten, aromatischer Geruch
+    effects:
+      - Gegen Prellungen, Verstauchungen, Blutergüsse
+      - Gegen Muskelkater
+      - Fördert Durchblutung
+    warning: Nur äußerlich – innerlich giftig!
+    cost: 1 Silber (Salbe)
+    tags: [heilend, alpin]
+
+  - name: Wermut
+    scientificName: Artemisia amara
+    category: flora
+    type: heilpflanze
+    regions: [Ordensmarken, Varethianische Ebenen]
+    locations: [Karsuun, Mordrath, Grathmund, Khorendal]
+    continents: [Calythar]
+    habitat: Ödland, Wegränder
+    harvest: Blühendes Kraut im Sommer
+    appearance: Silbrig-grüne, fein zerteilte Blätter, sehr bitter
+    effects:
+      - Extrem bitter – "König der Bitterkeit"
+      - Verdauungsfördernd, gegen Würmer
+      - Gegen Appetitlosigkeit
+      - Basis für Absinth
+      - Mottenschutz
+    warning: Gefährlich bei Überdosierung
+    tags: [heilend, bitter, rauschmittel]
+
+  - name: Ringelblume
+    scientificName: Calendula sanans
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden]
+    locations: [Varethis, Helioris, Soranthis, Veranthal, Thesan-Hafen]
+    continents: [Calythar]
+    habitat: Gärten, Feldränder
+    bloom: Frühjahr bis Herbst
+    harvest: Blütenköpfe während der Blüte
+    appearance: Orange bis gelbe Blüten, klebriger Stängel
+    effects:
+      - DIE Wundheilpflanze
+      - Gegen Entzündungen, Ekzeme
+      - Für Salben und Cremes
+      - Essbare Blüten (Dekoration)
+    cost: 3 Kupfer (Salbe)
+    tags: [heilend, kultiviert]
+
+  - name: Calythischer Sonnenhut (Echinacea)
+    scientificName: Echinacea calytharis
+    category: flora
+    type: heilpflanze
+    regions: [Süden, Varethianische Ebenen]
+    locations: [Soranthis, Veranthal, Varethis, Helioris]
+    continents: [Calythar]
+    habitat: Trockene Wiesen
+    bloom: Hochsommer
+    harvest: Wurzeln im Herbst, Kraut während der Blüte
+    appearance: Rosa-purpurne Blütenblätter, stacheliger Blütenkopf
+    effects:
+      - Immunstärkend
+      - Gegen beginnende Erkältungen
+      - Verkürzt Krankheitsdauer
+    cost: 1 Silber 5 Kupfer (Extrakt)
+    tags: [heilend]
+
+  - name: Beinwell
+    scientificName: Symphytum osseum
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen, Valdorn, Süden]
+    locations: [Luminfluss, Selhaven, Mulbeth, Bekannter Rand]
+    continents: [Calythar]
+    habitat: Bachläufe, feuchte Wiesen
+    harvest: Wurzeln im Frühjahr oder Herbst
+    appearance: Große raue Blätter, glockenförmige violette Blüten
+    effects:
+    - Knochenheiler 
+      – fördert Knochenheilung
+      - Gegen Prellungen und Verstauchungen
+    warning: Nur äußerlich – innerlich lebertoxisch!
+    tags: [heilend]
+
+  - name: Fenchel
+    scientificName: Foeniculum dulce
+    category: flora
+    type: heilpflanze
+    regions: [Süden, Westen & Westebenen]
+    locations: [Soranthis, Lumendras, Calyra, Thesan-Hafen]
+    continents: [Calythar]
+    habitat: Sonnige, trockene Standorte
+    harvest: Samen im Herbst, Blätter ganzjährig
+    appearance: Fein gefiederte Blätter, gelbe Doldenblüten, anisartiger Geruch
+    effects:
+      - Verdauungsfördernd, gegen Blähungen
+      - Milchbildend für stillende Mütter
+      - Kulinarisch für Fisch und Brot
+      - Gegen Mundgeruch
+    tags: [heilend, kulinarisch]
+
+  - name: Ingwer
+    scientificName: Zingiber calens
+    category: flora
+    type: heilpflanze
+    regions: [Süden]
+    locations: [Soranthis, Lumendras]
+    continents: [Calythar]
+    habitat: Warme, feuchte Bedingungen (Gewächshäuser)
+    harvest: Wurzeln nach 8–10 Monaten
+    appearance: Knollige, beige Wurzel, scharf-aromatisch
+    effects:
+      - Wärmend, durchblutungsfördernd
+      - Gegen Übelkeit (auch Seekrankheit)
+      - Verdauungsfördernd
+    cost: 1 Silber pro Portion
+    tags: [heilend, import, kultiviert]
+
+  - name: Knoblauch
+    scientificName: Allium protectorum
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen]
+    locations: [Varethis, Thesan-Hafen, Soranthis, Veranthal, Velastum]
+    continents: [Calythar]
+    habitat: Gärten, Felder
+    harvest: Sommer (Knollen), Frühjahr (Grün)
+    appearance: Weiße Knolle mit Zehen, charakteristischer Geruch
+    effects:
+      - Antibakteriell, antiviral
+      - Blutdrucksenkend
+      - Kulinarisch universal
+    notes: Traditionell Schutz gegen böse Geister (kein Effekt auf Vampire in Vael Tir)
+    cost: 1 Kupfer pro Knolle
+    tags: [heilend, kulinarisch, alltäglich]
+
+  - name: Zwiebel
+    scientificName: Allium cepa
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden]
+    locations: [Varethis, Velastum, Thesan-Hafen, Soranthis, Veranthal]
+    continents: [Calythar]
+    harvest: Sommer bis Herbst
+    appearance: Runde Knolle, verschiedene Farben
+    effects:
+      - Grundnahrungsmittel
+      - Schleimlösend bei Erkältung
+      - Äußerlich gegen Insektenstiche
+    cost: 1 Kupfer pro 5 Stück
+    tags: [heilend, essbar, alltäglich]
+
+  - name: Petersilie
+    scientificName: Petroselinum viridis
+    category: flora
+    type: gewuerz
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden]
+    locations: [Varethis, Helioris, Thesan-Hafen, Soranthis]
+    continents: [Calythar]
+    harvest: Ganzjährig
+    appearance: Krause oder glatte grüne Blätter
+    effects:
+      - Vitaminreich, harntreibend
+      - Gegen Mundgeruch
+      - Kulinarisch universal
+    cost: 1 Kupfer pro Bündel
+    tags: [kulinarisch, alltäglich]
+
+  - name: Koriander
+    scientificName: Coriandrum aromaticum
+    category: flora
+    type: gewuerz
+    regions: [Süden]
+    locations: [Soranthis, Lumendras]
+    continents: [Calythar]
+    harvest: Blätter im Sommer, Samen im Herbst
+    appearance: Fein geteilte Blätter, runde Samen
+    effects:
+      - Verdauungsfördernd, krampflösend
+    cost: 3 Kupfer pro Bündel
+    tags: [kulinarisch, import]
+
+  - name: Basilikum
+    scientificName: Ocimum regalis
+    category: flora
+    type: gewuerz
+    regions: [Süden]
+    locations: [Soranthis, Lumendras, Veranthal]
+    continents: [Calythar]
+    harvest: Blätter vor der Blüte
+    appearance: Ovale, glänzende Blätter, intensiver Duft
+    effects:
+    - Königskraut
+      – Symbol für Wohlstand
+      - Verdauungsfördernd
+      - Gegen Insekten
+    cost: 5 Kupfer pro Bündel (frisch)
+    tags: [kulinarisch, kultiviert]
+
+  - name: Oregano
+    scientificName: Origanum silvaticum
+    category: flora
+    type: gewuerz
+    regions: [Süden, Westen & Westebenen]
+    locations: [Soranthis, Lumendras, Thesan-Hafen, Calyra]
+    continents: [Calythar]
+    harvest: Während der Blüte
+    appearance: Kleine ovale Blätter, rosa Blüten
+    effects:
+      - Antiseptisch, gegen Erkältungen
+      - Kulinarisch – mediterran
+    cost: 2 Kupfer pro Bündel
+    tags: [kulinarisch]
+
+  - name: Lorbeer
+    scientificName: Laurus nobilis
+    category: flora
+    type: gewuerz
+    regions: [Süden, Westen & Westebenen]
+    locations: [Soranthis, Lumendras, Thesan-Hafen, Calyra, Havelthen]
+    continents: [Calythar]
+    harvest: Ganzjährig
+    appearance: Ledrige, dunkelgrüne Blätter
+    effects:
+      - Kulinarisch – Eintöpfe, Saucen
+      - Symbol des Sieges (Lorbeerkranz)
+    tags: [kulinarisch, symbolisch]
+
+  - name: Aloe
+    scientificName: Aloe medicata
+    category: flora
+    type: heilpflanze
+    regions: [Süden]
+    locations: [Soranthis, Lumendras]
+    continents: [Calythar]
+    habitat: Gewächshäuser
+    harvest: Ganzjährig
+    appearance: Fleischige, gezahnte Blätter mit Gel
+    effects:
+      - Das Mittel gegen Verbrennungen
+      - Hautpflege
+    tags: [heilend, kultiviert]
+
+  - name: Hopfen
+    scientificName: Humulus lupulus
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen, Calythische Höhen]
+    locations: [Varethis, Selhaven, Arendal, Haldorn]
+    continents: [Calythar]
+    harvest: Zapfen im Spätsommer
+    appearance: Rankende Pflanze, zapfenförmige Blüten
+    effects:
+      - Für Bierbrauen essenziell
+      - Beruhigend, schlaffördernd
+    cost: 5 Kupfer pro Pfund
+    tags: [heilend, gewerblich]
+
+  - name: Eisenkraut
+    scientificName: Verbena ferrea
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen, Valdorn, Ordensmarken]
+    locations: [Varethis, Thesan-Hafen, Soranthis, Haldorn, Karsuun]
+    continents: [Calythar]
+    appearance: Vierkantige Stängel, violette Blüten
+    effects:
+      - Traditionelle Ritualpflanze
+      - Nervenstärkend
+    tags: [heilend, rituell]
+
+  - name: Mistel
+    scientificName: Viscum quercus
+    category: flora
+    type: heilpflanze
+    regions: [Valdorn]
+    locations: [Bekannter Rand, Graue Tiefe, Vaelgrund, Schrein von Moldrath]
+    continents: [Calythar]
+    habitat: Parasitiert auf Eichen
+    harvest: Winter
+    appearance: Immergrüne Kugeln in Bäumen, weiße Beeren
+    effects:
+      - Heilig für alte Traditionen
+      - Druidischer Fokus
+    warning: Beeren giftig
+    tags: [heilend, rituell, erdgebunden]
+
+  - name: Wacholder
+    scientificName: Juniperus calytharis
+    category: flora
+    type: heilpflanze
+    regions: [Calythische Höhen]
+    locations: [Fendrak, Sildareth, Korathel, Vindrath, Haldorn, Sturmarak]
+    continents: [Calythar]
+    harvest: Beeren im Herbst
+    appearance: Immergrüner Strauch, blaue Beeren
+    effects:
+      - Für Gin und Wacholderschnaps
+      - Harntreibend
+      - Räucherwerk zur Reinigung
+    cost: 5 Kupfer pro Handvoll
+    tags: [heilend, gewerblich]
+
+  - name: Süßholz
+    scientificName: Glycyrrhiza dulcis
+    category: flora
+    type: heilpflanze
+    regions: [Süden]
+    locations: [Soranthis, Lumendras]
+    continents: [Calythar]
+    harvest: Wurzeln nach 3–4 Jahren
+    appearance: Holzige, süße Wurzel
+    effects:
+      - Gegen Husten und Heiserkeit
+      - Süßungsmittel
+      - Magenberuhigend
+    tags: [heilend, import]
+
+  - name: Sonnenhut
+    scientificName: Helianthus protector
+    category: flora
+    type: heilpflanze
+    regions: [Süden, Westen & Westebenen]
+    locations: [Soranthis, Veranthal, Thesan-Hafen, Calyra, Ernath]
+    continents: [Calythar]
+    habitat: Sonnige Wiesen, Gärten
+    bloom: Hochsommer (7.–8. Monat)
+    harvest: Blüten und Blätter im Sommer, Wurzeln im Herbst
+    appearance: Goldgelbe Strahlenblüten, kegelförmige Mitte
+    effects:
+      - Immunstärkend
+      - Gegen Erkältungen und Infektionen
+      - Beschleunigt Wundheilung
+    cost: 1 Silber 5 Kupfer (Extrakt)
+    tags: [heilend]
+
+  # ─── Regionale Heilkräuter ──────────────────────────────────────────────
+  - name: Luminblume
+    scientificName: Flos luminis
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen]
+    locations: [Luminfluss, Helioris, Varethis, Selhaven, Molthen]
+    continents: [Calythar]
+    habitat: Flussufer, feuchte Auen entlang des Luminflusses
+    bloom: Frühjahr, nur bei Vollmond
+    harvest: Blüten in der Vollmondnacht
+    appearance: Blasse, fast durchsichtige Blütenblätter; leuchtet schwach in der Nacht
+    effects:
+      - Hochpotentes Heilmittel
+      - Reinigt vergiftetes Blut
+      - Wird in Tempeln zur Herstellung von Weihwasser verwendet
+    notes: Heilig für das Aurel. Ernte nur mit Genehmigung.
+    cost: 25 Gold (Essenz)
+    tags: [heilend, heilig, selten, magisch]
+
+  - name: Herzblatt
+    scientificName: Cordifolia sanguinis
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen]
+    locations: [Varethis, Helioris, Keldrin, Soranthis]
+    continents: [Calythar]
+    habitat: Gut gepflegte Kräutergärten
+    bloom: Spätsommer
+    harvest: Blätter vor der Blüte
+    appearance: Herzförmige, dunkelgrüne Blätter mit roten Adern
+    effects:
+      - Stärkt das Herz
+      - Gegen Herzrasen und Schwächeanfälle
+    warning: In hoher Dosis gefährlich!
+    tags: [heilend, kultiviert]
+
+  - name: Goldtraube
+    scientificName: Vitis aurea
+    category: flora
+    type: obst
+    regions: [Süden]
+    locations: [Soranthis, Rebendris, Veranthal]
+    continents: [Calythar]
+    habitat: Sonnige Hänge, kultivierte Weingärten
+    harvest: Spätsommer bis Frühherbst
+    appearance: Goldgelbe Trauben mit bronzefarbenem Schimmer
+    effects:
+      - Nicht nur Wein – auch medizinisch wertvoll
+      - Traubenkerne gegen Altersschwäche
+      - Blattsaft gegen Augenentzündungen
+    tags: [essbar, kultiviert, gewerblich]
+
+  - name: Honigsalbei
+    scientificName: Salvia mellifica
+    category: flora
+    type: heilpflanze
+    regions: [Süden, Westen & Westebenen]
+    locations: [Soranthis, Veranthal, Lumendras, Calyra]
+    continents: [Calythar]
+    habitat: Trockene, sonnige Hänge
+    bloom: Frühsommer
+    harvest: Blätter vor der Blüte
+    appearance: Silbrig-grüne, samtweiche Blätter, blaue Blüten
+    effects:
+      - Antiseptisch
+      - Gegen Halsschmerzen und Mundinfektionen
+      - Honig mit Salbei als beliebtes Hausmittel
+    tags: [heilend]
+
+  - name: Seetang der Ruhigen Bucht
+    scientificName: Alga tranquilla
+    category: flora
+    type: heilpflanze
+    regions: [Westen & Westebenen]
+    locations: [Calyra, Thesan-Hafen, Havelthen, Odiannisches Meer]
+    continents: [Calythar]
+    habitat: Flaches Küstenwasser, Gezeitentümpel
+    harvest: Ganzjährig, am besten bei Ebbe
+    appearance: Dunkelgrüne bis braune Bänder, schleimig
+    effects:
+      - Reich an Mineralien
+      - Gegen Schilddrüsenprobleme (Jodmangel)
+      - Äußerlich gegen Hautausschläge
+    tags: [heilend, maritim]
+
+  - name: Salzfinger
+    scientificName: Salicornia maritima
+    category: flora
+    type: heilpflanze
+    regions: [Westen & Westebenen]
+    locations: [Saltheris, Odiannisches Meer, Calyra, Lumendras]
+    continents: [Calythar]
+    habitat: Salzwiesen, Dünen
+    harvest: Sommer
+    appearance: Fleischige, fingerartige grüne Triebe
+    effects:
+      - Essbar und vitaminreich
+      - Gegen Skorbut auf langen Seereisen
+      - Entwässernd (harntreibend)
+    tags: [heilend, essbar, maritim]
+
+  - name: Bergwächter
+    scientificName: Custos montium
+    category: flora
+    type: heilpflanze
+    regions: [Calythische Höhen]
+    locations: [Fendrak, Sildareth, Korathel, Vindrath, Nordath]
+    continents: [Calythar]
+    habitat: Felsspalten, alpine Wiesen ab 3000 Fuß
+    bloom: Kurzer Bergsommer (7. Monat)
+    harvest: Blüten im Sommer, Wurzeln im Herbst
+    appearance: Kleine, pelzige Blätter, intensiv blaue Blüten
+    effects:
+      - Gegen Höhenkrankheit
+      - Stärkt die Atmung
+      - Wärmt von innen
+    cost: 5 Silber (Tee)
+    tags: [heilend, alpin, selten]
+
+  - name: Eisenblatt
+    scientificName: Ferrum folium
+    category: flora
+    type: heilpflanze
+    regions: [Calythische Höhen]
+    locations: [Fendrak, Korvash, Sildareth, Tharumund, Nordath]
+    continents: [Calythar]
+    habitat: Erzhalden, alte Minenausgänge
+    harvest: Ganzjährig
+    appearance: Graue, metallisch schimmernde Blätter, rostbraune Unterseite
+    effects:
+      - Gegen Blutarmut
+      - Stärkt Knochen und Muskeln
+    notes: Extrem metallischer Geschmack.
+    tags: [heilend, mine]
+
+  - name: Dunkelkresse
+    scientificName: Nasturtium profundum
+    category: flora
+    type: heilpflanze
+    regions: [Calythische Höhen]
+    locations: [Fendrak, Korvash, Sildareth, Tharumund]
+    continents: [Calythar]
+    habitat: Feuchte Höhlenwände, tiefe Minen – benötigt kein Licht
+    harvest: Ganzjährig in Minen
+    appearance: Blasse, fast weiße Blätter
+    effects:
+      - Reich an Vitaminen für Minenarbeiter
+      - Gegen "Grubenfieber" (Krankheit durch Lichtmangel)
+    tags: [heilend, mine, untertage]
+
+  - name: Waldmutter-Moos
+    scientificName: Muscus matris silvae
+    category: flora
+    type: heilpflanze
+    regions: [Valdorn]
+    locations: [Graue Tiefe, Vaelgrund, Schrein von Moldrath]
+    continents: [Calythar]
+    habitat: Alte Baumstämme, besonders Eichen
+    harvest: Ganzjährig, aber gefährlich zu erreichen
+    appearance: Tiefgrünes, samtiges Moos mit goldenen Sporen
+    effects:
+      - Hochpotentes Heilmittel
+      - Lindert Phantomschmerzen
+      - Die Wurzelkinder nutzen es für fast alle Behandlungen
+    notes: Nicht käuflich. Nur im Valdorn.
+    tags: [heilend, wurzelkinder, selten, magisch]
+
+  - name: Nebelranke
+    scientificName: Vitis nebulosa
+    category: flora
+    type: heilpflanze
+    regions: [Valdorn]
+    locations: [Graue Tiefe, Vaelgrund, Bekannter Rand]
+    continents: [Calythar]
+    habitat: Umrankt Bäume in nebligen Bereichen
+    harvest: Morgendämmerung im Herbst
+    appearance: Silbrig-graue Ranken, feuchte Blätter
+    effects:
+      - Gegen Husten und Atemprobleme
+      - Dämpft Schmerzen (leicht betäubend)
+    warning: In hohen Dosen Halluzinationen!
+    tags: [heilend, rauschmittel]
+
+  - name: Stilleruf
+    scientificName: Silentium vocis
+    category: flora
+    type: heilpflanze
+    regions: [Valdorn]
+    locations: [Graue Tiefe, Stille Lichtung]
+    continents: [Calythar]
+    habitat: Nahe der Stillen Lichtung
+    harvest: Selten, gefährlich
+    appearance: Blassviolette Blüten, die keinen Schatten werfen
+    effects:
+      - Macht den Konsumenten temporär unhörbar
+      - Wird von den Wurzelkindern für heimliche Bewegung genutzt
+    warning: Kann die Stimme dauerhaft beschädigen bei Überdosierung
+    tags: [magisch, wurzelkinder, selten]
+
+  - name: Wächtertrost
+    scientificName: Solatium vigilum
+    category: flora
+    type: heilpflanze
+    regions: [Ordensmarken]
+    locations: [Karsuun, Sturmarak, Nevelthas, Grenthas, Veltharak, Vendarath]
+    continents: [Calythar]
+    habitat: Trockene, windgepeitschte Ebenen
+    bloom: Spätsommer
+    harvest: Blätter und Blüten vor dem Frost
+    appearance: Graue, ledrige Blätter, kleine rote Blüten
+    effects:
+      - Hält wach ohne Nervosität
+      - Standardration für Wachposten
+    warning: Leicht süchtig machend bei Dauergebrauch
+    tags: [heilend, militärisch, rauschmittel]
+
+  - name: Rissblüte
+    scientificName: Flos abyssi
+    category: flora
+    type: heilpflanze
+    regions: [Ordensmarken]
+    locations: [Großer Riss, Nevelthas, Khorendal]
+    continents: [Calythar]
+    habitat: Küstenklippen mit Blick auf den Riss
+    bloom: Unregelmäßig, oft bei "Riss-Nebel"
+    harvest: Extrem gefährlich
+    appearance: Schwarz-violette Blütenblätter, Stängel schimmert wie Öl
+    effects:
+      - Schützt angeblich vor den Flüstern des Risses
+      - Das Arkanum erforscht sie intensiv
+    warning: In falschen Händen gefährlich!
+    tags: [magisch, riss, selten]
+
+  # ─── Giftige Pflanzen ──────────────────────────────────────────────────
+  - name: Schattenschierling
+    scientificName: Cicuta umbrae
+    category: flora
+    type: giftpflanze
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen, Valdorn, Ordensmarken]
+    locations: [Luminfluss, Valdorn, Damrath, Molthen, Neveth]
+    continents: [Calythar]
+    habitat: Bachläufe, feuchte Gräben
+    bloom: Sommer
+    appearance: Ähnelt wilder Möhre, hohler purpurgefleckter Stängel
+    dangerLevel: 4
+    effects:
+      - Nervengift
+      - Symptome: Zittern, Krämpfe, Atemlähmung
+      - Tod innerhalb 1–3 Stunden ohne Behandlung
+    cost: 150 Gold (Schwarzmarkt)
+    tags: [gift, tödlich, schwarzmarkt]
+
+  - name: Teufelskirsche
+    scientificName: Atropa diaboli
+    category: flora
+    type: giftpflanze
+    regions: [Varethianische Ebenen, Valdorn]
+    locations: [Bekannter Rand, Neveth, Birketh, Horathen]
+    continents: [Calythar]
+    habitat: Schattige Plätze, Ruinen
+    bloom: Spätsommer (Reife)
+    appearance: Glänzende schwarze Beeren, glockenförmige violette Blüten
+    dangerLevel: 4
+    effects:
+      - Halluzinogen in kleinen Dosen
+      - Herzstillstand in hohen Dosen
+      - Schon 3–4 Beeren können tödlich sein
+    cost: 100 Gold (Schwarzmarkt)
+    tags: [gift, tödlich, schwarzmarkt, rauschmittel]
+
+  - name: Würgeranke
+    scientificName: Strangula viridis
+    category: flora
+    type: giftpflanze
+    regions: [Valdorn]
+    locations: [Graue Tiefe, Vaelgrund, Bekannter Rand]
+    continents: [Calythar]
+    habitat: Umschlingt Bäume und Sträucher
+    appearance: Dunkelgrüne Ranken mit feinen Haaren, rötlicher Saft
+    dangerLevel: 3
+    effects:
+      - Hautkontakt – starke Reizung, Blasenbildung
+      - Einnahme – innere Blutungen
+      - Saft für Pfeilgift
+    cost: 75 Gold (Schwarzmarkt)
+    tags: [gift, gefährlich, schwarzmarkt]
+
+  - name: Mondschatten
+    scientificName: Umbra lunaris
+    category: flora
+    type: giftpflanze
+    regions: [Valdorn, Calythische Höhen]
+    locations: [Graue Tiefe, Tharumund, Fendrak]
+    continents: [Calythar]
+    habitat: Tiefe Schatten, Höhleneingänge
+    bloom: Nur bei Neumond
+    appearance: Schwarze Blüten, die Licht zu absorbieren scheinen
+    dangerLevel: 3
+    effects:
+      - Verursacht temporäre Blindheit
+      - In hohen Dosen permanente Sehschäden
+      - Von Assassinen geschätzt
+    cost: 200 Gold (sehr illegal)
+    tags: [gift, magisch, assassinen, illegal]
+
+  - name: Blutdorn
+    scientificName: Spina sanguinis
+    category: flora
+    type: giftpflanze
+    regions: [Ordensmarken]
+    locations: [Karsuun, Khorendal, Grathmund, Sturmarak]
+    continents: [Calythar]
+    habitat: Ödland, verlassene Schlachtfelder
+    appearance: Verdrehter, dornenbesetzter Strauch, rötliche Rinde
+    dangerLevel: 2
+    effects:
+      - Dornen verursachen schlecht heilende Wunden
+      - Saft verhindert Blutgerinnung
+    tags: [gift, schmerzhaft]
+
+  - name: Herzensbrecher
+    scientificName: Cardiorum fractum
+    category: flora
+    type: giftpflanze
+    regions: [Varethianische Ebenen, Süden]
+    locations: [Varethis, Keldrin, Soranthis]
+    continents: [Calythar]
+    habitat: Verborgene Gärten, benötigt spezielle Pflege
+    appearance: Herzförmige rote Blüten, "bluten" beim Pflücken
+    dangerLevel: 5
+    effects:
+      - Das perfekte Assassinengift
+      - Symptome ähneln Herzinfarkt
+      - Kaum nachweisbar nach dem Tod
+    cost: 500+ Gold (Assassinengilden)
+    tags: [gift, absolut-tödlich, assassinen, selten]
+
+  - name: Schlummerlied
+    scientificName: Somnium aeternum
+    category: flora
+    type: giftpflanze
+    regions: [Süden, Valdorn]
+    locations: [Soranthis, Veranthal, Vaelgrund, Neveth]
+    continents: [Calythar]
+    habitat: Alte Gärten, verwilderte Anwesen
+    bloom: Frühling
+    appearance: Weiße Blüten mit betörendem Duft, gelber Pollen
+    dangerLevel: 3
+    effects:
+      - Tiefer künstlicher Schlaf
+      - In hohen Dosen Koma
+      - Der Duft allein kann schläfrig machen
+    cost: 300 Gold (Schwarzmarkt)
+    tags: [gift, gefährlich, schwarzmarkt]
+
+  - name: Seelenfrost
+    scientificName: Glacies animae
+    category: flora
+    type: giftpflanze
+    regions: [Calythische Höhen]
+    locations: [Korathel, Vindrath, Nordath]
+    continents: [Calythar]
+    habitat: Ewiges Eis, Gletscherspalten (über 6000 Fuß)
+    harvest: Winter
+    appearance: Kristallartige Blüten, wie aus Eis
+    dangerLevel: 3
+    effects:
+      - Verlangsamt alle Körperfunktionen
+      - Opfer "erfriert" von innen
+      - Vom Arkanum für Konservierungsmagie genutzt
+    tags: [gift, magisch, alpin, selten]
+
+  # ─── Pilze ────────────────────────────────────────────────────────────
+  - name: Goldkappe
+    scientificName: Aureus pileo
+    category: flora
+    type: pilz
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Valdorn]
+    locations: [Bekannter Rand, Haldorn, Varethis, Selhaven, Soranthis, Thesan-Hafen]
+    continents: [Calythar]
+    habitat: Unter Eichen und Buchen
+    harvest: Herbst (9.–11. Monat)
+    appearance: Goldgelber Hut, weißer Stiel, angenehmer Geruch
+    effects:
+      - Essbar und wohlschmeckend
+      - Nährstoffreich
+      - Basis für viele Gerichte
+    tags: [essbar, alltäglich]
+
+  - name: Leuchtmoos
+    scientificName: Muscus lucens
+    category: flora
+    type: pilz
+    regions: [Calythische Höhen, Valdorn]
+    locations: [Fendrak, Korvash, Sildareth, Tharumund, Graue Tiefe]
+    continents: [Calythar]
+    habitat: Feuchte Höhlenwände
+    harvest: Ganzjährig
+    appearance: Türkis-grün leuchtende Flecken
+    effects:
+      - Nicht essbar
+      - Leuchtet schwach im Dunkeln
+      - Notlichtquelle in Minen
+    tags: [magisch, mine, nützlich]
+
+  - name: Heilpilz
+    scientificName: Fungus sanans
+    category: flora
+    type: pilz
+    regions: [Valdorn]
+    locations: [Graue Tiefe, Vaelgrund, Bekannter Rand]
+    continents: [Calythar]
+    habitat: Auf toten Baumstämmen
+    harvest: Spätsommer bis Herbst
+    appearance: Halbkreisförmig, rot-braun mit weißem Rand
+    effects:
+      - Immunstärkend
+      - Gegen Erschöpfung
+    cost: 10 Gold (Tee)
+    tags: [heilend, selten]
+
+  - name: Traumkappe
+    scientificName: Pileo somniferum
+    category: flora
+    type: pilz
+    regions: [Valdorn]
+    locations: [Graue Tiefe, Vaelgrund, Bekannter Rand]
+    continents: [Calythar]
+    habitat: Unter Weiden, nahe Wasser
+    harvest: Herbst
+    appearance: Blasslila Hut mit silbernen Flecken
+    effects:
+      - Leicht halluzinogen
+      - Von manchen für "prophetische Träume" genutzt
+    warning: In hohen Dosen gefährlich
+    tags: [rauschmittel]
+
+  - name: Todeshaube
+    scientificName: Pileo mortis
+    category: flora
+    type: pilz
+    regions: [Valdorn, Varethianische Ebenen, Süden]
+    locations: [Graue Tiefe, Bekannter Rand, Vaelgrund]
+    continents: [Calythar]
+    habitat: Unter Eichen
+    harvest: Sommer bis Herbst
+    appearance: Grünlich-weißer Hut, weiße Lamellen, Ring am Stiel
+    dangerLevel: 5
+    effects:
+      - Das tödlichste Pilzgift Calythars
+      - Symptome erst nach 6–12 Stunden
+      - Zerstört die Leber irreparabel
+    tags: [gift, absolut-tödlich]
+
+  - name: Blutschwamm
+    scientificName: Spongia sanguinis
+    category: flora
+    type: pilz
+    regions: [Calythische Höhen]
+    locations: [Fendrak, Korvash, Tharumund]
+    continents: [Calythar]
+    habitat: Feuchte Minengänge, Blutspuren
+    harvest: Ganzjährig
+    appearance: Roter, schwammartiger Körper, "blutet" wenn gedrückt
+    dangerLevel: 3
+    effects:
+      - Verursacht unkontrollierbare Blutungen
+      - Äußerlich und innerlich gefährlich
+    tags: [gift, mine, gefährlich]
+
+  - name: Irrlicht-Pilz
+    scientificName: Fungus ignis fatui
+    category: flora
+    type: pilz
+    regions: [Valdorn]
+    locations: [Graue Tiefe, Vaelgrund]
+    continents: [Calythar]
+    habitat: Verrottende Vegetation in Sümpfen
+    harvest: Herbst
+    appearance: Leuchtet schwach grün-blau, zerfällt bei Berührung zu Sporen
+    dangerLevel: 2
+    effects:
+      - Sporen verursachen Verwirrung und Desorientierung
+      - Opfer laufen oft in Sümpfe
+    tags: [gift, verwirrend]
+
+  - name: Geisterfinger
+    scientificName: Digitus spectri
+    category: flora
+    type: pilz
+    regions: [Ordensmarken]
+    locations: [Karsuun, Nevelthas, Khorendal, Großer Riss]
+    continents: [Calythar]
+    habitat: Boden, der vom Riss-Nebel berührt wurde
+    harvest: Nach Riss-Nebel-Ereignissen
+    appearance: Lange, dünne, weiße Fruchtkörper wie bleiche Finger
+    dangerLevel: 4
+    effects:
+      - Verbindet das Bewusstsein kurzzeitig mit "etwas anderem"
+      - Viele werden wahnsinnig
+      - Das Arkanum experimentiert damit
+    tags: [gift, magisch, riss, selten]
+
+  # ─── Bäume ────────────────────────────────────────────────────────────
+  - name: Calythische Eiche
+    scientificName: Quercus calythiensis
+    category: flora
+    type: baum
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Valdorn]
+    locations: [Varethis, Selhaven, Thesan-Hafen, Soranthis, Bekannter Rand, Haldorn]
+    continents: [Calythar]
+    habitat: Tiefland, gemäßigte Wälder
+    appearance: Mächtiger Stamm, breite Krone, gelappte Blätter; bis 800 Jahre alt
+    effects:
+      - Bestes Bauholz für Schiffe und Gebäude
+      - Eicheln als Schweinefutter
+      - Rinde für Gerberei
+    tags: [gewerblich, alltäglich]
+
+  - name: Silberbirke
+    scientificName: Betula argentea
+    category: flora
+    type: baum
+    regions: [Calythische Höhen, Valdorn]
+    locations: [Haldorn, Vindrath, Korathel, Bekannter Rand, Sturmarak]
+    continents: [Calythar]
+    habitat: Kühle, feuchte Gebiete
+    appearance: Weiße Rinde, hängende Zweige, zarte Blätter; bis 150 Jahre alt
+    effects:
+      - Rinde wasserdicht, für Behälter
+      - Saft im Frühjahr gezapft, süß
+      - Blätter – harntreibender Tee
+    tags: [gewerblich, heilend]
+
+  - name: Schwarzkiefer
+    scientificName: Pinus nigra
+    category: flora
+    type: baum
+    regions: [Calythische Höhen]
+    locations: [Fendrak, Sildareth, Korathel, Vindrath, Nordath]
+    continents: [Calythar]
+    habitat: Bergige, steinige Böden
+    appearance: Dunkle Rinde, lange Nadeln, harzreich; bis 500 Jahre alt
+    effects:
+      - Bau- und Brennholz
+      - Harz für Fackeln, Abdichtung, Heilsalben
+      - Nadeln – Tee gegen Erkältung
+    tags: [gewerblich]
+
+  - name: Uralteiche des Valdorn
+    scientificName: Quercus antiquissima
+    category: flora
+    type: baum
+    regions: [Valdorn]
+    locations: [Graue Tiefe, Vaelgrund, Schrein von Moldrath]
+    continents: [Calythar]
+    habitat: Zentrum des Waldes
+    appearance: Gigantisch, Stamm von 20+ Personen nicht umfassbar; 2000+ Jahre alt
+    effects:
+      - Heilig für die Wurzelkinder
+      - Sollen Bewusstsein haben
+    warning: Fällen einer Uralteiche gilt als Fluch
+    tags: [heilig, wurzelkinder, magisch, einzigartig]
+
+  - name: Flammenholz
+    scientificName: Lignum ignis
+    category: flora
+    type: baum
+    regions: [Süden]
+    locations: [Soranthis, Veranthal]
+    continents: [Calythar]
+    habitat: Vulkanische Böden (selten in Calythar)
+    appearance: Rötliche Rinde, Blätter mit orangem Rand; bis 200 Jahre alt
+    effects:
+      - Holz ist natürlich warm
+      - Brennt sehr heiß und lange
+      - Für Schmiedearbeiten geschätzt
+    tags: [magisch, gewerblich, selten]
+
+  - name: Tränenweide
+    scientificName: Salix lacrimans
+    category: flora
+    type: baum
+    regions: [Varethianische Ebenen]
+    locations: [Luminfluss, Helioris, Varethis, Selhaven]
+    continents: [Calythar]
+    habitat: Flussufer, feuchte Böden
+    appearance: Hängende Zweige bis ins Wasser, silbrige Blätter; bis 300 Jahre
+    effects:
+    - Heilig für das Aurel
+      - "Saft" der Zweige salzig wie Tränen
+      - Für Trauerrituale verwendet
+    tags: [heilig, aurel, rituell]
+
+  - name: Silberstahl-Baum
+    scientificName: Arbor ferri argentei
+    category: flora
+    type: baum
+    regions: [Valdorn]
+    locations: [Stille Lichtung]
+    continents: [Calythar]
+    habitat: Unbekannt
+    appearance: Metallisch schimmernde Rinde, spiegelartig reflektierend
+    effects:
+      - Niemand weiß, was er ist
+      - Unzerstörbar durch normale Mittel
+    notes: Die Wurzelkinder nähern sich ihm nur mit Vorsicht. Manche glauben, er ist kein Baum.
+    tags: [einzigartig, magisch, mysterium]
+
+  # ─── Exotische Gewürze ─────────────────────────────────────────────────
+  - name: Calythischer Pfeffer
+    scientificName: Piper calythiensis
+    category: flora
+    type: gewuerz
+    regions: [Süden]
+    locations: [Soranthis, Lumendras]
+    continents: [Calythar]
+    harvest: Ganzjährig (Gewächshäuser)
+    appearance: Kleine schwarze Körner
+    effects:
+      - Alltägliches Gewürz
+      - Wärmt, würzt
+      - Symbol für bescheidenen Wohlstand
+    cost: 5 Kupfer pro Unze
+    tags: [kulinarisch, alltäglich]
+
+  - name: Sonnensalz
+    scientificName: Sal solis
+    category: flora
+    type: gewuerz
+    regions: [Westen & Westebenen]
+    locations: [Saltheris, Odiannisches Meer, Calyra, Lumendras]
+    continents: [Calythar]
+    harvest: Sommer
+    appearance: Grobe, goldene Kristalle
+    effects:
+      - Feineres Salz als gewöhnliches Meersalz
+      - Leicht süßlicher Geschmack
+      - Für Fleisch und Fisch
+    cost: 8 Kupfer pro Pfund
+    tags: [kulinarisch, maritim]
+
+  - name: Roter Thymian
+    scientificName: Thymus ruber
+    category: flora
+    type: gewuerz
+    regions: [Süden]
+    locations: [Soranthis, Veranthal]
+    continents: [Calythar]
+    habitat: Trockene, sonnige Hänge
+    bloom: Sommer
+    appearance: Kleine rötliche Blätter, intensiver Geruch
+    effects:
+      - Für Fleischgerichte
+      - Medizinisch gegen Husten
+      - Öl für Massagen
+    cost: 3 Kupfer pro Bündel
+    tags: [kulinarisch, heilend]
+
+  - name: Luminwurz
+    scientificName: Radix luminis
+    category: flora
+    type: gewuerz
+    regions: [Varethianische Ebenen]
+    locations: [Luminfluss, Varethis, Selhaven, Helioris]
+    continents: [Calythar]
+    harvest: Herbst
+    appearance: Knollige, hellgelbe Wurzel
+    effects:
+      - Intensiv aromatisch
+      - In Suppen und Eintöpfen
+      - Leicht wärmend
+    cost: 2 Kupfer pro Stück
+    tags: [kulinarisch]
+
+  - name: Meeresdill
+    scientificName: Anethum marinum
+    category: flora
+    type: gewuerz
+    regions: [Westen & Westebenen]
+    locations: [Thesan-Hafen, Calyra, Velenthor, Lumendras, Havelthen]
+    continents: [Calythar]
+    habitat: Küstennah, salzige Böden
+    harvest: Sommer
+    appearance: Feines federartiges Laub, leicht bläulich
+    effects:
+      - Für Fischgerichte unverzichtbar
+      - Eingelegte Gurken
+      - Verdauungsfördernd
+    cost: 2 Kupfer pro Bündel
+    tags: [kulinarisch, maritim]
+
+  - name: Schattenkümmel
+    scientificName: Cuminum umbrae
+    category: flora
+    type: gewuerz
+    regions: [Nordvarkuun, Zentralvarkuun (Aschezonen)]
+    locations: [Tränenhaven, Valdrek, Thalmunds Rast]
+    continents: [Varkuun]
+    appearance: Dunkle, fast schwarze Samen
+    effects:
+      - Seltenes Luxusgewürz
+      - Für Festmahlzeiten
+      - Soll "die Sinne schärfen"
+    cost: 5 Gold pro Unze
+    tags: [import, selten, luxus]
+
+  - name: Sonnenstaub
+    scientificName: Pulvis solis
+    category: flora
+    type: gewuerz
+    regions: [Jenseits des Nebels]
+    locations: [Il'Sereth, Kosmisches Gebirge]
+    continents: [Esh'Raen]
+    appearance: Goldenes Pulver, glitzert im Licht
+    effects:
+      - Nur bei Adeligen
+      - Für Süßspeisen und Wein
+      - Angeblich aus Esh'Raen (vor dem Verschwinden)
+    cost: 50 Gold pro Prise
+    tags: [import, sehr-selten, luxus, magisch]
+
+  - name: Riss-Salz
+    scientificName: Sal abyssi
+    category: flora
+    type: gewuerz
+    regions: [Ordensmarken]
+    locations: [Großer Riss, Karsuun, Nevelthas]
+    continents: [Calythar]
+    appearance: Schwarzgraue Kristalle mit blauem Schimmer
+    effects:
+      - Illegal außerhalb des Arkanums
+      - Für magische Rituale verwendet
+      - Soll "mehr als nur Fleisch" konservieren
+    cost: 100 Gold pro Unze
+    tags: [illegal, magisch, riss, selten]
+
+  # ─── Blumen ───────────────────────────────────────────────────────────
+  - name: Sonnenauge
+    scientificName: Helios oculus
+    category: flora
+    type: blume
+    regions: [Süden, Varethianische Ebenen]
+    locations: [Soranthis, Veranthal, Helioris, Varethis]
+    continents: [Calythar]
+    bloom: Sommer
+    appearance: Große gelbe Blüte, folgt der Sonne
+    effects:
+      - Zierpflanze
+      - Samen – essbar und ölreich
+      - Symbol des Aurels
+    cost: 1 Kupfer pro Stängel
+    tags: [aurel, symbolisch, essbar]
+
+  - name: Nachtjasmin
+    scientificName: Jasminum noctis
+    category: flora
+    type: blume
+    regions: [Süden]
+    locations: [Soranthis, Lumendras, Veranthal]
+    continents: [Calythar]
+    bloom: Sommer (nachts)
+    appearance: Kleine weiße Blüten, intensiver Duft bei Dunkelheit
+    effects:
+      - Parfümherstellung
+      - Romantische Gärten
+      - Öl für Entspannung
+    cost: 5 Silber pro Unze (Öl)
+    tags: [duft, kultiviert]
+
+  - name: Blutrose
+    scientificName: Rosa sanguinis
+    category: flora
+    type: blume
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden]
+    locations: [Varethis, Helioris, Keldrin, Soranthis]
+    continents: [Calythar]
+    bloom: Frühling bis Herbst
+    appearance: Tiefrote, fast schwarze Blütenblätter
+    effects:
+      - Symbol für Leidenschaft und Tod
+      - Rosenöl
+      - Bei Beerdigungen von Adeligen
+    cost: 1 Silber pro Blüte
+    tags: [symbolisch, kultiviert, adel]
+
+  - name: Sternentau
+    scientificName: Ros stellarum
+    category: flora
+    type: blume
+    regions: [Varethianische Ebenen]
+    locations: [Helioris]
+    continents: [Calythar]
+    bloom: Nur in sternklaren Nächten
+    appearance: Silbrig-blaue Blüten, scheinen zu leuchten
+    effects:
+      - Heilig für das Aurel
+      - In Hochzeitsritualen
+    notes: Sehr teuer, nur in Helioris kultiviert.
+    tags: [heilig, aurel, selten, magisch]
+
+  - name: Mitternachtsglöckchen
+    scientificName: Campanula medianox
+    category: flora
+    type: blume
+    regions: [Valdorn]
+    locations: [Graue Tiefe, Schrein von Moldrath, Vaelgrund]
+    continents: [Calythar]
+    bloom: Herbst, nur um Mitternacht
+    appearance: Dunkelblaue, glockenförmige Blüten
+    effects:
+      - Die Wurzelkinder nutzen sie für Rituale
+      - Macht die Grenzen zwischen den Welten dünner
+    warning: Gefährlich in falschen Händen
+    tags: [magisch, wurzelkinder, rituell, selten]
+
+  - name: Vergessens-Nelke
+    scientificName: Dianthus oblivionis
+    category: flora
+    type: blume
+    regions: [Valdorn]
+    locations: [Graue Tiefe, Valendris, Schrein von Moldrath]
+    continents: [Calythar]
+    bloom: Nach dem ersten Frost
+    appearance: Blassrosa, fast farblose Blüten
+    effects:
+      - In hoher Dosis Gedächtnisverlust
+      - Das Arkanum nutzt es für "Befragungen"
+      - Medizinisch gegen traumatische Erinnerungen
+    tags: [magisch, selten, arkanum]
+
+  # ─── Nutzpflanzen, Obst & Gemüse ──────────────────────────────────────
+  - name: Calytharischer Weizen
+    scientificName: Triticum calythiense
+    category: flora
+    type: nutzpflanze
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden]
+    locations: [Varethis, Selhaven, Arendal, Molthen, Horathen, Soranthis, Veranthal, Ernath]
+    continents: [Calythar]
+    harvest: Sommer (Aussaat Herbst oder Frühjahr)
+    appearance: Goldene Ähren, klassisches Getreide
+    effects:
+      - Brot, Bier, Grundnahrungsmittel
+      - Rückgrat der calythischen Ernährung
+    cost: 1 Silber pro 10 Pfund
+    tags: [essbar, alltäglich, gewerblich]
+
+  - name: Mondgerste
+    scientificName: Hordeum lunare
+    category: flora
+    type: nutzpflanze
+    regions: [Calythische Höhen, Varethianische Ebenen]
+    locations: [Haldorn, Felsmahr, Vindrath, Arendal]
+    continents: [Calythar]
+    harvest: Spätsommer (Aussaat Frühjahr)
+    appearance: Silbrig schimmernde Ähren
+    effects:
+      - Bier und Whisky
+      - Pferdefutter
+      - Robuster als Weizen
+    notes: Bier aus Mondgerste soll "klarere Träume" verursachen.
+    cost: 8 Kupfer pro 10 Pfund
+    tags: [essbar, magisch-assoziiert]
+
+  - name: Eisenknolle
+    scientificName: Tuber ferreum
+    category: flora
+    type: nutzpflanze
+    regions: [Calythische Höhen, Ordensmarken]
+    locations: [Fendrak, Haldorn, Korathel, Vindrath, Karsuun, Grathmund]
+    continents: [Calythar]
+    harvest: Herbst (Aussaat Frühjahr)
+    appearance: Braune, sehr feste Knollen
+    effects:
+      - Grundnahrung in armen Regionen
+      - Sehr lange haltbar
+      - Geschmack fade, aber sättigend
+    cost: 2 Kupfer pro 10 Pfund
+    tags: [essbar, alltäglich]
+
+  - name: Sonnenapfel
+    scientificName: Malum solis
+    category: flora
+    type: obst
+    regions: [Süden, Westen & Westebenen]
+    locations: [Soranthis, Veranthal, Ernath, Lumendras]
+    continents: [Calythar]
+    harvest: Herbst
+    appearance: Goldgelb, fast orange
+    effects:
+      - Frisch, als Saft, als Most
+      - Süß und aromatisch
+      - Symbol für Wohlstand
+    cost: 1 Kupfer pro Stück
+    tags: [essbar, symbolisch]
+
+  - name: Blutpflaume
+    scientificName: Prunum sanguineum
+    category: flora
+    type: obst
+    regions: [Süden, Valdorn]
+    locations: [Soranthis, Veranthal, Bekannter Rand, Haldorn]
+    continents: [Calythar]
+    harvest: Spätsommer
+    appearance: Dunkelrot bis fast schwarz
+    effects:
+      - Marmelade, Wein
+      - Rotes Fruchtfleisch
+      - Bei Trauerfeiern gereicht
+    cost: 2 Kupfer pro Pfund
+    tags: [essbar, symbolisch]
+
+  - name: Eiswurzel
+    scientificName: Radix glacialis
+    category: flora
+    type: obst
+    regions: [Calythische Höhen]
+    locations: [Korathel, Vindrath, Nordath, Fendrak, Haldorn]
+    continents: [Calythar]
+    harvest: Spätherbst, nach dem ersten Frost
+    appearance: Weiße, knollige Wurzel
+    effects:
+      - Wird süß nach Frost
+      - In Suppen, gebraten
+      - Hält den ganzen Winter
+    cost: 3 Kupfer pro Pfund
+    tags: [essbar, alpin]
+
+  # ─── FAUNA: Reittiere ─────────────────────────────────────────────────
+  - name: Varethianisches Streitross
+    scientificName: Equus bellator varethiensis
+    category: fauna
+    type: reittier
+    regions: [Varethianische Ebenen]
+    locations: [Varethis, Mordrath, Karsuun]
+    continents: [Calythar]
+    appearance: 16–18 Handbreit, muskulös, meist schwarz oder dunkelbraun
+    effects:
+      - Kavalleriepferde für den Ferran-Orden
+      - Nur Adelige und Militär
+    cost: 500 Gold
+    tags: [adel, militärisch, selten]
+
+  - name: Calythische Stute
+    scientificName: Equus calythiensis
+    category: fauna
+    type: reittier
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen]
+    locations: [Varethis, Selhaven, Thesan-Hafen, Soranthis, Veranthal, Helioris]
+    continents: [Calythar]
+    appearance: 14–16 Handbreit, verschiedene Farben, elegant
+    effects:
+      - Allzweckpferd
+      - Reisen, leichte Arbeit, Kutsche
+    cost: 75 Gold
+    tags: [alltäglich]
+
+  - name: Bergpony
+    scientificName: Equus montanus
+    category: fauna
+    type: reittier
+    regions: [Calythische Höhen]
+    locations: [Fendrak, Sildareth, Korathel, Vindrath, Haldorn, Felsmahr]
+    continents: [Calythar]
+    appearance: 12–14 Handbreit, klein, robust, dichtes Fell
+    effects:
+      - Lasttier in den Bergen
+      - Extrem trittsicher
+      - Genügsam
+    cost: 50 Gold
+    tags: [alpin, alltäglich]
+
+  # ─── Hunde ────────────────────────────────────────────────────────────
+  - name: Valdorn-Wolfshund
+    scientificName: Canis lupus valdornensis
+    category: fauna
+    type: hund
+    regions: [Valdorn, Calythische Höhen]
+    locations: [Haldorn, Bekannter Rand, Felsmahr, Vindrath]
+    continents: [Calythar]
+    appearance: Schulterhöhe bis 80 cm, grau bis schwarz, wolfsähnlich
+    effects:
+      - Jagdhund
+      - Wachhund
+      - Loyal bis zum Tod
+    cost: 25 Gold
+    tags: [nutztier]
+
+  - name: Ferranit-Mastiff
+    scientificName: Canis mastivus ferranus
+    category: fauna
+    type: hund
+    regions: [Ordensmarken, Varethianische Ebenen]
+    locations: [Karsuun, Sturmarak, Mordrath, Varethis]
+    continents: [Calythar]
+    appearance: Massiv, bis 90 cm, schwarzes kurzes Fell, breiter Kopf
+    effects:
+      - Wachhund, Kampfhund
+      - Einschüchterung
+    cost: 50 Gold (nur über Ferran-Orden)
+    tags: [militärisch, ferran-orden]
+
+  # ─── Nutztiere ────────────────────────────────────────────────────────
+  - name: Eisenrind
+    scientificName: Bos ferreus
+    category: fauna
+    type: nutztier
+    regions: [Calythische Höhen, Ordensmarken]
+    locations: [Haldorn, Felsmahr, Vindrath, Korathel, Grathmund]
+    continents: [Calythar]
+    appearance: Massig, dichtes graues Fell, kleine Hörner
+    effects:
+      - Fleisch, Milch, Leder
+      - Extrem robust – übersteht harte Winter
+    tags: [nutztier, alpin]
+
+  - name: Südland-Schaf
+    scientificName: Ovis australis
+    category: fauna
+    type: nutztier
+    regions: [Süden]
+    locations: [Soranthis, Veranthal, Dorathel, Rebendris]
+    continents: [Calythar]
+    appearance: Weißes, feines Fell
+    effects:
+      - Feinste Wolle Calythars
+      - Teurer als normales Schaf
+    tags: [nutztier, luxus]
+
+  # ─── Wildtiere: Raubtiere ─────────────────────────────────────────────
+  - name: Valdorn-Wolf
+    scientificName: Lupus valdornensis
+    category: fauna
+    type: raubtier
+    regions: [Valdorn, Calythische Höhen]
+    locations: [Graue Tiefe, Vaelgrund, Bekannter Rand, Haldorn, Fendrak]
+    continents: [Calythar]
+    appearance: Rudelgröße 5–12 Tiere, dämmerungs- und nachtaktiv
+    effects:
+      - Meiden normalerweise Menschen
+      - Im harten Winter Angriffe möglich
+      - Sehr intelligent
+    tags: [gefährlich, rudeltier]
+
+  - name: Bergkatze
+    scientificName: Felis montanus
+    category: fauna
+    type: raubtier
+    regions: [Calythische Höhen]
+    locations: [Fendrak, Sildareth, Korathel, Vindrath, Nordath]
+    continents: [Calythar]
+    appearance: Einzelgänger, nachtaktiv
+    effects:
+      - Beute – Bergziegen, Hasen, gelegentlich Lämmer
+      - Angriffe auf Menschen selten
+      - Sehr scheu
+    tags: [scheu, alpin]
+
+  - name: Schattenluchs
+    scientificName: Lynx umbrae
+    category: fauna
+    type: raubtier
+    regions: [Valdorn]
+    locations: [Graue Tiefe, Vaelgrund, Bekannter Rand]
+    continents: [Calythar]
+    appearance: Fast unsichtbar im Unterholz, dämmerungsaktiv
+    effects:
+      - Lauert, springt aus dem Hinterhalt
+      - Fell wertvoll
+      - Die Wurzelkinder betrachten ihn als heilig
+    tags: [heilig, wurzelkinder, selten]
+
+  # ─── Beutetiere ──────────────────────────────────────────────────────
+  - name: Weißhirsch
+    scientificName: Cervus albus
+    category: fauna
+    type: beutetier
+    regions: [Valdorn, Süden]
+    locations: [Graue Tiefe, Vaelgrund, Soranthis, Bekannter Rand]
+    continents: [Calythar]
+    appearance: Albino-Hirsche, sehr selten, morgen- und abendaktiv
+    effects:
+      - Extrem scheu
+      - Gilt als gutes Omen
+    warning: Einen zu töten gilt als Frevel
+    tags: [selten, symbolisch]
+
+  - name: Calythischer Hase
+    scientificName: Lepus calythiensis
+    category: fauna
+    type: beutetier
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen, Valdorn, Ordensmarken]
+    locations: [Varethis, Thesan-Hafen, Soranthis, Haldorn, Molthen]
+    continents: [Calythar]
+    appearance: Dämmerungs- und nachtaktiv
+    effects:
+      - Jagdwild
+      - Fell, Fleisch
+    tags: [jagdwild, alltäglich]
+
+  - name: Flussotter
+    scientificName: Lutra fluviatilis
+    category: fauna
+    type: beutetier
+    regions: [Varethianische Ebenen, Süden, Westen & Westebenen]
+    locations: [Luminfluss, Selhaven, Molthen, Damrath, Lumendras]
+    continents: [Calythar]
+    appearance: Tagaktiv
+    effects:
+      - Verspielt, neugierig
+      - Fell ist wertvoll
+    tags: [fluss, gewerblich]
+
+  # ─── Vögel ───────────────────────────────────────────────────────────
+  - name: Sonnenadler
+    scientificName: Aquila solis
+    category: fauna
+    type: vogel
+    regions: [Calythische Höhen]
+    locations: [Fendrak, Sildareth, Korathel, Nordath, Sturmarak]
+    continents: [Calythar]
+    appearance: Spannweite bis 2,5 m, goldenes Gefieder, brütet im Frühjahr
+    effects:
+      - Symbol des Ferran-Ordens
+    warning: Zu töten ist ein Verbrechen
+    tags: [symbolisch, ferran-orden, geschützt]
+
+  - name: Nachtrabe
+    scientificName: Corvus noctis
+    category: fauna
+    type: vogel
+    regions: [Valdorn, Varethianische Ebenen, Ordensmarken, Calythische Höhen]
+    locations: [Graue Tiefe, Vaelgrund, Varethis, Haldorn, Karsuun]
+    continents: [Calythar]
+    appearance: Größer als normale Raben, tiefschwarzes Gefieder
+    effects:
+      - Sehr intelligent
+      - Folgt manchmal Reisenden
+      - Gilt als Omen (gut oder schlecht, je nach Region)
+    tags: [symbolisch, omen]
+
+  - name: Spiegelfink
+    scientificName: Fringilla specularis
+    category: fauna
+    type: vogel
+    regions: [Süden, Varethianische Ebenen]
+    locations: [Soranthis, Veranthal, Varethis, Helioris, Keldrin]
+    continents: [Calythar]
+    appearance: Schillerndes Gefieder, ändert Farben im Licht
+    effects:
+      - Singt komplexe Melodien
+      - Kann kurze Phrasen nachahmen
+      - Beliebter Käfigvogel bei Adeligen
+    tags: [adel, luxus, kultiviert]
+
+  - name: Eule (Waldkauz)
+    scientificName: Strix silvarum
+    category: fauna
+    type: vogel
+    regions: [Valdorn, Varethianische Ebenen, Süden, Calythische Höhen]
+    locations: [Bekannter Rand, Graue Tiefe, Haldorn, Varethis, Molthen]
+    continents: [Calythar]
+    appearance: Braun gefleckt, große Augen, nachtaktiv
+    effects:
+      - Lautloser Jäger
+      - Assoziation mit Weisheit und Tod
+    tags: [symbolisch]
+
+  - name: Falke
+    scientificName: Falco venatrix
+    category: fauna
+    type: vogel
+    regions: [Varethianische Ebenen, Calythische Höhen, Ordensmarken]
+    locations: [Varethis, Mordrath, Karsuun, Sildareth, Horathen]
+    continents: [Calythar]
+    appearance: Grau-braun, schneller Flug, tagaktiv
+    effects:
+      - Falknerei (Adelsprivileg)
+      - Symbol für Schnelligkeit und Präzision
+    cost: 100+ Gold (ausgebildet)
+    tags: [adel, luxus, dressur]
+
+  - name: Krähe
+    scientificName: Corvus ater
+    category: fauna
+    type: vogel
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen, Valdorn, Ordensmarken]
+    locations: [Varethis, Thesan-Hafen, Soranthis, Karsuun, Mordrath]
+    continents: [Calythar]
+    appearance: Komplett schwarz, tagaktiv
+    effects:
+      - Sehr intelligent
+      - Lebt in Gruppen
+      - Folgt Armeen
+    tags: [alltäglich, schlachtfeld]
+
+  - name: Schwan
+    scientificName: Cygnus nobilis
+    category: fauna
+    type: vogel
+    regions: [Varethianische Ebenen, Süden]
+    locations: [Luminfluss, Varethis, Selhaven, Helioris, Lumendras]
+    continents: [Calythar]
+    appearance: Weiß, langer Hals, tagaktiv
+    effects:
+      - Symbol für Reinheit und Adel
+      - Paart sich fürs Leben
+    warning: Zu töten ist in Varethis ein Verbrechen
+    tags: [adel, symbolisch, geschützt]
+
+  - name: Storch
+    scientificName: Ciconia fertilis
+    category: fauna
+    type: vogel
+    regions: [Süden, Varethianische Ebenen]
+    locations: [Soranthis, Varethis, Veranthal, Selhaven]
+    continents: [Calythar]
+    appearance: Weiß mit schwarzen Flügeln, roter Schnabel, Zugvogel (Frühling–Herbst)
+    effects:
+      - Nistet auf Dächern
+      - Symbol für Fruchtbarkeit und Glück
+    notes: Sein Nest zu zerstören bringt Unglück.
+    tags: [symbolisch, zugvogel]
+
+  - name: Eisvogel
+    scientificName: Alcedo fluminis
+    category: fauna
+    type: vogel
+    regions: [Varethianische Ebenen, Süden]
+    locations: [Luminfluss, Selhaven, Molthen, Lumendras]
+    continents: [Calythar]
+    appearance: Leuchtend blau und orange, tagaktiv
+    effects:
+      - Taucht nach Fischen
+      - Sehr scheu
+      - Sein Erscheinen gilt als gutes Omen
+    tags: [symbolisch, fluss]
+
+  # ─── Meerestiere ─────────────────────────────────────────────────────
+  - name: Odiannischer Großfisch
+    scientificName: Pisces magnus odiannus
+    category: fauna
+    type: meerestier
+    regions: [Westen & Westebenen]
+    locations: [Odiannisches Meer, Thesan-Hafen, Lumendras, Velenthor]
+    continents: [Calythar]
+    appearance: Bis zu 3 Meter lang
+    effects:
+      - Wichtigster Speisefisch
+      - Großer Fang bei Thesan-Hafen (Spätsommer, Laichzeit)
+    tags: [essbar, maritim, gewerblich]
+
+  - name: Salzaal
+    scientificName: Anguilla salsa
+    category: fauna
+    type: meerestier
+    regions: [Westen & Westebenen]
+    locations: [Saltheris, Odiannisches Meer, Calyra]
+    continents: [Calythar]
+    appearance: Silbrig, schlangenförmig
+    effects:
+      - Delikatesse
+      - Geräuchert sehr wertvoll
+    tags: [essbar, maritim, luxus]
+
+  - name: Riss-Qualle
+    scientificName: Medusa abyssi
+    category: fauna
+    type: meerestier
+    regions: [Ordensmarken]
+    locations: [Großer Riss, Nevelthas, Khorendal]
+    continents: [Calythar]
+    appearance: Durchsichtig mit blau leuchtenden Streifen
+    dangerLevel: 3
+    effects:
+      - Berührung verursacht Halluzinationen
+      - Fischer fürchten sie
+      - Das Arkanum sammelt sie
+    tags: [gefährlich, riss, magisch, arkanum]
+
+  # ─── Insekten & Wirbellose ────────────────────────────────────────────
+  - name: Luminmotte
+    scientificName: Phalaena lucis
+    category: fauna
+    type: insekt
+    regions: [Varethianische Ebenen]
+    locations: [Luminfluss, Helioris, Varethis, Selhaven]
+    continents: [Calythar]
+    appearance: Große, weiße Flügel mit goldenem Schimmer, nachtaktiv
+    effects:
+      - Leuchtet schwach in der Dunkelheit
+      - Sammelt sich bei Luminblumen
+      - Symbol für Seelen im Aurel-Glauben
+    tags: [aurel, symbolisch, magisch]
+
+  - name: Valdorn-Spinne
+    scientificName: Aranea valdornensis
+    category: fauna
+    type: insekt
+    regions: [Valdorn]
+    locations: [Graue Tiefe, Vaelgrund, Bekannter Rand]
+    continents: [Calythar]
+    appearance: Körper bis 3 cm, grün-braun, perfekte Tarnung, nachtaktiv
+    effects:
+      - Baut riesige Netze zwischen Bäumen
+      - Nicht aggressiv, aber schmerzhafter Biss
+      - Seide ist extrem belastbar
+    cost: 20 Gold pro 50 ft Seide
+    tags: [gewerblich, selten]
+
+  - name: Honigbiene (Calythisch)
+    scientificName: Apis mellifica
+    category: fauna
+    type: insekt
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen]
+    locations: [Varethis, Soranthis, Veranthal, Thesan-Hafen, Rebendris]
+    continents: [Calythar]
+    appearance: Goldbraun, pelzig, tagaktiv (Frühling–Herbst)
+    effects:
+      - Honig – Süßungsmittel, Medizin, Konservierung
+      - Wachs – Kerzen, Abdichtung
+      - Bestäubung essenziell
+    cost: 5 Kupfer pro Pfund Honig, 8 Kupfer pro Pfund Wachs
+    tags: [gewerblich, alltäglich, essbar]
+
+  - name: Blutegel (Medizinisch)
+    scientificName: Hirudo medicinalis
+    category: fauna
+    type: insekt
+    regions: [Valdorn, Varethianische Ebenen]
+    locations: [Luminfluss, Vaelgrund, Damrath, Mulbeth]
+    continents: [Calythar]
+    habitat: Stehende Gewässer, Sümpfe
+    appearance: Schwarz-grün, schleimig
+    effects:
+      - Medizinisch – gegen Blutergüsse, "schlechtes Blut"
+      - Von Heilern verwendet
+    cost: 5 Kupfer pro Stück
+    tags: [heilend]
+
+  - name: Glühwürmchen
+    scientificName: Lampyris noctiluca
+    category: fauna
+    type: insekt
+    regions: [Süden, Varethianische Ebenen]
+    locations: [Soranthis, Veranthal, Rebendris, Mulbeth, Helioris]
+    continents: [Calythar]
+    appearance: Kleiner Käfer mit leuchtendem Hinterteil, nachtaktiv (Sommer)
+    effects:
+      - Romantisches Symbol
+      - Leuchten zur Paarungszeit
+    tags: [symbolisch, magisch-assoziiert]
+
+  - name: Totengräberkäfer
+    scientificName: Necrophorus sepelio
+    category: fauna
+    type: insekt
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen, Valdorn, Ordensmarken]
+    locations: [Varethis, Helioris, Karsuun, Haldorn, Graue Tiefe]
+    continents: [Calythar]
+    appearance: Schwarz mit orangenen Streifen, nachtaktiv
+    effects:
+      - Begräbt kleine Tierkadaver
+      - Gilt als heilig für Moriel
+    warning: Zu töten bringt angeblich Unglück.
+    tags: [heilig, moriel, symbolisch]
+
+  # ─── Weitere Säugetiere ──────────────────────────────────────────────
+  - name: Wildschwein
+    scientificName: Sus silvaticus
+    category: fauna
+    type: saeugetier
+    regions: [Valdorn, Varethianische Ebenen, Süden, Calythische Höhen]
+    locations: [Bekannter Rand, Graue Tiefe, Haldorn, Soranthis]
+    continents: [Calythar]
+    appearance: Bis 150 kg, dunkelbraunes Fell, Hauer, dämmerungs- und nachtaktiv
+    effects:
+      - Wühlt Böden auf
+      - Beliebtes Jagdwild
+    warning: Gefährlich wenn bedroht (besonders Bachen mit Frischlingen)
+    tags: [jagdwild, gefährlich]
+
+  - name: Dachs
+    scientificName: Meles calytharis
+    category: fauna
+    type: saeugetier
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Valdorn]
+    locations: [Bekannter Rand, Haldorn, Molthen, Soranthis]
+    continents: [Calythar]
+    appearance: Grau mit schwarzweißem Gesicht, nachtaktiv
+    effects:
+      - Lebt in komplexen Bauten
+      - Wehrhaft wenn bedrängt
+      - Symbol für Beharrlichkeit
+    tags: [symbolisch]
+
+  - name: Fuchs
+    scientificName: Vulpes rufa
+    category: fauna
+    type: saeugetier
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen, Valdorn]
+    locations: [Varethis, Thesan-Hafen, Soranthis, Haldorn, Molthen]
+    continents: [Calythar]
+    appearance: Rotbraunes Fell, buschiger Schwanz, dämmerungs- und nachtaktiv
+    effects:
+      - Schlau, anpassungsfähig
+      - Jagt Kleintiere, frisst auch Beeren
+    cost: 2 Gold pro Pelz
+    tags: [jagdwild, gewerblich]
+
+  - name: Marder
+    scientificName: Martes calythiensis
+    category: fauna
+    type: saeugetier
+    regions: [Valdorn, Varethianische Ebenen, Calythische Höhen]
+    locations: [Bekannter Rand, Graue Tiefe, Haldorn, Felsmahr]
+    continents: [Calythar]
+    appearance: Schlank, braunes Fell, gelblicher Kehlfleck, nachtaktiv
+    effects:
+      - Geschickter Kletterer
+      - Jagt Eichhörnchen und Vögel
+    cost: 5 Gold pro Pelz
+    tags: [jagdwild, gewerblich]
+
+  - name: Eichhörnchen
+    scientificName: Sciurus arborum
+    category: fauna
+    type: saeugetier
+    regions: [Valdorn, Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen]
+    locations: [Bekannter Rand, Haldorn, Varethis, Soranthis, Molthen]
+    continents: [Calythar]
+    appearance: Rotbraun oder grau, buschiger Schwanz, tagaktiv
+    effects:
+      - Sammelt Nüsse für den Winter
+      - Sehr flink
+    tags: [alltäglich]
+
+  - name: Fledermaus (Gewöhnliche)
+    scientificName: Vespertilio communis
+    category: fauna
+    type: saeugetier
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen, Valdorn, Ordensmarken]
+    locations: [Fendrak, Korvash, Tharumund, Varethis, Karsuun, Haldorn]
+    continents: [Calythar]
+    appearance: Braun bis schwarz, ledrige Flügel, nachtaktiv
+    effects:
+      - Jagt Insekten
+      - Echolokation
+      - Gilt manchmal als Unheilsbote (zu Unrecht)
+    tags: [symbolisch, mine]
+
+  - name: Bergziege
+    scientificName: Capra montana
+    category: fauna
+    type: saeugetier
+    regions: [Calythische Höhen]
+    locations: [Fendrak, Korathel, Vindrath, Sturmarak, Nordath]
+    continents: [Calythar]
+    appearance: Grau-weiß, gebogene Hörner, tagaktiv
+    effects:
+      - Extrem trittsicher
+      - Lebt in Herden
+      - Fleisch und Fell nutzbar
+    tags: [essbar, alpin]
+
+  # ─── Reptilien & Amphibien ────────────────────────────────────────────
+  - name: Grasnatter
+    scientificName: Natrix herbae
+    category: fauna
+    type: reptil
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Valdorn]
+    locations: [Luminfluss, Molthen, Damrath, Soranthis, Vaelgrund]
+    continents: [Calythar]
+    appearance: Bis 1,5 m, grün-grau mit gelbem Nackenfleck, tagaktiv
+    effects:
+      - Ungiftig, frisst Frösche und Fische
+      - Scheu, flieht bei Störung
+    tags: [scheu, fluss]
+
+  - name: Kreuzotter
+    scientificName: Vipera cruciata
+    category: fauna
+    type: reptil
+    regions: [Calythische Höhen, Valdorn]
+    locations: [Fendrak, Korathel, Bekannter Rand, Haldorn]
+    continents: [Calythar]
+    appearance: Bis 80 cm, grau-braun mit Zickzack-Muster, tagaktiv (Sonnenbaden)
+    dangerLevel: 2
+    effects:
+      - Giftig, aber selten tödlich für Erwachsene
+      - Beißt nur bei Bedrängung
+      - Wärmt sich auf Steinen
+    cost: 50 Gold (Gift, Schwarzmarkt)
+    tags: [gift, gefährlich, alpin]
+
+  - name: Sumpfkröte
+    scientificName: Bufo paludis
+    category: fauna
+    type: amphibie
+    regions: [Valdorn, Varethianische Ebenen]
+    locations: [Graue Tiefe, Vaelgrund, Mulbeth, Damrath]
+    continents: [Calythar]
+    habitat: Sümpfe, feuchte Wälder
+    appearance: Braun-warzig, goldene Augen, nachtaktiv
+    dangerLevel: 2
+    effects:
+      - Krötensekret – Halluzinogen (gefährlich!)
+      - In manchen Hexenrezepten verwendet
+    cost: 25 Gold (Sekret, Schwarzmarkt)
+    tags: [rauschmittel, schwarzmarkt]
+
+  - name: Laubfrosch
+    scientificName: Hyla arborea
+    category: fauna
+    type: amphibie
+    regions: [Valdorn, Varethianische Ebenen, Süden]
+    locations: [Bekannter Rand, Molthen, Mulbeth, Soranthis]
+    continents: [Calythar]
+    appearance: Leuchtend grün, Haftscheiben an Zehen, nachtaktiv
+    effects:
+      - Lautes Quaken im Frühjahr
+      - Klettert auf Bäume
+      - Sein Ruf kündigt Regen an
+    tags: [omen]
+
+  - name: Eidechse (Gewöhnliche)
+    scientificName: Lacerta viridis
+    category: fauna
+    type: reptil
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen, Ordensmarken]
+    locations: [Varethis, Thesan-Hafen, Soranthis, Karsuun, Korathel]
+    continents: [Calythar]
+    appearance: Grün oder braun, schnelle Bewegungen, tagaktiv
+    effects:
+      - Sonnt sich auf Steinen
+      - Wirft bei Gefahr Schwanz ab
+      - Jagt Insekten
+    tags: [alltäglich]
