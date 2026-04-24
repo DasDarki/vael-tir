@@ -492,6 +492,12 @@ const hasAnyActivity = (e: EnrichedEntry) =>
                   <div class="ff__calendarLegend">
                     <span class="ff__calendarDot ff__calendarDot--bloom"></span> Blüte
                     <span class="ff__calendarDot ff__calendarDot--harvest"></span> Ernte
+                    <span
+                      v-if="entry.bloomInferred || entry.harvestInferred"
+                      class="ff__calendarLegendNote"
+                    >
+                      · gestrichelt = abgeleitet
+                    </span>
                   </div>
                   <div class="ff__calendarStrip">
                     <div
@@ -503,6 +509,9 @@ const hasAnyActivity = (e: EnrichedEntry) =>
                         'ff__calendarCell--harvest': monthBloomState(entry, m).harvest,
                         'ff__calendarCell--both':
                           monthBloomState(entry, m).bloom && monthBloomState(entry, m).harvest,
+                        'ff__calendarCell--inferred':
+                          (monthBloomState(entry, m).bloom && entry.bloomInferred) ||
+                          (monthBloomState(entry, m).harvest && entry.harvestInferred),
                       }"
                       :title="`${m} · ${monthSeason(m)}`"
                     >
@@ -1140,6 +1149,14 @@ const hasAnyActivity = (e: EnrichedEntry) =>
   .ff__calendarMonth {
     color: var(--gold);
   }
+}
+.ff__calendarCell--inferred {
+  border-style: dashed;
+  opacity: 0.78;
+}
+.ff__calendarLegendNote {
+  color: var(--faint);
+  font-style: italic;
 }
 
 .ff__note {

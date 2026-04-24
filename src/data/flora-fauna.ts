@@ -97,6 +97,11 @@ function seasonOf(token: string): Season | null {
   return null;
 }
 
+export function isYearRound(text: string | undefined | null): boolean {
+  if (!text) return false;
+  return /ganzjährig|immergrün/.test(text.toLowerCase());
+}
+
 export function parseSeasons(text: string | undefined | null): Set<Season> {
   const out = new Set<Season>();
   if (!text) return out;
@@ -155,6 +160,17 @@ export interface EnrichedEntry extends FloraFaunaEntry {
   harvestSeasons: Season[];
   bloomMonths: Month[];
   harvestMonths: Month[];
+  bloomInferred: boolean;
+  harvestInferred: boolean;
+}
+
+function seasonsFromMonthList(months: Iterable<Month>): Season[] {
+  const set = new Set<Season>();
+  for (const m of months) {
+    const s = MONTH_SEASON[m];
+    if (s !== "Übergang") set.add(s);
+  }
+  return [...set];
 }
 
 const parsed = yaml.load(floraFaunaYaml) as FloraFaunaData;
@@ -162,13 +178,55 @@ const parsed = yaml.load(floraFaunaYaml) as FloraFaunaData;
 export const floraFauna = parsed;
 
 export const enrichedEntries: EnrichedEntry[] = parsed.entries.map((e) => {
+  const bloomYearRound = isYearRound(e.bloom);
+  const harvestYearRound = isYearRound(e.harvest);
+
   const bs = parseSeasons(e.bloom);
   const hs = parseSeasons(e.harvest);
+
+  const bloomMonths: Set<Month> = bloomYearRound
+    ? new Set(MONTHS)
+    : monthsFromSeasons(bs);
+  const harvestMonths: Set<Month> = harvestYearRound
+    ? new Set(MONTHS)
+    : monthsFromSeasons(hs);
+
+  let bloomInferred = false;
+  let harvestInferred = false;
+
+  // Infer missing bloom = month before first harvest month (unless harvest is year-round)
+  if (bloomMonths.size === 0 && harvestMonths.size > 0 && !harvestYearRound) {
+    const firstIdx = Math.min(
+      ...[...harvestMonths].map((m) => MONTHS.indexOf(m))
+    );
+    const before = (firstIdx - 1 + MONTHS.length) % MONTHS.length;
+    const inferred = MONTHS[before];
+    if (inferred) {
+      bloomMonths.add(inferred);
+      bloomInferred = true;
+    }
+  }
+
+  // Infer missing harvest = month after last bloom month (unless bloom is year-round)
+  if (harvestMonths.size === 0 && bloomMonths.size > 0 && !bloomYearRound) {
+    const lastIdx = Math.max(
+      ...[...bloomMonths].map((m) => MONTHS.indexOf(m))
+    );
+    const after = (lastIdx + 1) % MONTHS.length;
+    const inferred = MONTHS[after];
+    if (inferred) {
+      harvestMonths.add(inferred);
+      harvestInferred = true;
+    }
+  }
+
   return {
     ...e,
-    bloomSeasons: [...bs],
-    harvestSeasons: [...hs],
-    bloomMonths: [...monthsFromSeasons(bs)],
-    harvestMonths: [...monthsFromSeasons(hs)],
+    bloomSeasons: seasonsFromMonthList(bloomMonths),
+    harvestSeasons: seasonsFromMonthList(harvestMonths),
+    bloomMonths: [...bloomMonths],
+    harvestMonths: [...harvestMonths],
+    bloomInferred,
+    harvestInferred,
   };
 });
