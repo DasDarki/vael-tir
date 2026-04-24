@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { floraFauna, type FloraFaunaEntry } from "@/data/flora-fauna";
+import {
+  floraFauna,
+  enrichedEntries,
+  SEASONS,
+  MONTHS,
+  MONTH_SEASON,
+  type EnrichedEntry,
+  type Season,
+  type Month,
+} from "@/data/flora-fauna";
 
 definePage({
   meta: {
@@ -8,7 +17,10 @@ definePage({
   },
 });
 
-const { meta, entries } = floraFauna;
+const { meta } = floraFauna;
+const entries = enrichedEntries;
+
+type ActivityMode = "all" | "bloom" | "harvest";
 
 const query = ref("");
 const selectedCategories = ref<Set<string>>(new Set());
@@ -17,6 +29,9 @@ const selectedContinents = ref<Set<string>>(new Set());
 const selectedRegions = ref<Set<string>>(new Set());
 const selectedLocations = ref<Set<string>>(new Set());
 const selectedDanger = ref<Set<number>>(new Set());
+const selectedSeasons = ref<Set<Season>>(new Set());
+const selectedMonths = ref<Set<Month>>(new Set());
+const activityMode = ref<ActivityMode>("all");
 const expanded = ref<Set<string>>(new Set());
 const filtersOpen = ref(false);
 
@@ -33,6 +48,8 @@ const toggleContinent = (v: string) => (selectedContinents.value = toggle(select
 const toggleRegion = (v: string) => (selectedRegions.value = toggle(selectedRegions.value, v));
 const toggleLocation = (v: string) => (selectedLocations.value = toggle(selectedLocations.value, v));
 const toggleDanger = (v: number) => (selectedDanger.value = toggle(selectedDanger.value, v));
+const toggleSeason = (v: Season) => (selectedSeasons.value = toggle(selectedSeasons.value, v));
+const toggleMonth = (v: Month) => (selectedMonths.value = toggle(selectedMonths.value, v));
 
 const toggleExpanded = (key: string) => (expanded.value = toggle(expanded.value, key));
 
@@ -43,6 +60,9 @@ const clearAll = () => {
   selectedRegions.value = new Set();
   selectedLocations.value = new Set();
   selectedDanger.value = new Set();
+  selectedSeasons.value = new Set();
+  selectedMonths.value = new Set();
+  activityMode.value = "all";
   query.value = "";
 };
 
@@ -53,8 +73,17 @@ const activeFilterCount = computed(
     selectedContinents.value.size +
     selectedRegions.value.size +
     selectedLocations.value.size +
-    selectedDanger.value.size
+    selectedDanger.value.size +
+    selectedSeasons.value.size +
+    selectedMonths.value.size +
+    (activityMode.value === "all" ? 0 : 1)
 );
+
+const ACTIVITY_MODES: { value: ActivityMode; label: string }[] = [
+  { value: "all", label: "Beides" },
+  { value: "bloom", label: "Nur Blüte" },
+  { value: "harvest", label: "Nur Ernte" },
+];
 
 // Region options depend on selected continents
 const visibleContinents = computed(() => {
@@ -88,7 +117,7 @@ const typeOptions = computed(() => {
 
 const typeLabel = (t: string) => meta.typeLabels[t] ?? t;
 
-const matchesQuery = (e: FloraFaunaEntry, q: string) => {
+const matchesQuery = (e: EnrichedEntry, q: string) => {
   if (!q) return true;
   const needle = q.toLowerCase();
   const hay = [
@@ -107,7 +136,19 @@ const matchesQuery = (e: FloraFaunaEntry, q: string) => {
   return hay.includes(needle);
 };
 
-const filtered = computed<FloraFaunaEntry[]>(() => {
+function activitySeasons(e: EnrichedEntry): Season[] {
+  if (activityMode.value === "bloom") return e.bloomSeasons;
+  if (activityMode.value === "harvest") return e.harvestSeasons;
+  return Array.from(new Set([...e.bloomSeasons, ...e.harvestSeasons]));
+}
+
+function activityMonths(e: EnrichedEntry): Month[] {
+  if (activityMode.value === "bloom") return e.bloomMonths;
+  if (activityMode.value === "harvest") return e.harvestMonths;
+  return Array.from(new Set([...e.bloomMonths, ...e.harvestMonths]));
+}
+
+const filtered = computed<EnrichedEntry[]>(() => {
   const q = query.value.trim();
   return entries.filter((e) => {
     if (selectedCategories.value.size && !selectedCategories.value.has(e.category)) return false;
@@ -122,12 +163,22 @@ const filtered = computed<FloraFaunaEntry[]>(() => {
       const d = e.dangerLevel ?? 0;
       if (!selectedDanger.value.has(d)) return false;
     }
+    if (activityMode.value === "bloom" && !e.bloom) return false;
+    if (activityMode.value === "harvest" && !e.harvest) return false;
+    if (selectedSeasons.value.size) {
+      const ss = activitySeasons(e);
+      if (!ss.some((s) => selectedSeasons.value.has(s))) return false;
+    }
+    if (selectedMonths.value.size) {
+      const ms = activityMonths(e);
+      if (!ms.some((m) => selectedMonths.value.has(m))) return false;
+    }
     return matchesQuery(e, q);
   });
 });
 
 const groupedByType = computed(() => {
-  const map = new Map<string, FloraFaunaEntry[]>();
+  const map = new Map<string, EnrichedEntry[]>();
   for (const e of filtered.value) {
     if (!map.has(e.type)) map.set(e.type, []);
     map.get(e.type)!.push(e);
@@ -143,7 +194,17 @@ const groupedByType = computed(() => {
 
 const skulls = (n: number) => "☠".repeat(Math.max(0, Math.min(5, n)));
 
-const keyOf = (e: FloraFaunaEntry) => `${e.type}:${e.name}`;
+const keyOf = (e: EnrichedEntry) => `${e.type}:${e.name}`;
+
+const monthSeason = (m: Month) => MONTH_SEASON[m];
+const seasonsFor = (e: EnrichedEntry) =>
+  Array.from(new Set([...e.bloomSeasons, ...e.harvestSeasons]));
+const monthBloomState = (e: EnrichedEntry, m: Month) => ({
+  bloom: e.bloomMonths.includes(m),
+  harvest: e.harvestMonths.includes(m),
+});
+const hasAnyActivity = (e: EnrichedEntry) =>
+  e.bloomMonths.length > 0 || e.harvestMonths.length > 0;
 </script>
 
 <template>
@@ -273,6 +334,59 @@ const keyOf = (e: FloraFaunaEntry) => `${e.type}:${e.name}`;
         </section>
 
         <section class="ff__group">
+          <h3 class="ff__groupTitle">Aktivität</h3>
+          <div class="ff__chips">
+            <button
+              v-for="mode in ACTIVITY_MODES"
+              :key="mode.value"
+              type="button"
+              class="ff__chip"
+              :class="{ 'ff__chip--active': activityMode === mode.value }"
+              @click="activityMode = mode.value"
+            >
+              {{ mode.label }}
+            </button>
+          </div>
+        </section>
+
+        <section class="ff__group">
+          <h3 class="ff__groupTitle">Jahreszeit</h3>
+          <div class="ff__chips">
+            <button
+              v-for="s in SEASONS"
+              :key="s"
+              type="button"
+              class="ff__chip"
+              :class="[
+                { 'ff__chip--active': selectedSeasons.has(s) },
+                `ff__chip--season-${s.toLowerCase()}`,
+              ]"
+              @click="toggleSeason(s)"
+            >
+              {{ s }}
+            </button>
+          </div>
+        </section>
+
+        <section class="ff__group">
+          <h3 class="ff__groupTitle">Monat</h3>
+          <div class="ff__chips">
+            <button
+              v-for="m in MONTHS"
+              :key="m"
+              type="button"
+              class="ff__chip ff__chip--sm"
+              :class="{ 'ff__chip--active': selectedMonths.has(m) }"
+              :title="monthSeason(m)"
+              @click="toggleMonth(m)"
+            >
+              {{ m }}
+              <span class="ff__chipHint">{{ monthSeason(m) }}</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="ff__group">
           <h3 class="ff__groupTitle">Gefahrenstufe</h3>
           <div class="ff__chips">
             <button
@@ -328,6 +442,12 @@ const keyOf = (e: FloraFaunaEntry) => `${e.type}:${e.name}`;
                   class="ff__tag ff__tag--continent"
                 >{{ c }}</span>
                 <span
+                  v-for="s in seasonsFor(entry)"
+                  :key="`season-${s}`"
+                  class="ff__tag ff__tag--season"
+                  :class="`ff__tag--season-${s.toLowerCase()}`"
+                >{{ s }}</span>
+                <span
                   v-for="t in entry.tags"
                   :key="t"
                   class="ff__tag"
@@ -367,6 +487,30 @@ const keyOf = (e: FloraFaunaEntry) => `${e.type}:${e.name}`;
                     <dd>{{ entry.cost }}</dd>
                   </template>
                 </dl>
+
+                <div v-if="hasAnyActivity(entry)" class="ff__calendar">
+                  <div class="ff__calendarLegend">
+                    <span class="ff__calendarDot ff__calendarDot--bloom"></span> Blüte
+                    <span class="ff__calendarDot ff__calendarDot--harvest"></span> Ernte
+                  </div>
+                  <div class="ff__calendarStrip">
+                    <div
+                      v-for="m in MONTHS"
+                      :key="m"
+                      class="ff__calendarCell"
+                      :class="{
+                        'ff__calendarCell--bloom': monthBloomState(entry, m).bloom,
+                        'ff__calendarCell--harvest': monthBloomState(entry, m).harvest,
+                        'ff__calendarCell--both':
+                          monthBloomState(entry, m).bloom && monthBloomState(entry, m).harvest,
+                      }"
+                      :title="`${m} · ${monthSeason(m)}`"
+                    >
+                      <span class="ff__calendarMonth">{{ m }}</span>
+                      <span class="ff__calendarSeason">{{ monthSeason(m) }}</span>
+                    </div>
+                  </div>
+                </div>
 
                 <div v-if="entry.effects?.length" class="ff__effects">
                   <h4>Wirkung & Verwendung</h4>
@@ -659,6 +803,47 @@ const keyOf = (e: FloraFaunaEntry) => `${e.type}:${e.name}`;
   color: var(--danger);
 }
 
+.ff__chipHint {
+  display: block;
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-top: 1px;
+}
+.ff__chip--active .ff__chipHint {
+  color: var(--gold-2);
+}
+
+.ff__chip--season-frühling {
+  &.ff__chip--active {
+    border-color: rgba(150, 220, 150, 0.45);
+    background: rgba(150, 220, 150, 0.12);
+    color: rgba(190, 240, 190, 0.95);
+  }
+}
+.ff__chip--season-sommer {
+  &.ff__chip--active {
+    border-color: rgba(255, 210, 120, 0.5);
+    background: rgba(255, 210, 120, 0.14);
+    color: rgba(255, 225, 160, 0.95);
+  }
+}
+.ff__chip--season-herbst {
+  &.ff__chip--active {
+    border-color: rgba(230, 150, 90, 0.5);
+    background: rgba(230, 150, 90, 0.14);
+    color: rgba(245, 180, 130, 0.95);
+  }
+}
+.ff__chip--season-winter {
+  &.ff__chip--active {
+    border-color: rgba(160, 200, 245, 0.5);
+    background: rgba(160, 200, 245, 0.12);
+    color: rgba(200, 225, 255, 0.95);
+  }
+}
+
 .ff__results {
   display: grid;
   gap: 22px;
@@ -790,6 +975,26 @@ const keyOf = (e: FloraFaunaEntry) => `${e.type}:${e.name}`;
   border-color: rgba(170, 200, 255, 0.25);
   background: rgba(120, 170, 255, 0.08);
 }
+.ff__tag--season-frühling {
+  color: rgba(190, 240, 190, 0.9);
+  border-color: rgba(150, 220, 150, 0.3);
+  background: rgba(150, 220, 150, 0.08);
+}
+.ff__tag--season-sommer {
+  color: rgba(255, 225, 160, 0.9);
+  border-color: rgba(255, 210, 120, 0.3);
+  background: rgba(255, 210, 120, 0.08);
+}
+.ff__tag--season-herbst {
+  color: rgba(245, 180, 130, 0.9);
+  border-color: rgba(230, 150, 90, 0.3);
+  background: rgba(230, 150, 90, 0.08);
+}
+.ff__tag--season-winter {
+  color: rgba(200, 225, 255, 0.9);
+  border-color: rgba(160, 200, 245, 0.3);
+  background: rgba(160, 200, 245, 0.08);
+}
 
 .ff__cardBody {
   margin-top: 4px;
@@ -845,6 +1050,95 @@ const keyOf = (e: FloraFaunaEntry) => `${e.type}:${e.name}`;
     font-size: 13px;
     display: grid;
     gap: 2px;
+  }
+}
+
+.ff__calendar {
+  display: grid;
+  gap: 6px;
+}
+.ff__calendarLegend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--faint);
+  letter-spacing: 0.04em;
+}
+.ff__calendarDot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  margin-right: 4px;
+  vertical-align: -1px;
+  border: 1px solid var(--border);
+
+  &.ff__calendarDot--bloom {
+    background: rgba(150, 220, 150, 0.45);
+    border-color: rgba(150, 220, 150, 0.6);
+  }
+  &.ff__calendarDot--harvest {
+    background: rgba(255, 190, 120, 0.45);
+    border-color: rgba(255, 190, 120, 0.6);
+  }
+}
+.ff__calendarStrip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 3px;
+
+  @media (min-width: 560px) {
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+  }
+}
+.ff__calendarCell {
+  display: grid;
+  gap: 1px;
+  padding: 6px 4px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.025);
+  text-align: center;
+  min-width: 0;
+}
+.ff__calendarMonth {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ff__calendarSeason {
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.ff__calendarCell--bloom {
+  border-color: rgba(150, 220, 150, 0.5);
+  background: rgba(150, 220, 150, 0.12);
+  .ff__calendarMonth {
+    color: rgba(200, 245, 200, 0.95);
+  }
+}
+.ff__calendarCell--harvest {
+  border-color: rgba(255, 190, 120, 0.5);
+  background: rgba(255, 190, 120, 0.12);
+  .ff__calendarMonth {
+    color: rgba(255, 220, 170, 0.95);
+  }
+}
+.ff__calendarCell--both {
+  border-color: rgba(229, 200, 120, 0.6);
+  background: linear-gradient(
+    135deg,
+    rgba(150, 220, 150, 0.18),
+    rgba(255, 190, 120, 0.18)
+  );
+  .ff__calendarMonth {
+    color: var(--gold);
   }
 }
 
