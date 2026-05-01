@@ -1,0 +1,267 @@
+[
+  {
+    "name": "Varethis",
+    "x": 6378,
+    "y": 2347
+  },
+  {
+    "name": "Helioris",
+    "x": 6787,
+    "y": 2486
+  },
+  {
+    "name": "Sturmarak",
+    "x": 7122,
+    "y": 2745
+  },
+  {
+    "name": "Vendarath",
+    "x": 7275,
+    "y": 2835
+  },
+  {
+    "name": "Karsuun",
+    "x": 7123,
+    "y": 3045
+  },
+  {
+    "name": "Grathmund",
+    "x": 6911,
+    "y": 2995
+  },
+  {
+    "name": "Haldorn",
+    "x": 6487,
+    "y": 652
+  },
+  {
+    "name": "Korathel",
+    "x": 6812,
+    "y": 633
+  },
+  {
+    "name": "Sildareth",
+    "x": 6778,
+    "y": 833
+  },
+  {
+    "name": "Korvash",
+    "x": 7011,
+    "y": 854
+  },
+  {
+    "name": "Gorendal",
+    "x": 6659,
+    "y": 1016
+  },
+  {
+    "name": "Fendrak",
+    "x": 7226,
+    "y": 1127
+  },
+  {
+    "name": "Stumprath",
+    "x": 7312,
+    "y": 1289
+  },
+  {
+    "name": "Vindrath",
+    "x": 6896,
+    "y": 1489
+  },
+  {
+    "name": "Mordrath",
+    "x": 6305,
+    "y": 1393
+  },
+  {
+    "name": "Felsmahr",
+    "x": 7173,
+    "y": 1753
+  },
+  {
+    "name": "Selhaven",
+    "x": 6441,
+    "y": 1780
+  },
+  {
+    "name": "Arendal",
+    "x": 6077,
+    "y": 1973
+  },
+  {
+    "name": "Birketh",
+    "x": 5606,
+    "y": 2133
+  },
+  {
+    "name": "Damrath",
+    "x": 6083,
+    "y": 2712
+  },
+  {
+    "name": "Horathen",
+    "x": 5750,
+    "y": 3031
+  },
+  {
+    "name": "Molthen",
+    "x": 6008,
+    "y": 3303
+  },
+  {
+    "name": "Valenthor",
+    "x": 5262,
+    "y": 3293
+  },
+  {
+    "name": "Vaelith",
+    "x": 5121,
+    "y": 3740
+  },
+  {
+    "name": "Neveth",
+    "x": 5493,
+    "y": 3846
+  },
+  {
+    "name": "Thesan-Hafen",
+    "x": 4875,
+    "y": 3881
+  },
+  {
+    "name": "Soramund",
+    "x": 5070,
+    "y": 4075
+  },
+  {
+    "name": "Langeth",
+    "x": 5347,
+    "y": 4293
+  },
+  {
+    "name": "Calyra",
+    "x": 4598,
+    "y": 4348
+  },
+  {
+    "name": "Ankhoral",
+    "x": 4393,
+    "y": 4548
+  },
+  {
+    "name": "Ernath",
+    "x": 4839,
+    "y": 4738
+  },
+  {
+    "name": "Saltheris",
+    "x": 4706,
+    "y": 5127
+  },
+  {
+    "name": "Lumendras",
+    "x": 5155,
+    "y": 5287
+  },
+  {
+    "name": "Havelthen",
+    "x": 5228,
+    "y": 5493
+  },
+  {
+    "name": "Althenor",
+    "x": 5695,
+    "y": 5144
+  },
+  {
+    "name": "Varenthal",
+    "x": 5839,
+    "y": 4778
+  },
+  {
+    "name": "Dorathel",
+    "x": 5468,
+    "y": 4613
+  },
+  {
+    "name": "Rebendris",
+    "x": 6211,
+    "y": 4374
+  },
+  {
+    "name": "Soranthis",
+    "x": 6467,
+    "y": 4447
+  },
+  {
+    "name": "Mulbeth",
+    "x": 6656,
+    "y": 4773
+  },
+  {
+    "name": "Keldrin",
+    "x": 6437,
+    "y": 3880
+  },
+  {
+    "name": "Veltharak",
+    "x": 7015,
+    "y": 3762
+  },
+  {
+    "name": "Grenthas",
+    "x": 7194,
+    "y": 3983
+  },
+  {
+    "name": "Nevelthas",
+    "x": 7685,
+    "y": 4096
+  },
+  {
+    "name": "Khorendal",
+    "x": 7337,
+    "y": 3396
+  },
+  {
+    "name": "Die alte Kosmologie Il'Sereth",
+    "x": 11835,
+    "y": 1263
+  },
+  {
+    "name": "Grauklamm",
+    "x": 2840,
+    "y": 1156
+  },
+  {
+    "name": "Valdrek",
+    "x": 988,
+    "y": 1617
+  },
+  {
+    "name": "Branthor",
+    "x": 1228,
+    "y": 1886
+  },
+  {
+    "name": "Kathmud",
+    "x": 937,
+    "y": 1959
+  },
+  {
+    "name": "Sturmkap",
+    "x": 1179,
+    "y": 2183
+  },
+  {
+    "name": "Tränenhaven",
+    "x": 1335,
+    "y": 4085
+  },
+  {
+    "name": "Thalmunds Rast",
+    "x": 2588,
+    "y": 4572
+  }
+]
