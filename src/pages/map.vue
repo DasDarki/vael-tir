@@ -121,6 +121,8 @@ let highlightTimer: number | null = null
 
 const selectedPlaceName = ref<string | null>(null)
 const selectedStaticRegionName = ref<string | null>(null)
+const hoveredStaticPlaceName = ref<string | null>(null)
+const hoveredStaticRegionName = ref<string | null>(null)
 
 let viewer: OpenSeadragon.Viewer | null = null
 let copiedTimer: number | null = null
@@ -779,6 +781,50 @@ function onSvgInteractiveDown(e: PointerEvent) {
   suppressNextCanvasClick = true
 }
 
+function pointInPolygonScreen(pt: Pt, points: RegionVertex[]): boolean {
+  let inside = false
+  const n = points.length
+  for (let i = 0, j = n - 1; i < n; j = i++) {
+    const a = points[i]
+    const b = points[j]
+    if (!a || !b) continue
+    const yi = a.screen.y
+    const yj = b.screen.y
+    const xi = a.screen.x
+    const xj = b.screen.x
+    const intersect =
+      ((yi > pt.y) !== (yj > pt.y)) &&
+      pt.x < ((xj - xi) * (pt.y - yi)) / ((yj - yi) || 1e-9) + xi
+    if (intersect) inside = !inside
+  }
+  return inside
+}
+
+function hitTestStaticPlace(screenPt: Pt): StaticPlace | null {
+  const HIT_RADIUS = 14
+  let best: StaticPlace | null = null
+  let bestDist = HIT_RADIUS
+  for (const place of staticPlaces.value) {
+    const d = Math.hypot(place.screen.x - screenPt.x, place.screen.y - screenPt.y)
+    if (d < bestDist) {
+      bestDist = d
+      best = place
+    }
+  }
+  return best
+}
+
+function hitTestStaticRegion(screenPt: Pt): StaticRegion | null {
+  for (let i = staticRegions.value.length - 1; i >= 0; i--) {
+    const r = staticRegions.value[i]
+    if (!r) continue
+    if (regionVisibility[r.name] === false) continue
+    if (r.points.length < 3) continue
+    if (pointInPolygonScreen(screenPt, r.points)) return r
+  }
+  return null
+}
+
 function regionCenter(region: Region): Pt {
   let sx = 0
   let sy = 0
@@ -829,6 +875,17 @@ function handleCanvasClick(evt: any) {
   }
 
   if (mode.value === "browse" && !isDmDevMode.value) {
+    const screenPt: Pt = { x: webPoint?.x ?? 0, y: webPoint?.y ?? 0 }
+    const placeHit = hitTestStaticPlace(screenPt)
+    if (placeHit) {
+      selectStaticPlace(placeHit.name)
+      return
+    }
+    const regionHit = hitTestStaticRegion(screenPt)
+    if (regionHit) {
+      selectStaticRegion(regionHit.name)
+      return
+    }
     if (selectedPlaceName.value || selectedStaticRegionName.value) {
       clearStaticSelection()
     }
@@ -1053,9 +1110,28 @@ function onKeyDown(e: KeyboardEvent) {
 }
 
 function onCanvasMouseMove(e: MouseEvent) {
-  if (mode.value !== "regions" || !drawing.active || !el.value) return
+  if (!el.value) return
   const rect = el.value.getBoundingClientRect()
-  drawing.cursorScreen = { x: e.clientX - rect.left, y: e.clientY - rect.top }
+  const screenPt: Pt = { x: e.clientX - rect.left, y: e.clientY - rect.top }
+
+  if (mode.value === "regions" && drawing.active) {
+    drawing.cursorScreen = screenPt
+  }
+
+  if (mode.value === "browse" && !isDmDevMode.value && !isDragging) {
+    const placeHit = hitTestStaticPlace(screenPt)
+    const regionHit = placeHit ? null : hitTestStaticRegion(screenPt)
+    hoveredStaticPlaceName.value = placeHit ? placeHit.name : null
+    hoveredStaticRegionName.value = regionHit ? regionHit.name : null
+  } else if (hoveredStaticPlaceName.value || hoveredStaticRegionName.value) {
+    hoveredStaticPlaceName.value = null
+    hoveredStaticRegionName.value = null
+  }
+}
+
+function onCanvasMouseLeave() {
+  hoveredStaticPlaceName.value = null
+  hoveredStaticRegionName.value = null
 }
 
 watch(mode, (newMode, oldMode) => {
@@ -1139,6 +1215,7 @@ onMounted(() => {
 
   window.addEventListener("keydown", onKeyDown)
   el.value.addEventListener("mousemove", onCanvasMouseMove)
+  el.value.addEventListener("mouseleave", onCanvasMouseLeave)
 })
 
 watch(
@@ -1150,7 +1227,10 @@ watch(
 
 onBeforeUnmount(() => {
   window.removeEventListener("keydown", onKeyDown)
-  if (el.value) el.value.removeEventListener("mousemove", onCanvasMouseMove)
+  if (el.value) {
+    el.value.removeEventListener("mousemove", onCanvasMouseMove)
+    el.value.removeEventListener("mouseleave", onCanvasMouseLeave)
+  }
   if (viewer) {
     viewer.destroy()
     viewer = null
@@ -1161,7 +1241,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="map-wrap">
+  <div class="map-wrap" :class="{ 'static-hover': hoveredStaticPlaceName || hoveredStaticRegionName }">
     <div ref="el" class="osd"></div>
 
     <svg class="overlay">
@@ -1348,10 +1428,11 @@ onBeforeUnmount(() => {
           <polygon
             :points="staticRegionPolygonString(region.points)"
             class="static-region"
-            :class="{ interactive: mode === 'browse', selected: selectedStaticRegionName === region.name }"
+            :class="{
+              selected: selectedStaticRegionName === region.name,
+              hover: hoveredStaticRegionName === region.name,
+            }"
             :style="{ fill: region.color, stroke: region.color }"
-            @pointerdown="onSvgInteractiveDown($event)"
-            @click.stop="mode === 'browse' && selectStaticRegion(region.name)"
           />
           <g class="static-region-label-group" pointer-events="none">
             <rect
@@ -1380,9 +1461,10 @@ onBeforeUnmount(() => {
             :cy="place.screen.y"
             r="4.5"
             class="static-place-dot"
-            :class="{ interactive: mode === 'browse', selected: selectedPlaceName === place.name }"
-            @pointerdown="onSvgInteractiveDown($event)"
-            @click.stop="mode === 'browse' && selectStaticPlace(place.name)"
+            :class="{
+              selected: selectedPlaceName === place.name,
+              hover: hoveredStaticPlaceName === place.name,
+            }"
           />
           <circle :cx="place.screen.x" :cy="place.screen.y" r="1.8" class="static-place-dot-inner" pointer-events="none" />
           <text :x="place.screen.x + 8" :y="place.screen.y + 4" class="static-place-label-stroke" pointer-events="none">{{ place.name }}</text>
@@ -1582,6 +1664,11 @@ onBeforeUnmount(() => {
   height: 100vh;
   min-height: 70vh;
   font-family: 'Inter', sans-serif;
+}
+
+.map-wrap.static-hover :deep(.openseadragon-canvas),
+.map-wrap.static-hover .osd {
+  cursor: pointer !important;
 }
 
 .osd {
@@ -1979,14 +2066,10 @@ onBeforeUnmount(() => {
   stroke-opacity: 0.85;
   stroke-linejoin: round;
   pointer-events: none;
-  transition: fill-opacity .15s, stroke-width .15s;
-  &.interactive {
-    pointer-events: auto;
-    cursor: pointer;
-    &:hover {
-      fill-opacity: 0.32;
-      stroke-opacity: 1;
-    }
+  transition: fill-opacity .15s, stroke-width .15s, stroke-opacity .15s;
+  &.hover {
+    fill-opacity: 0.32;
+    stroke-opacity: 1;
   }
   &.selected {
     fill-opacity: 0.42;
@@ -2032,13 +2115,9 @@ onBeforeUnmount(() => {
   stroke-width: 1.5;
   pointer-events: none;
   transition: fill .15s, stroke .15s, r .15s;
-  &.interactive {
-    pointer-events: auto;
-    cursor: pointer;
-    &:hover {
-      fill: #fbbf24;
-      stroke: #f97316;
-    }
+  &.hover {
+    fill: #fbbf24;
+    stroke: #f97316;
   }
   &.selected {
     fill: #fbbf24;
