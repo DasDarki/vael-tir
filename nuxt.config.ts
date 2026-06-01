@@ -9,6 +9,14 @@ export default defineNuxtConfig({
 
   modules: ['@nuxtjs/color-mode', '@nuxt/fonts'],
 
+  // Öffentliche Laufzeit-Konfiguration. Translator-API-Basis,
+  // überschreibbar via NUXT_PUBLIC_TRANSLATE_API.
+  runtimeConfig: {
+    public: {
+      translateApi: 'https://translate.vael-tir.de',
+    },
+  },
+
   // Fonts werden im Build von Google geladen, lokal self-hosted (keine Laufzeit-Requests).
   fonts: {
     families: [
