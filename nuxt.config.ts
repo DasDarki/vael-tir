@@ -56,9 +56,12 @@ export default defineNuxtConfig({
     },
   },
 
-  // Static generation (SSG) — prerender every route to plain HTML for SEO + Coolify/nginx.
+  // Static generation (SSG) — prerender every route to plain HTML for SEO.
   ssr: true,
   nitro: {
+    // Preset explizit fixieren: verhindert, dass Nitro auf Cloudflare/Vercel/etc.
+    // automatisch einen Server-/Worker-Preset wählt. Erzeugt rein statisch (.output/public).
+    preset: 'static',
     prerender: {
       crawlLinks: true,
       routes: ['/'],
