@@ -1,0 +1,7 @@
+# Cloudflare Pages — Cache-Header (ersetzt die nginx-Regeln im statischen Hosting)
+/_nuxt/*
+  Cache-Control: public, max-age=31536000, immutable
+/_fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/map_tiles/*
+  Cache-Control: public, max-age=2592000

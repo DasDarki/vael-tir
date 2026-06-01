@@ -36,7 +36,21 @@ bun run generate   # statische Site nach .output/public
 bun run preview    # generierte Site lokal servieren
 ```
 
-## Deployment (Coolify / Docker, SSG)
+## Deployment
+
+Die App ist statisch (`nuxt generate` → `.output/public`) und lässt sich auf jedem
+statischen Host ausliefern.
+
+### Cloudflare Pages (empfohlen, kostenlos)
+
+- **Build command:** `bun run generate`
+- **Build output directory:** `.output/public`
+- **Env:** `NODE_VERSION=22`
+
+`public/_redirects` (301 für alte Pfade) und `public/_headers` (Cache) sind bereits
+hinterlegt. 511 Dateien total — weit unter CF Pages' 20.000-Datei-Limit.
+
+### Coolify / Docker (SSG)
 
 Das `Dockerfile` baut mit Bun, generiert die statische Site (`bun run generate`) und
 serviert `.output/public` via nginx (`nginx-default.conf`).

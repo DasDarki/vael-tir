@@ -1,0 +1,4 @@
+# Cloudflare Pages — echte 301-Weiterleitungen alter SPA-Pfade
+/map            /karte                    301
+/flora-fauna    /kompendium               301
+/money          /werkzeuge/muenzteiler    301
