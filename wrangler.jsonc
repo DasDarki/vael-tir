@@ -1,0 +1,11 @@
+{
+  // Cloudflare Workers — reines Static-Assets-Hosting (kein Server-Code).
+  // `wrangler deploy` lädt nur das statische Verzeichnis hoch.
+  // Kein "main"-Eintrag → es wird kein Worker-Script erwartet.
+  "name": "vael-tir",
+  "compatibility_date": "2025-01-01",
+  "assets": {
+    "directory": ".output/public",
+    "not_found_handling": "404-page"
+  }
+}
