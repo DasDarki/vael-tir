@@ -1,11 +1,4 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    },
-    {
-      "path": "./tsconfig.app.json"
-    }
-  ]
+  // Nuxt generiert die eigentliche Konfiguration unter .nuxt/tsconfig.json
+  "extends": "./.nuxt/tsconfig.json"
 }

@@ -1,0 +1,73 @@
+// =============================================================
+//  Vael Tir · SCSS Abstracts
+//  Variablen, Breakpoints & Mixins — KEIN CSS-Output.
+//  Wird via nuxt.config additionalData in jede Komponente injiziert.
+// =============================================================
+
+@use 'sass:map';
+
+// ---- Schriftstimmen -----------------------------------------
+$font-display: ('Cinzel', 'Times New Roman', serif);
+$font-lore: ('Cormorant Garamond', Georgia, serif);
+$font-data: ('JetBrains Mono', ui-monospace, monospace);
+
+// ---- Radien -------------------------------------------------
+$r-sm: 8px;
+$r-md: 14px;
+$r-lg: 20px;
+$r-xl: 28px;
+
+// ---- Bewegung -----------------------------------------------
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+// ---- Layout -------------------------------------------------
+$maxw: 1180px;
+$maxw-read: 760px;
+
+// ---- Breakpoints --------------------------------------------
+$bp: (
+  sm: 540px,
+  md: 768px,
+  lg: 980px,
+  xl: 1200px,
+);
+
+@mixin up($name) {
+  @media (min-width: map.get($bp, $name)) {
+    @content;
+  }
+}
+
+@mixin down($name) {
+  @media (max-width: (map.get($bp, $name) - 0.02px)) {
+    @content;
+  }
+}
+
+// ---- Werkzeug-Mixins ----------------------------------------
+@mixin eyebrow {
+  font-family: $font-data;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+@mixin panel {
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--border);
+  border-radius: $r-lg;
+  box-shadow: var(--shadow);
+}
+
+@mixin focus-ring {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@mixin hairline-rule {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(90deg, var(--hairline), transparent 70%);
+}

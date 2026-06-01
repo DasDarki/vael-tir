@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vael Tir — Luminoxischer Stilkanon</title>
+<meta name="description" content="Das Design System für das Atlas-Projekt Vael Tir. Im Licht liegt die Ordnung." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     VAEL TIR — Luminoxischer Stilkanon (Design System)
+     "Im Licht liegt die Ordnung."
+     ============================================================ */
+
+  :root {
+    /* type */
+    --font-display: "Cinzel", "Times New Roman", serif;
+    --font-lore: "Cormorant Garamond", Georgia, serif;
+    --font-data: "JetBrains Mono", ui-monospace, monospace;
+
+    /* fixed brand hues (theme-independent) */
+    --gold-raw: 229, 200, 120;
+    --celest-raw: 143, 182, 255;
+
+    --r-sm: 8px;
+    --r-md: 14px;
+    --r-lg: 20px;
+    --r-xl: 28px;
+
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --maxw: 1120px;
+  }
+
+  /* ---------- DARK (primary) ---------- */
+  :root[data-theme="dark"] {
+    --bg: #0a0c10;
+    --bg-deep: #06080b;
+    --bg-glow-a: rgba(var(--gold-raw), 0.13);
+    --bg-glow-b: rgba(var(--celest-raw), 0.09);
+
+    --surface: rgba(255, 255, 255, 0.035);
+    --surface-2: rgba(255, 255, 255, 0.06);
+    --surface-inset: rgba(0, 0, 0, 0.22);
+
+    --border: rgba(255, 255, 255, 0.09);
+    --border-soft: rgba(255, 255, 255, 0.055);
+    --hairline: rgba(var(--gold-raw), 0.28);
+
+    --text: rgba(245, 240, 228, 0.95);
+    --muted: rgba(245, 240, 228, 0.6);
+    --faint: rgba(245, 240, 228, 0.38);
+
+    --gold: #e8cd82;
+    --gold-ink: #1a1304;
+    --celest: #9cbcff;
+
+    --shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+    --grain-opacity: 0.05;
+  }
+
+  /* ---------- LIGHT (vellum) ---------- */
+  :root[data-theme="light"] {
+    --bg: #ece3d0;
+    --bg-deep: #f5efe1;
+    --bg-glow-a: rgba(184, 146, 47, 0.16);
+    --bg-glow-b: rgba(47, 95, 174, 0.08);
+
+    --surface: rgba(45, 33, 12, 0.035);
+    --surface-2: rgba(45, 33, 12, 0.06);
+    --surface-inset: rgba(45, 33, 12, 0.05);
+
+    --border: rgba(45, 33, 12, 0.16);
+    --border-soft: rgba(45, 33, 12, 0.09);
+    --hairline: rgba(154, 119, 39, 0.45);
+
+    --text: #241c10;
+    --muted: rgba(36, 28, 16, 0.66);
+    --faint: rgba(36, 28, 16, 0.45);
+
+    --gold: #8a6a1c;
+    --gold-ink: #fbf6ea;
+    --celest: #2f5fae;
+
+    --shadow: 0 22px 48px rgba(58, 44, 18, 0.18);
+    --grain-opacity: 0.045;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background:
+      radial-gradient(1100px 620px at 18% -8%, var(--bg-glow-a), transparent 58%),
+      radial-gradient(820px 520px at 92% 4%, var(--bg-glow-b), transparent 55%),
+      linear-gradient(180deg, var(--bg-deep), var(--bg) 42%);
+    background-attachment: fixed;
+    color: var(--text);
+    font-family: var(--font-lore);
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.5s var(--ease), color 0.4s var(--ease);
+    overflow-x: hidden;
+  }
+
+  /* grain overlay */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  ::selection { background: rgba(var(--gold-raw), 0.3); color: var(--text); }
+
+  /* ===================== TYPOGRAPHY ===================== */
+  .eyebrow {
+    font-family: var(--font-data);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0;
+  }
+
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.1; margin: 0; }
+
+  .lore { font-family: var(--font-lore); color: var(--muted); }
+
+  a { color: var(--celest); text-decoration: none; }
+
+  /* ===================== LAYOUT ===================== */
+  .shell { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+
+  section { position: relative; }
+
+  /* ---------- TOP BAR ---------- */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(14px) saturate(1.1);
+    background: linear-gradient(180deg,
+      color-mix(in srgb, var(--bg) 78%, transparent),
+      color-mix(in srgb, var(--bg) 30%, transparent));
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .topbar__inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 12px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .brand-mini { display: flex; align-items: center; gap: 11px; min-width: 0; }
+  .brand-mini__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .brand-mini__tag {
+    font-family: var(--font-data);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--faint);
+    white-space: nowrap;
+  }
+  @media (max-width: 620px) { .brand-mini__tag { display: none; } }
+
+  /* theme toggle */
+  .toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 999px;
+    padding: 5px;
+    cursor: pointer;
+    font-family: var(--font-data);
+  }
+  .toggle__opt {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 30px;
+    border-radius: 999px;
+    color: var(--faint);
+    transition: color 0.3s var(--ease);
+  }
+  .toggle__opt svg { width: 16px; height: 16px; }
+  .toggle__thumb {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 32px;
+    height: 30px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(var(--gold-raw), 0.9), rgba(var(--gold-raw), 0.65));
+    box-shadow: 0 4px 14px rgba(var(--gold-raw), 0.4), inset 0 0 0 1px rgba(255,255,255,0.2);
+    transition: transform 0.45s var(--ease);
+  }
+  :root[data-theme="light"] .toggle__thumb { transform: translateX(40px); }
+  :root[data-theme="dark"] .toggle__opt--dark { color: var(--gold-ink); }
+  :root[data-theme="light"] .toggle__opt--light { color: var(--gold-ink); }
+
+  /* ===================== SIGIL ===================== */
+  .sigil { display: block; }
+  .sigil--brand { filter: drop-shadow(0 0 22px rgba(var(--gold-raw), 0.35)); }
+  .sigil .ray { transform-origin: center; }
+  .sigil .core { animation: pulse 4.5s ease-in-out infinite; transform-origin: center; }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+  }
+  .sigil--spin { animation: spin 90s linear infinite; transform-origin: center; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ===================== HERO ===================== */
+  .hero { padding: clamp(60px, 12vw, 130px) 0 clamp(48px, 8vw, 96px); text-align: center; }
+  .hero__sigil-wrap {
+    width: clamp(96px, 18vw, 150px);
+    margin: 0 auto 30px;
+    aspect-ratio: 1;
+    position: relative;
+  }
+  .hero__title {
+    font-size: clamp(48px, 13vw, 132px);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    line-height: 0.95;
+    margin: 0;
+    background: linear-gradient(180deg,
+      var(--text) 0%,
+      color-mix(in srgb, var(--text) 70%, var(--gold)) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero__rule {
+    width: min(420px, 80%);
+    margin: 26px auto;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--hairline);
+  }
+  .hero__rule::before, .hero__rule::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--hairline), transparent);
+  }
+  .hero__rule span { font-size: 14px; }
+  .hero__lead {
+    font-family: var(--font-lore);
+    font-size: clamp(18px, 2.6vw, 23px);
+    font-style: italic;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto 34px;
+  }
+  .hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 26px;
+    font-family: var(--font-data);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .hero__meta b { color: var(--gold); font-weight: 500; }
+
+  /* ===================== SECTION HEADER ===================== */
+  .sec { padding: clamp(46px, 8vw, 82px) 0; }
+  .sec__head { margin-bottom: 38px; max-width: 640px; }
+  .sec__head .eyebrow { margin-bottom: 14px; }
+  .sec__title { font-size: clamp(28px, 5vw, 44px); font-weight: 700; }
+  .sec__desc { font-family: var(--font-lore); font-size: 18px; color: var(--muted); margin-top: 12px; }
+
+  .sec__divider {
+    height: 1px;
+    background: linear-gradient(90deg, var(--hairline), transparent 70%);
+    border: 0;
+    margin: 0;
+  }
+
+  /* ===================== CARDS / PANELS ===================== */
+  .panel {
+    background: linear-gradient(180deg, var(--surface-2), var(--surface));
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow);
+  }
+
+  .grid { display: grid; gap: 18px; }
+  .grid--2 { grid-template-columns: repeat(2, 1fr); }
+  .grid--3 { grid-template-columns: repeat(3, 1fr); }
+  .grid--4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 820px) { .grid--3, .grid--4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; } }
+
+  /* ---------- COLOR SWATCHES ---------- */
+  .swatch {
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    background: var(--surface);
+    transition: transform 0.3s var(--ease), border-color 0.3s var(--ease);
+  }
+  .swatch:hover { transform: translateY(-3px); border-color: var(--hairline); }
+  .swatch__chip { height: 76px; position: relative; }
+  .swatch__chip::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.14), transparent 40%);
+  }
+  .swatch__meta { padding: 11px 13px; }
+  .swatch__name { font-family: var(--font-display); font-size: 14px; font-weight: 600; }
+  .swatch__hex { font-family: var(--font-data); font-size: 11px; color: var(--faint); letter-spacing: 0.08em; margin-top: 2px; }
+
+  /* ---------- TYPE SCALE ---------- */
+  .type-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-soft);
+    flex-wrap: wrap;
+  }
+  .type-row:last-child { border-bottom: 0; }
+  .type-row__label { font-family: var(--font-data); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+  .type-spec-display { font-family: var(--font-display); }
+  .type-spec-lore { font-family: var(--font-lore); }
+  .type-spec-data { font-family: var(--font-data); }
+
+  /* ---------- BUTTONS ---------- */
+  .btn {
+    font-family: var(--font-data);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text);
+    transition: transform 0.12s var(--ease), border-color 0.25s var(--ease), background 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  }
+  .btn:hover { border-color: var(--hairline); background: color-mix(in srgb, var(--gold) 12%, var(--surface-2)); }
+  .btn:active { transform: translateY(1px); }
+  .btn--primary {
+    background: linear-gradient(180deg, var(--gold), color-mix(in srgb, var(--gold) 78%, #000));
+    color: var(--gold-ink);
+    border-color: transparent;
+    box-shadow: 0 8px 22px rgba(var(--gold-raw), 0.28);
+    font-weight: 600;
+  }
+  .btn--primary:hover { box-shadow: 0 10px 30px rgba(var(--gold-raw), 0.42); background: linear-gradient(180deg, var(--gold), color-mix(in srgb, var(--gold) 85%, #000)); }
+  .btn--ghost { background: transparent; }
+  .btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  .btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+  /* ---------- SEARCH INPUT ---------- */
+  .search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    background: var(--surface-inset);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 13px 15px;
+    transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  }
+  .search:focus-within { border-color: var(--hairline); box-shadow: 0 0 0 4px rgba(var(--gold-raw), 0.12); }
+  .search__icon { color: var(--faint); font-size: 17px; }
+  .search input {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--text);
+    font-family: var(--font-lore);
+    font-size: 17px;
+  }
+  .search input::placeholder { color: var(--faint); font-style: italic; }
+
+  /* ---------- BADGES / TAGS ---------- */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-data);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 11px 6px 9px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--bdg, var(--gold)) 45%, transparent);
+    color: color-mix(in srgb, var(--bdg, var(--gold)) 78%, var(--text));
+    background: color-mix(in srgb, var(--bdg, var(--gold)) 12%, transparent);
+  }
+  .badge__dot { width: 7px; height: 7px; border-radius: 999px; background: var(--bdg, var(--gold)); box-shadow: 0 0 8px color-mix(in srgb, var(--bdg, var(--gold)) 70%, transparent); }
+  .badge-cloud { display: flex; flex-wrap: wrap; gap: 9px; }
+
+  /* ---------- ENTRY CARD (Kompendium) ---------- */
+  .entry {
+    padding: 0;
+    overflow: hidden;
+    transition: transform 0.35s var(--ease), border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  }
+  .entry:hover { transform: translateY(-4px); border-color: var(--hairline); box-shadow: 0 30px 70px rgba(0,0,0,0.4); }
+  .entry__banner {
+    height: 110px;
+    position: relative;
+    background:
+      radial-gradient(120% 140% at 80% -20%, color-mix(in srgb, var(--accent) 55%, transparent), transparent 60%),
+      linear-gradient(135deg, color-mix(in srgb, var(--accent) 30%, var(--surface-inset)), var(--surface-inset));
+    border-bottom: 1px solid var(--border-soft);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+  .entry__banner svg { width: 54px; height: 54px; opacity: 0.85; color: color-mix(in srgb, var(--accent) 60%, var(--text)); }
+  .entry__banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, color-mix(in srgb, var(--accent) 30%, transparent) 1px, transparent 1.4px);
+    background-size: 16px 16px;
+    opacity: 0.25;
+    mask-image: radial-gradient(70% 70% at 50% 50%, #000, transparent);
+  }
+  .entry__body { padding: 18px 20px 22px; }
+  .entry__type { font-family: var(--font-data); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: color-mix(in srgb, var(--accent) 70%, var(--muted)); }
+  .entry__name { font-family: var(--font-display); font-size: 23px; font-weight: 600; margin: 6px 0 4px; }
+  .entry__latin { font-family: var(--font-lore); font-style: italic; font-size: 15px; color: var(--faint); }
+  .entry__desc { font-family: var(--font-lore); font-size: 16px; color: var(--muted); margin: 12px 0 16px; }
+  .entry__foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 14px; border-top: 1px solid var(--border-soft); }
+  .entry__region { font-family: var(--font-data); font-size: 10.5px; letter-spacing: 0.08em; color: var(--muted); display: flex; align-items: center; gap: 7px; }
+  .entry__region i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+
+  /* ---------- PAGE TREE NODE ---------- */
+  .tree { font-family: var(--font-lore); }
+  .tree__node {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 13px;
+    border-radius: var(--r-sm);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background 0.2s var(--ease), border-color 0.2s var(--ease);
+  }
+  .tree__node:hover { background: var(--surface); border-color: var(--border-soft); }
+  .tree__node--active { background: color-mix(in srgb, var(--gold) 10%, transparent); border-color: var(--hairline); }
+  .tree__caret { color: var(--faint); width: 12px; transition: transform 0.25s var(--ease); }
+  .tree__node--open .tree__caret { transform: rotate(90deg); color: var(--gold); }
+  .tree__label { font-size: 17px; flex: 1; }
+  .tree__count { font-family: var(--font-data); font-size: 10px; color: var(--faint); border: 1px solid var(--border); border-radius: 999px; padding: 2px 8px; }
+  .tree__children { padding-left: 22px; margin-left: 6px; border-left: 1px solid var(--border-soft); }
+
+  /* ---------- CALENDAR MONTHS ---------- */
+  .months { display: flex; flex-wrap: wrap; gap: 12px; }
+  .month {
+    position: relative;
+    flex: 1 1 150px;
+    min-width: 150px;
+    padding: 16px 16px 18px;
+    border-radius: var(--r-md);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    overflow: hidden;
+    transition: transform 0.3s var(--ease), border-color 0.3s var(--ease);
+  }
+  .month:hover { transform: translateY(-3px); border-color: var(--hairline); }
+  .month__num { font-family: var(--font-data); font-size: 11px; color: var(--faint); letter-spacing: 0.1em; }
+  .month__name { font-family: var(--font-display); font-size: 21px; font-weight: 600; margin: 4px 0 3px; }
+  .month__fn { font-family: var(--font-lore); font-style: italic; font-size: 15px; color: var(--muted); }
+  .month__glyph { position: absolute; top: 12px; right: 14px; font-family: var(--font-display); font-size: 38px; font-weight: 800; color: var(--hairline); opacity: 0.5; line-height: 1; }
+
+  /* ---------- CURRENCY ---------- */
+  .coins { display: flex; gap: 14px; flex-wrap: wrap; }
+  .coin {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 14px 18px 14px 14px;
+    border-radius: var(--r-md);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    flex: 1 1 150px;
+  }
+  .coin__disc {
+    width: 42px; height: 42px; border-radius: 999px;
+    display: grid; place-items: center;
+    font-family: var(--font-display); font-weight: 700; font-size: 13px;
+    color: #1a1304;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,0.25), inset 0 -6px 10px rgba(0,0,0,0.25), 0 5px 14px rgba(0,0,0,0.3);
+  }
+  .coin__disc--gp { background: radial-gradient(circle at 35% 28%, #fbe9a8, #c79a36 70%); }
+  .coin__disc--sp { background: radial-gradient(circle at 35% 28%, #f2f4f8, #9aa3ad 70%); color: #2a2f36; }
+  .coin__disc--cp { background: radial-gradient(circle at 35% 28%, #e8a878, #a35a30 70%); color: #2a1206; }
+  .coin__val { font-family: var(--font-data); font-size: 22px; font-weight: 500; }
+  .coin__unit { font-family: var(--font-lore); font-size: 14px; color: var(--muted); }
+
+  /* ---------- TOKEN TABLE ---------- */
+  .tokens { width: 100%; border-collapse: collapse; font-family: var(--font-data); font-size: 13px; }
+  .tokens td { padding: 12px 14px; border-bottom: 1px solid var(--border-soft); }
+  .tokens tr:last-child td { border-bottom: 0; }
+  .tokens__key { color: var(--gold); }
+  .tokens__val { color: var(--muted); text-align: right; }
+  .tokens__swatch { display: inline-block; width: 14px; height: 14px; border-radius: 4px; border: 1px solid var(--border); vertical-align: middle; margin-left: 8px; }
+
+  /* ---------- ELEVATION ---------- */
+  .elev { padding: 24px; border-radius: var(--r-md); background: var(--surface); border: 1px solid var(--border); text-align: center; }
+  .elev--0 { box-shadow: none; }
+  .elev--1 { box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+  .elev--2 { box-shadow: 0 16px 36px rgba(0,0,0,0.4); }
+  .elev--3 { box-shadow: 0 28px 64px rgba(0,0,0,0.5), 0 0 0 1px var(--hairline); }
+  .elev__name { font-family: var(--font-display); font-size: 16px; font-weight: 600; }
+  .elev__spec { font-family: var(--font-data); font-size: 10px; color: var(--faint); margin-top: 4px; letter-spacing: 0.05em; }
+
+  /* ===================== MOTION (reveal) ===================== */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+  .reveal.is-in { opacity: 1; transform: none; }
+
+  /* hero load stagger */
+  .hero > * { opacity: 0; animation: rise 0.9s var(--ease) forwards; }
+  .hero__sigil-wrap { animation-delay: 0.05s; }
+  .hero__title { animation-delay: 0.18s; }
+  .hero__rule { animation-delay: 0.34s; }
+  .hero__lead { animation-delay: 0.46s; }
+  .hero__meta { animation-delay: 0.58s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+
+  /* ===================== FOOTER ===================== */
+  .footer { text-align: center; padding: 70px 0 56px; border-top: 1px solid var(--border-soft); margin-top: 40px; }
+  .footer__motto { font-family: var(--font-display); font-size: clamp(20px, 4vw, 30px); font-weight: 500; letter-spacing: 0.04em; }
+  .footer__sub { font-family: var(--font-data); font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--faint); margin-top: 16px; }
+
+  /* utility */
+  .stack-sm > * + * { margin-top: 12px; }
+  .pad { padding: 24px; }
+  @media (min-width: 700px) { .pad { padding: 30px; } }
+</style>
+</head>
+<body>
+
+<!-- ===================== TOP BAR ===================== -->
+<header class="topbar">
+  <div class="topbar__inner">
+    <div class="brand-mini">
+      <svg viewBox="0 0 48 48" width="26" height="26" class="sigil" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="1.4" style="color: var(--gold)">
+          <circle cx="24" cy="24" r="5" fill="currentColor" stroke="none"/>
+          <circle cx="24" cy="24" r="11"/>
+          <circle cx="24" cy="24" r="18" opacity="0.5"/>
+        </g>
+      </svg>
+      <span class="brand-mini__name">Vael Tir</span>
+      <span class="brand-mini__tag">· Stilkanon v0.1</span>
+    </div>
+
+    <button class="toggle" id="themeToggle" aria-label="Theme wechseln">
+      <span class="toggle__thumb" aria-hidden="true"></span>
+      <span class="toggle__opt toggle__opt--dark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+      </span>
+      <span class="toggle__opt toggle__opt--light" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+      </span>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero shell">
+  <div class="hero__sigil-wrap">
+    <!-- Luminoxisches Siegel: rays + concentric rings -->
+    <svg viewBox="0 0 200 200" width="100%" height="100%" class="sigil sigil--brand" aria-hidden="true">
+      <g style="color: var(--gold)">
+        <g class="sigil--spin" stroke="currentColor">
+          <g stroke-width="1.4" opacity="0.85">
+            <!-- long rays -->
+            <line x1="100" y1="8"  x2="100" y2="38"/>
+            <line x1="100" y1="162" x2="100" y2="192"/>
+            <line x1="8" y1="100"  x2="38" y2="100"/>
+            <line x1="162" y1="100" x2="192" y2="100"/>
+          </g>
+          <g stroke-width="1" opacity="0.55">
+            <line x1="35" y1="35" x2="56" y2="56"/>
+            <line x1="165" y1="35" x2="144" y2="56"/>
+            <line x1="35" y1="165" x2="56" y2="144"/>
+            <line x1="165" y1="165" x2="144" y2="144"/>
+          </g>
+        </g>
+        <circle cx="100" cy="100" r="60" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
+        <circle cx="100" cy="100" r="44" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <circle cx="100" cy="100" r="26" fill="none" stroke="currentColor" stroke-width="1" opacity="0.6"/>
+        <circle class="core" cx="100" cy="100" r="13" fill="currentColor"/>
+      </g>
+    </svg>
+  </div>
+
+  <h1 class="hero__title">Vael&nbsp;Tir</h1>
+
+  <div class="hero__rule"><span>✦</span></div>
+
+  <p class="hero__lead">Der Stilkanon des Luminoxischen Zeitalters — ein klares, modernes Gewand für den Atlas einer geordneten Welt.</p>
+
+  <div class="hero__meta">
+    <span>Atlas · <b>Calythar</b></span>
+    <span>Kompendium · <b>Esh'Raen</b></span>
+    <span>Chronik · <b>Varkuun</b></span>
+  </div>
+</section>
+
+<!-- ===================== FOUNDATIONS: COLOR ===================== -->
+<section class="sec shell reveal" id="farben">
+  <div class="sec__head">
+    <p class="eyebrow">Fundament · 01</p>
+    <h2 class="sec__title">Farbe &amp; Licht</h2>
+    <p class="sec__desc">Tiefes Tintenblau trägt das Dunkel, warmes Pergament das Licht. Über beidem liegt das <em>Luminox-Gold</em> als einzige Stimme der Ordnung — sparsam gesetzt, nie laut.</p>
+  </div>
+
+  <div class="grid grid--4" style="margin-bottom: 18px;">
+    <div class="swatch"><div class="swatch__chip" style="background:#0a0c10"></div><div class="swatch__meta"><div class="swatch__name">Tinte</div><div class="swatch__hex">--bg · #0A0C10</div></div></div>
+    <div class="swatch"><div class="swatch__chip" style="background:#e8cd82"></div><div class="swatch__meta"><div class="swatch__name">Luminox-Gold</div><div class="swatch__hex">--gold · #E8CD82</div></div></div>
+    <div class="swatch"><div class="swatch__chip" style="background:#9cbcff"></div><div class="swatch__meta"><div class="swatch__name">Himmelsblau</div><div class="swatch__hex">--celest · #9CBCFF</div></div></div>
+    <div class="swatch"><div class="swatch__chip" style="background:#ece3d0"></div><div class="swatch__meta"><div class="swatch__name">Pergament</div><div class="swatch__hex">--bg(hell) · #ECE3D0</div></div></div>
+  </div>
+
+  <p class="eyebrow" style="margin: 30px 0 16px;">Regionen-Kanon · Atlasfarben</p>
+  <div class="grid grid--4">
+    <div class="swatch"><div class="swatch__chip" style="background:#60a5fa"></div><div class="swatch__meta"><div class="swatch__name">Calythische Höhen</div><div class="swatch__hex">#60A5FA</div></div></div>
+    <div class="swatch"><div class="swatch__chip" style="background:#34d399"></div><div class="swatch__meta"><div class="swatch__name">Valdorn</div><div class="swatch__hex">#34D399</div></div></div>
+    <div class="swatch"><div class="swatch__chip" style="background:#a78bfa"></div><div class="swatch__meta"><div class="swatch__name">Ordensmarken</div><div class="swatch__hex">#A78BFA</div></div></div>
+    <div class="swatch"><div class="swatch__chip" style="background:#fbbf24"></div><div class="swatch__meta"><div class="swatch__name">Süden</div><div class="swatch__hex">#FBBF24</div></div></div>
+    <div class="swatch"><div class="swatch__chip" style="background:#d97706"></div><div class="swatch__meta"><div class="swatch__name">Westen</div><div class="swatch__hex">#D97706</div></div></div>
+    <div class="swatch"><div class="swatch__chip" style="background:#facc15"></div><div class="swatch__meta"><div class="swatch__name">Varethianische Ebenen</div><div class="swatch__hex">#FACC15</div></div></div>
+    <div class="swatch"><div class="swatch__chip" style="background:#ef4444"></div><div class="swatch__meta"><div class="swatch__name">Nordvarkuun</div><div class="swatch__hex">#EF4444</div></div></div>
+    <div class="swatch"><div class="swatch__chip" style="background:#ec4899"></div><div class="swatch__meta"><div class="swatch__name">Südvarkuun</div><div class="swatch__hex">#EC4899</div></div></div>
+  </div>
+</section>
+
+<hr class="sec__divider shell" style="max-width: var(--maxw);" />
+
+<!-- ===================== FOUNDATIONS: TYPE ===================== -->
+<section class="sec shell reveal" id="typografie">
+  <div class="sec__head">
+    <p class="eyebrow">Fundament · 02</p>
+    <h2 class="sec__title">Typografie</h2>
+    <p class="sec__desc">Drei Stimmen: <b>Cinzel</b> spricht im Stein der Ordnung, <b>Cormorant&nbsp;Garamond</b> erzählt die Lehre, <b>JetBrains&nbsp;Mono</b> führt das Register der Daten.</p>
+  </div>
+
+  <div class="panel pad">
+    <div class="type-row">
+      <div>
+        <div class="type-spec-display" style="font-size: clamp(32px,6vw,56px); font-weight:800;">Im Licht liegt die Ordnung</div>
+      </div>
+      <div class="type-row__label">Cinzel · Display 800</div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec-display" style="font-size: 28px; font-weight:600;">Die zehn Monate des Jahres</div>
+      <div class="type-row__label">Cinzel · Titel 600</div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec-lore" style="font-size: 22px; font-style: italic; color: var(--muted);">Zeit wird nicht gefeiert. Sie wird durchlaufen.</div>
+      <div class="type-row__label">Cormorant · Lead Italic</div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec-lore" style="font-size: 18px; max-width: 60ch; color: var(--muted);">Der luminoxische Kalender ist die verbindliche Zeitrechnung des Luminoxischen Zeitalters. Ein Jahr umfasst 360 Tage, gegliedert in zehn Monate zu je 36 Tagen — ohne Ausnahme.</div>
+      <div class="type-row__label">Cormorant · Fließtext 400</div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec-data" style="font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);">Domyra — Monat der Setzung</div>
+      <div class="type-row__label">JetBrains Mono · Label</div>
+    </div>
+  </div>
+</section>
+
+<hr class="sec__divider shell" style="max-width: var(--maxw);" />
+
+<!-- ===================== COMPONENTS ===================== -->
+<section class="sec shell reveal" id="komponenten">
+  <div class="sec__head">
+    <p class="eyebrow">Bausteine · 03</p>
+    <h2 class="sec__title">Komponenten</h2>
+    <p class="sec__desc">Die wiederkehrenden Werkzeuge des Atlas — geprüft auf Klarheit, Berührung und beide Lichter.</p>
+  </div>
+
+  <!-- Buttons + Search -->
+  <div class="grid grid--2" style="align-items: start; margin-bottom: 18px;">
+    <div class="panel pad stack-sm">
+      <p class="eyebrow" style="margin-bottom: 6px;">Schaltflächen</p>
+      <div class="btn-row">
+        <button class="btn btn--primary">Karte öffnen</button>
+        <button class="btn">Alles öffnen</button>
+        <button class="btn btn--ghost">Alles schließen</button>
+      </div>
+    </div>
+    <div class="panel pad stack-sm">
+      <p class="eyebrow" style="margin-bottom: 6px;">Suche</p>
+      <label class="search">
+        <span class="search__icon" aria-hidden="true">⌕</span>
+        <input type="search" placeholder="Orte, Wesen, Pflanzen suchen …" />
+      </label>
+    </div>
+  </div>
+
+  <!-- Badges -->
+  <div class="panel pad" style="margin-bottom: 18px;">
+    <p class="eyebrow" style="margin-bottom: 16px;">Marken · Flora &amp; Fauna</p>
+    <div class="badge-cloud">
+      <span class="badge" style="--bdg:#34d399"><span class="badge__dot"></span>Heilpflanze</span>
+      <span class="badge" style="--bdg:#ef4444"><span class="badge__dot"></span>Giftpflanze</span>
+      <span class="badge" style="--bdg:#a78bfa"><span class="badge__dot"></span>Pilz</span>
+      <span class="badge" style="--bdg:#34d399"><span class="badge__dot"></span>Baum</span>
+      <span class="badge" style="--bdg:#fbbf24"><span class="badge__dot"></span>Gewürz</span>
+      <span class="badge" style="--bdg:#ec4899"><span class="badge__dot"></span>Blume</span>
+      <span class="badge" style="--bdg:#e8cd82"><span class="badge__dot"></span>Reittier</span>
+      <span class="badge" style="--bdg:#ef4444"><span class="badge__dot"></span>Raubtier</span>
+      <span class="badge" style="--bdg:#60a5fa"><span class="badge__dot"></span>Vogel</span>
+      <span class="badge" style="--bdg:#9cbcff"><span class="badge__dot"></span>Meerestier</span>
+    </div>
+  </div>
+
+  <!-- Entry cards -->
+  <p class="eyebrow" style="margin: 30px 0 16px;">Kompendium-Karten</p>
+  <div class="grid grid--3" style="margin-bottom: 18px;">
+    <article class="panel entry" style="--accent:#34d399">
+      <div class="entry__banner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 22c0-6 0-10 0-10M12 12c0-4 3-7 8-7 0 5-4 7-8 7zM12 14c0-3-3-6-8-6 0 4 4 6 8 6z"/></svg>
+      </div>
+      <div class="entry__body">
+        <div class="entry__type">Heilpflanze</div>
+        <h3 class="entry__name">Silberblatt</h3>
+        <div class="entry__latin">Argentum foliata</div>
+        <p class="entry__desc">Im Mondlicht geerntet, lindert sein Sud Fieber und Wundbrand. In den Tempeln Lethains hoch geschätzt.</p>
+        <div class="entry__foot">
+          <span class="entry__region"><i style="background:#60a5fa"></i>Calythische Höhen</span>
+          <span class="badge" style="--bdg:#34d399; font-size:9px;">Selten</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="panel entry" style="--accent:#ef4444">
+      <div class="entry__banner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3c3 4 6 6 6 10a6 6 0 11-12 0c0-4 3-6 6-10z"/><circle cx="12" cy="13" r="2"/></svg>
+      </div>
+      <div class="entry__body">
+        <div class="entry__type">Giftpflanze</div>
+        <h3 class="entry__name">Aschdorn</h3>
+        <div class="entry__latin">Cineris spina</div>
+        <p class="entry__desc">Wächst auf verbranntem Grund. Seine Dornen tragen ein Gift, das den Atem schwer macht und das Herz verlangsamt.</p>
+        <div class="entry__foot">
+          <span class="entry__region"><i style="background:#ef4444"></i>Nordvarkuun</span>
+          <span class="badge" style="--bdg:#ef4444; font-size:9px;">Tödlich</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="panel entry" style="--accent:#e8cd82">
+      <div class="entry__banner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 17c2-1 4-4 7-4s4 2 6 1M5 13c1-3 4-5 7-5M19 9l1-3-3 1"/><circle cx="8" cy="18" r="1.4"/><circle cx="16" cy="18" r="1.4"/></svg>
+      </div>
+      <div class="entry__body">
+        <div class="entry__type">Reittier</div>
+        <h3 class="entry__name">Steppenläufer</h3>
+        <div class="entry__latin">Equus varethii</div>
+        <p class="entry__desc">Schlank und ausdauernd, trägt es die Boten Calythars über die Varethianischen Ebenen — von Sonne zu Sonne.</p>
+        <div class="entry__foot">
+          <span class="entry__region"><i style="background:#facc15"></i>Varethianische Ebenen</span>
+          <span class="badge" style="--bdg:#e8cd82; font-size:9px;">Verbreitet</span>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- Tree + Coins -->
+  <div class="grid grid--2" style="align-items: start;">
+    <div class="panel pad">
+      <p class="eyebrow" style="margin-bottom: 14px;">Navigationsbaum</p>
+      <div class="tree">
+        <div class="tree__node tree__node--open">
+          <span class="tree__caret">▸</span><span class="tree__label">Weltkarte</span><span class="tree__count">3</span>
+        </div>
+        <div class="tree__children">
+          <div class="tree__node tree__node--active"><span class="tree__caret" style="visibility:hidden">▸</span><span class="tree__label">Calythar</span></div>
+          <div class="tree__node tree__node--open"><span class="tree__caret">▸</span><span class="tree__label">Esh'Raen</span><span class="tree__count">2</span></div>
+          <div class="tree__children">
+            <div class="tree__node"><span class="tree__caret" style="visibility:hidden">▸</span><span class="tree__label">Varethis</span></div>
+          </div>
+          <div class="tree__node"><span class="tree__caret" style="visibility:hidden">▸</span><span class="tree__label">Varkuun</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel pad">
+      <p class="eyebrow" style="margin-bottom: 14px;">Münzteiler · Währung</p>
+      <div class="coins">
+        <div class="coin"><div class="coin__disc coin__disc--gp">GP</div><div><div class="coin__val">128</div><div class="coin__unit">Gold</div></div></div>
+        <div class="coin"><div class="coin__disc coin__disc--sp">SP</div><div><div class="coin__val">7</div><div class="coin__unit">Silber</div></div></div>
+        <div class="coin"><div class="coin__disc coin__disc--cp">CP</div><div><div class="coin__val">4</div><div class="coin__unit">Kupfer</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sec__divider shell" style="max-width: var(--maxw);" />
+
+<!-- ===================== CALENDAR ===================== -->
+<section class="sec shell reveal" id="kalender">
+  <div class="sec__head">
+    <p class="eyebrow">Anwendung · 04</p>
+    <h2 class="sec__title">Der Luminoxische Kalender</h2>
+    <p class="sec__desc">Zehn Monate, je sechsunddreißig Tage. Jeder Monat trägt eine Funktion — Setzung, Licht, Erhalt. Das Stilbild im Einsatz.</p>
+  </div>
+
+  <div class="months">
+    <div class="month"><div class="month__glyph">I</div><div class="month__num">01 · 36 Tage</div><div class="month__name">Domyra</div><div class="month__fn">Monat der Setzung</div></div>
+    <div class="month"><div class="month__glyph">II</div><div class="month__num">02 · 36 Tage</div><div class="month__name">Lethain</div><div class="month__fn">Monat des Lichts</div></div>
+    <div class="month"><div class="month__glyph">III</div><div class="month__num">03 · 36 Tage</div><div class="month__name">Elisar</div><div class="month__fn">Monat des Erhalts</div></div>
+  </div>
+</section>
+
+<hr class="sec__divider shell" style="max-width: var(--maxw);" />
+
+<!-- ===================== ELEVATION + TOKENS ===================== -->
+<section class="sec shell reveal" id="elevation">
+  <div class="sec__head">
+    <p class="eyebrow">Fundament · 05</p>
+    <h2 class="sec__title">Tiefe &amp; Register</h2>
+    <p class="sec__desc">Schatten heben Flächen aus dem Dunkel, ohne es zu brechen. Daneben: die Marken, aus denen das System gebaut ist.</p>
+  </div>
+
+  <div class="grid grid--4" style="margin-bottom: 26px;">
+    <div class="elev elev--0"><div class="elev__name">Grund</div><div class="elev__spec">elev/0 · flach</div></div>
+    <div class="elev elev--1"><div class="elev__name">Erhoben</div><div class="elev__spec">elev/1 · Karte</div></div>
+    <div class="elev elev--2"><div class="elev__name">Schwebend</div><div class="elev__spec">elev/2 · Panel</div></div>
+    <div class="elev elev--3"><div class="elev__name">Leuchtend</div><div class="elev__spec">elev/3 · aktiv</div></div>
+  </div>
+
+  <div class="panel" style="overflow: hidden;">
+    <table class="tokens">
+      <tr><td class="tokens__key">--gold</td><td class="tokens__val">#E8CD82<span class="tokens__swatch" style="background:#e8cd82"></span></td></tr>
+      <tr><td class="tokens__key">--celest</td><td class="tokens__val">#9CBCFF<span class="tokens__swatch" style="background:#9cbcff"></span></td></tr>
+      <tr><td class="tokens__key">--radius-md</td><td class="tokens__val">14px</td></tr>
+      <tr><td class="tokens__key">--font-display</td><td class="tokens__val">Cinzel</td></tr>
+      <tr><td class="tokens__key">--ease</td><td class="tokens__val">cubic-bezier(.22, 1, .36, 1)</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer shell">
+  <svg viewBox="0 0 48 48" width="40" height="40" class="sigil sigil--brand" style="margin: 0 auto 22px;" aria-hidden="true">
+    <g fill="none" stroke="currentColor" stroke-width="1.3" style="color: var(--gold)">
+      <circle cx="24" cy="24" r="5" fill="currentColor" stroke="none" class="core"/>
+      <circle cx="24" cy="24" r="12"/>
+      <circle cx="24" cy="24" r="19" opacity="0.45"/>
+    </g>
+  </svg>
+  <p class="footer__motto">Im Licht liegt die Ordnung.</p>
+  <p class="footer__sub">Vael Tir · Luminoxischer Stilkanon · Entwurf v0.1</p>
+</footer>
+
+<script>
+  // ---------- Theme persistence ----------
+  const root = document.documentElement;
+  const KEY = "vaeltir-theme";
+  const saved = localStorage.getItem(KEY);
+  if (saved) root.setAttribute("data-theme", saved);
+  else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
+    root.setAttribute("data-theme", "light");
+  }
+  document.getElementById("themeToggle").addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem(KEY, next);
+  });
+
+  // ---------- Reveal on scroll ----------
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+</script>
+</body>
+</html>
