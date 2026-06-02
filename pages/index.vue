@@ -19,9 +19,10 @@ interface Tile {
 
 const tiles: Tile[] = [
   { to: '/karte', glyph: '◎', name: 'Weltkarte', desc: 'Orte, Regionen und Wege Vael Tirs — zoombar bis ins Detail.', tone: '#60a5fa', featured: true },
-  { to: '/kompendium', glyph: '❧', name: 'Kompendium', desc: 'Flora & Fauna der bekannten Lande.', tone: '#34d399' },
+  { to: '/kompendium', glyph: '❧', name: 'Flora & Fauna', desc: 'Pflanzen & Wesen der bekannten Lande.', tone: '#34d399' },
   { to: '/kalender', glyph: '☉', name: 'Kalender', desc: 'Zehn Monate, 360 Tage.', tone: '#e8cd82' },
-  { to: '/uebersetzer', glyph: '✶', name: 'Übersetzer', desc: 'Deutsch ↔ Aelthîr & Vethran.', tone: '#5ec8c8' },
+  // Übersetzer vorerst von der Startseite ausgeblendet (im Header weiterhin erreichbar):
+  // { to: '/uebersetzer', glyph: '✶', name: 'Übersetzer', desc: 'Deutsch ↔ Aelthîr & Vethran.', tone: '#5ec8c8' },
   { to: '/regionen', glyph: '⛬', name: 'Regionen', desc: 'Calythar · Esh’Raen · Varkuun.', tone: '#a78bfa' },
   { to: '/werkzeuge/muenzteiler', glyph: '⚖', name: 'Werkzeuge', desc: 'Münzteiler & Spieltisch-Hilfen.', tone: '#f59e0b' },
 ]

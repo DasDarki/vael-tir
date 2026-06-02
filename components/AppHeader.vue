@@ -17,8 +17,15 @@ watch(() => route.fullPath, () => (open.value = false))
       </NuxtLink>
 
       <nav class="nav" aria-label="Hauptnavigation">
-        <NuxtLink v-for="l in primary" :key="l.to" :to="l.to" class="nav__link">
-          {{ l.label }}
+        <NuxtLink
+          v-for="l in primary"
+          :key="l.to"
+          :to="l.to"
+          class="nav__link"
+          :target="l.external ? '_blank' : undefined"
+          :rel="l.external ? 'noopener noreferrer' : undefined"
+        >
+          {{ l.label }}<span v-if="l.external" class="nav__ext" aria-hidden="true">↗</span>
         </NuxtLink>
       </nav>
 
@@ -38,10 +45,17 @@ watch(() => route.fullPath, () => (open.value = false))
 
     <Transition name="sheet">
       <nav v-if="open" class="sheet" aria-label="Mobile Navigation">
-        <NuxtLink v-for="l in primary" :key="l.to" :to="l.to" class="sheet__link">
+        <NuxtLink
+          v-for="l in primary"
+          :key="l.to"
+          :to="l.to"
+          class="sheet__link"
+          :target="l.external ? '_blank' : undefined"
+          :rel="l.external ? 'noopener noreferrer' : undefined"
+        >
           <span class="sheet__glyph">{{ l.glyph }}</span>
           <span>
-            <span class="sheet__label">{{ l.label }}</span>
+            <span class="sheet__label">{{ l.label }}<span v-if="l.external" aria-hidden="true"> ↗</span></span>
             <span class="sheet__desc">{{ l.desc }}</span>
           </span>
         </NuxtLink>
@@ -126,6 +140,12 @@ watch(() => route.fullPath, () => (open.value = false))
   &.router-link-active {
     color: var(--gold);
   }
+}
+.nav__ext {
+  margin-left: 4px;
+  font-size: 9px;
+  vertical-align: super;
+  color: var(--faint);
 }
 
 .hdr__right {

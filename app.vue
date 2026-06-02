@@ -3,7 +3,7 @@
 useSeoMeta({
   ogImage: '/logo.png',
   description:
-    'Vael Tir — der Atlas des Luminoxischen Zeitalters. Weltkarte, Kompendium der Flora & Fauna, Kalender und Werkzeuge für den Spieltisch.',
+    'Vael Tir — der Atlas des Luminoxischen Zeitalters. Weltkarte, Flora & Fauna, Kalender und Werkzeuge für den Spieltisch.',
 })
 </script>
 

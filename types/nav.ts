@@ -4,6 +4,8 @@ export interface NavLink {
   desc?: string
   /** Kurzes Kürzel/Glyph für Karten & Marken. */
   glyph?: string
+  /** Externer Link → öffnet in neuem Tab. */
+  external?: boolean
 }
 
 /** Knoten im Atlas-Baum (aus den Routen-Meta abgeleitet). */

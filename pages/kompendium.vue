@@ -11,11 +11,11 @@ import {
   type Month,
 } from "@/data/flora-fauna";
 
-definePageMeta({ title: "Kompendium" });
+definePageMeta({ title: "Flora & Fauna" });
 
 useSeoMeta({
-  title: "Kompendium der Flora & Fauna",
-  ogTitle: "Kompendium · Vael Tir",
+  title: "Flora & Fauna",
+  ogTitle: "Flora & Fauna · Vael Tir",
   description:
     "Pflanzen und Tiere Vael Tirs — durchsuchbar nach Art, Region, Jahreszeit, Gefahr und luminoxischem Monat.",
 });
