@@ -178,6 +178,7 @@ const tiles: Tile[] = [
     top: 22px;
     left: 30px;
     font-size: 60px;
+    z-index: -1;
   }
   .tile__name {
     font-size: 34px;
