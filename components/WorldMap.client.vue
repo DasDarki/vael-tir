@@ -1148,12 +1148,16 @@ watch(isDmDevMode, (val) => {
   }
 })
 
-onMounted(() => {
-  if (!el.value) return
+let viewerRO: ResizeObserver | null = null
+let initRaf = 0
 
-  loadPlacesFromStorage()
-  loadRegionsFromStorage()
-  loadRegionVisibility()
+function refreshAll() {
+  refreshOverlay()
+  updateScaleBar()
+}
+
+function createViewer() {
+  if (!el.value || viewer) return
 
   viewer = OpenSeadragon({
     element: el.value,
@@ -1175,19 +1179,16 @@ onMounted(() => {
 
   viewer.addHandler("canvas-click", handleCanvasClick)
   viewer.addHandler("canvas-double-click", handleCanvasDoubleClick)
-
-  viewer.addHandler("animation", () => {
-    refreshOverlay()
-    updateScaleBar()
-  })
-  viewer.addHandler("animation-finish", () => {
-    refreshOverlay()
-    updateScaleBar()
-  })
+  viewer.addHandler("animation", refreshAll)
+  viewer.addHandler("animation-finish", refreshAll)
+  // Bei jeder Größenänderung (verspätetes Layout, Fenster-Resize) Overlays neu setzen.
+  viewer.addHandler("resize", refreshAll)
 
   viewer.addHandler("open", () => {
-    refreshOverlay()
-    updateScaleBar()
+    // Bild korrekt einrahmen (falls die Container-Größe spät kam) …
+    viewer?.viewport.goHome(true)
+    refreshAll()
+    // … URL-Status danach anwenden, damit geteilte Links Vorrang behalten.
     tryApplyStateFromUrl()
     tryApplyMeasureFromUrl()
     tryApplySelectionFromUrl()
@@ -1207,9 +1208,38 @@ onMounted(() => {
     }, 0)
   })
 
-  window.addEventListener("keydown", onKeyDown)
   el.value.addEventListener("mousemove", onCanvasMouseMove)
   el.value.addEventListener("mouseleave", onCanvasMouseLeave)
+
+  // Letzte Absicherung: bekommt der Container erst nachträglich Höhe, vermisst
+  // OSD den Canvas neu (eigenes autoResize) — wir setzen dann die Overlays nach.
+  viewerRO = new ResizeObserver(() => {
+    if (viewer) refreshAll()
+  })
+  viewerRO.observe(el.value)
+}
+
+// OSD erst erzeugen, wenn der Container eine echte Größe hat. Sonst rahmt
+// OpenSeadragon das Bild gegen 0×0 ein (Karte unsichtbar, Overlays oben links).
+function waitForSizeThenInit(tries = 90) {
+  const node = el.value
+  if (!node) return
+  if ((node.clientWidth > 0 && node.clientHeight > 0) || tries <= 0) {
+    createViewer()
+    return
+  }
+  initRaf = requestAnimationFrame(() => waitForSizeThenInit(tries - 1))
+}
+
+onMounted(() => {
+  if (!el.value) return
+
+  loadPlacesFromStorage()
+  loadRegionsFromStorage()
+  loadRegionVisibility()
+
+  window.addEventListener("keydown", onKeyDown)
+  waitForSizeThenInit()
 })
 
 watch(
@@ -1220,7 +1250,12 @@ watch(
 )
 
 onBeforeUnmount(() => {
+  if (initRaf) cancelAnimationFrame(initRaf)
   window.removeEventListener("keydown", onKeyDown)
+  if (viewerRO) {
+    viewerRO.disconnect()
+    viewerRO = null
+  }
   if (el.value) {
     el.value.removeEventListener("mousemove", onCanvasMouseMove)
     el.value.removeEventListener("mouseleave", onCanvasMouseLeave)
@@ -1668,6 +1703,8 @@ onBeforeUnmount(() => {
 .osd {
   width: 100%;
   height: 100%;
+  // Sicherheitsnetz: nie 0 hoch, auch wenn die Höhen-Kette der Eltern spät auflöst.
+  min-height: 100dvh;
   background: #111;
   cursor: grab;
   &:active {
