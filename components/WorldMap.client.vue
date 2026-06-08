@@ -1230,27 +1230,27 @@ function createViewer() {
   viewer.open(TILE_SOURCE as any)
 }
 
-// OSD erst erzeugen, wenn der Container eine echte Größe hat. Sonst rahmt
-// OpenSeadragon das Bild gegen 0×0 ein (Karte unsichtbar, Overlays oben links).
-function waitForSizeThenInit(tries = 90) {
+// Beim direkten Laden (ClientOnly-Hydration) wird die Template-Ref `el` u. U. erst
+// NACH onMounted gebunden — und der Container bekommt seine Höhe erst, wenn das
+// Scoped-CSS greift. Deshalb pollen wir, bis das Element existiert UND eine Größe hat,
+// und brechen NICHT vorzeitig ab. Sonst: Viewer wird nie erzeugt, Overlays bei (0,0).
+function waitForReadyThenInit(tries = 120) {
   const node = el.value
-  if (!node) return
-  if ((node.clientWidth > 0 && node.clientHeight > 0) || tries <= 0) {
-    createViewer()
+  const ready = !!node && node.clientWidth > 0 && node.clientHeight > 0
+  if (ready || tries <= 0) {
+    if (node) createViewer()
     return
   }
-  initRaf = requestAnimationFrame(() => waitForSizeThenInit(tries - 1))
+  initRaf = requestAnimationFrame(() => waitForReadyThenInit(tries - 1))
 }
 
 onMounted(() => {
-  if (!el.value) return
-
   loadPlacesFromStorage()
   loadRegionsFromStorage()
   loadRegionVisibility()
 
   window.addEventListener("keydown", onKeyDown)
-  waitForSizeThenInit()
+  waitForReadyThenInit()
 })
 
 watch(
