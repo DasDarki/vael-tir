@@ -1156,9 +1156,22 @@ function refreshAll() {
   updateScaleBar()
 }
 
+const TILE_SOURCE = {
+  width: IMAGE_WIDTH,
+  height: IMAGE_HEIGHT,
+  tileSize: TILE_SIZE,
+  minLevel: MIN_LEVEL,
+  maxLevel: MAX_LEVEL,
+  getTileUrl: (level: number, x: number, y: number) => `/map_tiles/${level}/${x}_${y}.jpg`,
+}
+
 function createViewer() {
   if (!el.value || viewer) return
 
+  // WICHTIG: ohne tileSources konstruieren. Würde man tileSources direkt im
+  // Konstruktor übergeben, ruft OSD synchron open() auf — beim Direktaufruf kann
+  // das "open"-Event dann feuern, BEVOR unten addHandler("open") hängt. Folge:
+  // Bild rendert nicht, Overlays bleiben bei (0,0). Wir öffnen erst nach den Handlern.
   viewer = OpenSeadragon({
     element: el.value,
     showNavigationControl: false,
@@ -1167,14 +1180,6 @@ function createViewer() {
     maxZoomPixelRatio: 2,
     visibilityRatio: 1,
     constrainDuringPan: true,
-    tileSources: {
-      width: IMAGE_WIDTH,
-      height: IMAGE_HEIGHT,
-      tileSize: TILE_SIZE,
-      minLevel: MIN_LEVEL,
-      maxLevel: MAX_LEVEL,
-      getTileUrl: (level: number, x: number, y: number) => `/map_tiles/${level}/${x}_${y}.jpg`,
-    } as any,
   })
 
   viewer.addHandler("canvas-click", handleCanvasClick)
@@ -1185,13 +1190,16 @@ function createViewer() {
   viewer.addHandler("resize", refreshAll)
 
   viewer.addHandler("open", () => {
-    // Bild korrekt einrahmen (falls die Container-Größe spät kam) …
-    viewer?.viewport.goHome(true)
-    refreshAll()
-    // … URL-Status danach anwenden, damit geteilte Links Vorrang behalten.
-    tryApplyStateFromUrl()
-    tryApplyMeasureFromUrl()
-    tryApplySelectionFromUrl()
+    // Einen Frame warten, bis der Viewport vermessen ist, dann einrahmen + Overlays setzen.
+    requestAnimationFrame(() => {
+      if (!viewer) return
+      viewer.viewport.goHome(true)
+      refreshAll()
+      // URL-Status NACH dem Einrahmen anwenden, damit geteilte Links Vorrang haben.
+      tryApplyStateFromUrl()
+      tryApplyMeasureFromUrl()
+      tryApplySelectionFromUrl()
+    })
   })
 
   viewer.addHandler("canvas-drag", (evt: any) => {
@@ -1217,6 +1225,9 @@ function createViewer() {
     if (viewer) refreshAll()
   })
   viewerRO.observe(el.value)
+
+  // Jetzt — mit allen Handlern — das Bild öffnen.
+  viewer.open(TILE_SOURCE as any)
 }
 
 // OSD erst erzeugen, wenn der Container eine echte Größe hat. Sonst rahmt
@@ -1271,7 +1282,9 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="map-wrap" :class="{ 'static-hover': hoveredStaticPlaceName || hoveredStaticRegionName }">
-    <div ref="el" class="osd"></div>
+    <!-- Inline-Höhe: garantiert die Container-Größe ab dem ersten Frame,
+         unabhängig vom (ggf. spät geladenen) Scoped-CSS. -->
+    <div ref="el" class="osd" style="height: 100dvh"></div>
 
     <svg class="overlay">
       <defs>
