@@ -6,6 +6,10 @@
   "compatibility_date": "2025-01-01",
   "assets": {
     "directory": ".output/public",
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+    // /karte direkt ausliefern statt auf /karte/ umzuleiten. Der Trailing-Slash-Redirect
+    // ließ vue-router den Query-String fallen → Share-/Mess-Links (?s=, ?m=, ?p=, ?r=)
+    // verloren ihren Zustand. So bleibt /karte?s=… ohne Redirect erhalten.
+    "html_handling": "drop-trailing-slash"
   }
 }

@@ -33,6 +33,18 @@ function colorForRegion(name: string): string {
 
 const route = useRoute()
 const router = useRouter()
+const nuxtApp = useNuxtApp()
+
+// Liest einen URL-Parameter — bevorzugt aus der aktuellen Route, mit Fallback auf
+// die beim ersten Client-Load gesicherte Query (siehe plugins/preserve-query.client.ts).
+// Nötig, weil Trailing-Slash-Redirects (Cloudflare → Nuxt) den Query-String verlieren
+// können, bevor die Karte ihn auswertet.
+function urlParam(key: string): string | null {
+  const v = route.query[key]
+  if (typeof v === "string" && v) return v
+  const init = (nuxtApp.$initialQuery as URLSearchParams | undefined)?.get(key)
+  return init && init.length ? init : null
+}
 
 const el = ref<HTMLDivElement | null>(null)
 
@@ -586,13 +598,13 @@ function clearStaticSelection() {
 }
 
 function tryApplySelectionFromUrl() {
-  const p = route.query.p
-  const r = route.query.r
-  if (typeof p === "string" && p) {
+  const p = urlParam("p")
+  const r = urlParam("r")
+  if (p) {
     selectStaticPlace(p, { immediate: true })
     return
   }
-  if (typeof r === "string" && r) {
+  if (r) {
     selectStaticRegion(r, { immediate: true })
   }
 }
@@ -933,8 +945,8 @@ async function handleCanvasDoubleClick(evt: any) {
 }
 
 function tryApplyStateFromUrl() {
-  const raw = route.query.s
-  if (!raw || Array.isArray(raw)) return
+  const raw = urlParam("s")
+  if (!raw) return
   try {
     const st = b64urlDecode<ShareState>(raw)
     if (!st || st.v !== 1 || !st.c || !st.m || typeof st.z !== "number") return
@@ -964,8 +976,8 @@ function addMeasurePoint(img: Pt) {
 }
 
 function tryApplyMeasureFromUrl() {
-  const raw = route.query.m
-  if (!raw || Array.isArray(raw)) return
+  const raw = urlParam("m")
+  if (!raw) return
   try {
     const st = b64urlDecode<MeasureShareState>(raw)
     if (!st || st.v !== 1 || !Array.isArray(st.pts) || st.pts.length < 2) return
