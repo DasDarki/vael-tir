@@ -133,6 +133,11 @@ const hoveredStaticRegionName = ref<string | null>(null)
 let viewer: OpenSeadragon.Viewer | null = null
 let copiedTimer: number | null = null
 
+// Browse-Auswahl (Ort/Region) leicht verzögern, damit ein Doppelklick (Marker setzen)
+// sie abfangen kann — sonst verschiebt der erste Klick den Viewport.
+let browseClickTimer: number | null = null
+const BROWSE_CLICK_DELAY = 320
+
 let isDragging = false
 let dragStart: { x: number; y: number } | null = null
 const DRAG_THRESHOLD_PX = 6
@@ -883,18 +888,16 @@ function handleCanvasClick(evt: any) {
   if (mode.value === "browse" && !isDmDevMode.value) {
     const screenPt: Pt = { x: webPoint?.x ?? 0, y: webPoint?.y ?? 0 }
     const placeHit = hitTestStaticPlace(screenPt)
-    if (placeHit) {
-      selectStaticPlace(placeHit.name)
-      return
-    }
-    const regionHit = hitTestStaticRegion(screenPt)
-    if (regionHit) {
-      selectStaticRegion(regionHit.name)
-      return
-    }
-    if (selectedPlaceName.value || selectedStaticRegionName.value) {
-      clearStaticSelection()
-    }
+    const regionHit = placeHit ? null : hitTestStaticRegion(screenPt)
+
+    // Verzögert ausführen, damit ein Doppelklick (Marker) die Auswahl abbrechen kann.
+    if (browseClickTimer) window.clearTimeout(browseClickTimer)
+    browseClickTimer = window.setTimeout(() => {
+      browseClickTimer = null
+      if (placeHit) selectStaticPlace(placeHit.name)
+      else if (regionHit) selectStaticRegion(regionHit.name)
+      else if (selectedPlaceName.value || selectedStaticRegionName.value) clearStaticSelection()
+    }, BROWSE_CLICK_DELAY)
     return
   }
 
@@ -928,6 +931,13 @@ function handleCanvasClick(evt: any) {
 
 async function handleCanvasDoubleClick(evt: any) {
   if (!viewer) return
+
+  // Verzögerte Browse-Auswahl des ersten Klicks abbrechen — sonst springt der Viewport,
+  // bevor der Marker gesetzt wird.
+  if (browseClickTimer) {
+    window.clearTimeout(browseClickTimer)
+    browseClickTimer = null
+  }
 
   if (mode.value === "regions" && drawing.active) {
     finalizeDrawing()
@@ -1289,6 +1299,7 @@ onBeforeUnmount(() => {
   }
   if (copiedTimer) window.clearTimeout(copiedTimer)
   if (highlightTimer) window.clearTimeout(highlightTimer)
+  if (browseClickTimer) window.clearTimeout(browseClickTimer)
 })
 </script>
 
