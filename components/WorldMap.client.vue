@@ -5,6 +5,7 @@ import { useRoute, useRouter } from "vue-router"
 import placesJson from "@/data/places.json"
 import regionsJson from "@/data/regions.json"
 import regionColorsJson from "@/data/region-colors.json"
+import type { LiveState } from "~/composables/useLiveMap"
 
 type Pt = { x: number; y: number }
 type Keypoint = { id: string; img: Pt }
@@ -945,10 +946,17 @@ async function handleCanvasDoubleClick(evt: any) {
   }
 
   if (mode.value !== "browse") return
+  // Im Live-Modus dürfen nur Zuschauer NICHT setzen.
+  if (liveRole.value === "viewer") return
+
   const webPoint = evt.position
   const vpPoint = viewer.viewport.pointFromPixel(webPoint)
   const img = viewportToImagePx(vpPoint)
   setShareMarker(img)
+
+  // Host: Marker wird per Watch live gebroadcastet — kein Link kopieren nötig.
+  if (liveRole.value === "host") return
+
   const st = getShareState(img)
   if (!st) return
   await setUrlStateAndCopy(st)
@@ -1170,6 +1178,70 @@ watch(isDmDevMode, (val) => {
   }
 })
 
+// ===================== Live-Map (P2P-Sync) =====================
+const {
+  role: liveRole,
+  status: liveStatus,
+  peerCount: livePeerCount,
+  hostId: liveHostId,
+  remote: liveRemote,
+  errorMsg: liveErr,
+  storedHostId,
+  startHost,
+  startViewer,
+  broadcast: liveBroadcast,
+  stop: liveStop,
+} = useLiveMap()
+
+const livePanelOpen = ref(false)
+
+function currentLiveState(): LiveState {
+  return {
+    marker: shareMarker.value ? { x: shareMarker.value.img.x, y: shareMarker.value.img.y } : null,
+    measure: measure.points.map((p) => ({ x: p.img.x, y: p.img.y })),
+  }
+}
+
+const liveLink = computed(() => {
+  if (!liveHostId.value || typeof window === "undefined") return ""
+  return `${window.location.origin}/karte?live=${liveHostId.value}`
+})
+
+async function startLiveHost() {
+  await startHost(currentLiveState)
+  router.replace({ query: { ...route.query, live: liveHostId.value } })
+}
+
+function endLive() {
+  liveStop()
+  const q = { ...route.query }
+  delete q.live
+  router.replace({ query: q })
+}
+
+async function copyLiveLink() {
+  if (!liveLink.value) return
+  await writeShareUrlToClipboard(liveLink.value)
+  flashCopied("Live-Link kopiert")
+}
+
+// Host: Marker-/Messungs-Änderungen an alle Viewer broadcasten.
+const liveSig = computed(() => (liveRole.value === "host" ? JSON.stringify(currentLiveState()) : ""))
+watch(liveSig, () => {
+  if (liveRole.value === "host") liveBroadcast(currentLiveState())
+})
+
+// Viewer: empfangenen Zustand des Hosts anwenden (read-only).
+watch(liveRemote, (state) => {
+  if (liveRole.value !== "viewer" || !state) return
+  if (state.marker) setShareMarker({ x: state.marker.x, y: state.marker.y })
+  else shareMarker.value = null
+  const pts = Array.isArray(state.measure) ? state.measure : []
+  measure.points = pts.map((pt) => ({ img: { x: pt.x, y: pt.y }, screen: imagePxToScreen({ x: pt.x, y: pt.y }) }))
+  measure.miles = pts.length >= 2 ? polylinePx(pts) * MILES_PER_PIXEL : null
+  refreshOverlay()
+})
+
 let viewerRO: ResizeObserver | null = null
 let initRaf = 0
 
@@ -1273,6 +1345,13 @@ onMounted(() => {
 
   window.addEventListener("keydown", onKeyDown)
   waitForReadyThenInit()
+
+  // Live-Map: ?live=<id> ⇒ ist es die eigene Host-ID, hosten — sonst als Viewer verbinden.
+  const liveId = urlParam("live")
+  if (liveId) {
+    if (liveId === storedHostId()) startHost(currentLiveState)
+    else startViewer(liveId)
+  }
 })
 
 watch(
@@ -1557,13 +1636,19 @@ onBeforeUnmount(() => {
     </svg>
 
     <div class="hud">
-      <template v-if="!isDmDevMode">
+      <template v-if="liveRole === 'viewer'">
+        <div class="live-badge"><span class="live-dot" :class="liveStatus" /> Live · Zuschauer</div>
+        <div v-if="measure.miles !== null" class="stat">Gesamt: {{ formatMiles(measure.miles) }}</div>
+      </template>
+
+      <template v-else-if="!isDmDevMode">
         <button class="btn" @click="mode = mode === 'measure' ? 'browse' : 'measure'">
           Mode: {{ mode }}
         </button>
         <button v-if="mode === 'measure' && measure.points.length" class="btn ghost" @click="resetMeasure()">
           Reset
         </button>
+        <div v-if="liveRole === 'host'" class="live-badge"><span class="live-dot" :class="liveStatus" /> Live · {{ livePeerCount }}</div>
         <div v-if="!isCalibrateMode && measure.miles !== null" class="stat">Gesamt: {{ formatMiles(measure.miles) }}</div>
         <div v-if="isCalibrateMode" class="stat dev">devmode=calibrate</div>
       </template>
@@ -1644,6 +1729,57 @@ onBeforeUnmount(() => {
           <path d="M9 4v13M15 6.5v13" />
         </svg>
       </button>
+      <button
+        v-if="!isDmDevMode"
+        class="iconbtn"
+        :class="{ active: livePanelOpen || liveRole !== 'off', live: liveRole !== 'off' }"
+        @click="livePanelOpen = !livePanelOpen"
+        title="Live-Map"
+      >
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none" />
+          <path d="M7.8 7.8a6 6 0 000 8.4M16.2 16.2a6 6 0 000-8.4M5 5a9.5 9.5 0 000 14M19 19a9.5 9.5 0 000-14" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Live-Map-Panel -->
+    <div v-if="livePanelOpen && !isDmDevMode" class="live-panel">
+      <div class="lp-head">
+        <span class="lp-title">Live-Map</span>
+        <button class="rtp-close" @click="livePanelOpen = false" title="Schließen">✕</button>
+      </div>
+
+      <div class="lp-body">
+        <template v-if="liveRole === 'off'">
+          <p class="lp-desc">Teile Marker &amp; Messungen live mit deiner Gruppe — ohne Server, direkt P2P.</p>
+          <button class="lp-btn lp-btn--primary" @click="startLiveHost">Live-Map starten</button>
+        </template>
+
+        <template v-else-if="liveRole === 'host'">
+          <div class="lp-status">
+            <span class="live-dot" :class="liveStatus" />
+            {{ liveStatus === 'online' ? 'Live' : liveStatus === 'error' ? 'Fehler' : 'Verbinde…' }}
+            <span class="lp-count">· {{ livePeerCount }} verbunden</span>
+          </div>
+          <label class="lp-label">Perma-Link für deine Gruppe</label>
+          <div class="lp-link">
+            <input :value="liveLink" readonly spellcheck="false" @focus="($event.target as HTMLInputElement).select()" />
+            <button @click="copyLiveLink">kopieren</button>
+          </div>
+          <p v-if="liveErr" class="lp-err">{{ liveErr }}</p>
+          <button class="lp-btn" @click="endLive">Beenden</button>
+        </template>
+
+        <template v-else>
+          <div class="lp-status">
+            <span class="live-dot" :class="liveStatus" />
+            {{ liveStatus === 'online' ? 'Verbunden mit Spielleiter' : liveStatus === 'error' ? 'Verbindungsfehler' : 'Warte auf Spielleiter…' }}
+          </div>
+          <p class="lp-desc">Du siehst Marker &amp; Messungen des Spielleiters live. Karte frei bewegbar.</p>
+          <button class="lp-btn" @click="endLive">Verlassen</button>
+        </template>
+      </div>
     </div>
 
     <div v-if="searchOpen" class="search-overlay" @click.self="closeSearch">
@@ -2538,6 +2674,168 @@ onBeforeUnmount(() => {
   &:hover {
     background: rgba(6, 182, 212, 0.18);
     color: #06b6d4;
+  }
+}
+
+/* ===================== Live-Map ===================== */
+.iconbtn.live {
+  background: linear-gradient(135deg, #16a34a, #06b6d4);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  white-space: nowrap;
+}
+.live-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: #9ca3af;
+  flex-shrink: 0;
+  &.online {
+    background: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+    animation: live-pulse 2s ease-in-out infinite;
+  }
+  &.connecting {
+    background: #fbbf24;
+    animation: live-pulse 1.2s ease-in-out infinite;
+  }
+  &.error {
+    background: #ef4444;
+  }
+}
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.live-panel {
+  position: absolute;
+  right: 12px;
+  top: 60px;
+  width: 300px;
+  max-width: calc(100vw - 24px);
+  background: rgba(15, 23, 42, 0.95);
+  color: white;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  z-index: 6;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+.lp-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.lp-title {
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+.lp-body {
+  padding: 14px 14px 16px;
+  display: grid;
+  gap: 12px;
+}
+.lp-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+.lp-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.lp-count {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+}
+.lp-label {
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+.lp-link {
+  display: flex;
+  gap: 6px;
+  input {
+    flex: 1;
+    min-width: 0;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 11px;
+    padding: 8px 10px;
+    font-family: ui-monospace, monospace;
+    outline: 0;
+    &:focus {
+      border-color: rgba(34, 197, 94, 0.5);
+    }
+  }
+  button {
+    flex-shrink: 0;
+    border: 0;
+    border-radius: 8px;
+    padding: 0 12px;
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+.lp-err {
+  margin: 0;
+  font-size: 12px;
+  color: #fda4af;
+}
+.lp-btn {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+  border-radius: 10px;
+  padding: 11px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+  &--primary {
+    background: linear-gradient(135deg, #16a34a, #06b6d4);
+    border-color: transparent;
+    &:hover {
+      filter: brightness(1.08);
+    }
   }
 }
 </style>

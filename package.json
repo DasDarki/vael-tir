@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "js-yaml": "^4.1.1",
-    "openseadragon": "^5.0.1"
+    "openseadragon": "^5.0.1",
+    "peerjs": "^1.5.4"
   },
   "devDependencies": {
     "@nuxt/fonts": "^0.10.3",
