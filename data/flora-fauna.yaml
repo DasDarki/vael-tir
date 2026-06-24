@@ -1,5 +1,5 @@
 # Kompendium der Flora & Fauna Vael Tirs
-# Quellen: Flora & Fauna.md, Calythar.md, Esh'Raen.md, Varkuun.md
+# Quellen: Flora & Fauna.md, Calythar.md, Esh'Raen.md, Varkuun.md, Heilkunde.md
 
 meta:
   description: >
@@ -1632,6 +1632,198 @@ entries:
       - Hält den ganzen Winter
     cost: 3 Kupfer pro Pfund
     tags: [essbar, alpin]
+
+  # ─── Komponenten aus dem Buch der Stillen Heilung ─────────────────────
+  # Nachgetragen aus Heilkunde.md (Ylvana Grünwurz). Bereits vorhandene
+  # Kräuter (Schafgarbe, Königsfarn, Ringelblume, Lavendel, Baldrian, …)
+  # sowie reine Erzeugnisse (Honig/Wachs → Honigbiene, Wein → Goldtraube)
+  # sind nicht doppelt aufgeführt.
+  - name: Wüstenlilie
+    scientificName: Lilium deserti
+    category: flora
+    type: heilpflanze
+    regions: [Süden, Westen & Westebenen]
+    locations: [Soranthis, Lumendras, Saltheris, Ankhoral]
+    continents: [Calythar]
+    habitat: Trockene, sandige Böden und Halbwüsten des tiefen Südens
+    harvest: Ganzjährig (Blätter)
+    appearance: Dicke, fleischige Blätter mit gezacktem Rand, gefüllt mit klarem Gel
+    effects:
+      - Das Gel der Blätter ist DAS Mittel gegen Verbrennungen
+      - Nimmt den Schmerz und verhindert Narben
+      - Kühlend und feuchtigkeitsspendend für die Haut
+    notes: Wilde Verwandte der kultivierten Aloe; im "Buch der Stillen Heilung" Wüstenlilie genannt.
+    tags: [heilend, wild]
+
+  - name: Wegerich
+    scientificName: Plantago officinalis
+    category: flora
+    type: heilpflanze
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden, Calythische Höhen, Ordensmarken]
+    locations: [Varethis, Thesan-Hafen, Soranthis, Haldorn, Karsuun]
+    continents: [Calythar]
+    habitat: Wegränder, Trittpfade, Wiesen – überall, wo Menschen gehen
+    harvest: Frische Blätter im Sommer
+    appearance: Rosette aus breiten, geriffelten Blättern, unscheinbare Blütenähre
+    effects:
+      - Frische, zerkaute Blätter auf Wunden und Insektenstiche
+      - Zieht Gift aus Schlangenbissen (Notfallhilfe)
+      - Stillt kleine Blutungen, lindert Juckreiz
+    notes: Wegbegleiter der Wanderer – wächst, wo der Fuß tritt.
+    tags: [heilend, alltäglich]
+
+  - name: Fieberweide
+    scientificName: Salix febrifuga
+    category: flora
+    type: baum
+    regions: [Varethianische Ebenen, Süden, Valdorn]
+    locations: [Luminfluss, Selhaven, Damrath, Mulbeth, Bekannter Rand]
+    continents: [Calythar]
+    habitat: Flussufer, feuchte Niederungen
+    harvest: Rinde im Frühjahr, wenn der Saft steigt
+    appearance: Schlanker Baum mit hängenden Zweigen, raue graubraune Rinde, schmale Blätter
+    effects:
+      - Die Rinde senkt Fieber und lindert Schmerzen
+      - Wird kalt eingeweicht, dann gekocht
+      - Grundlage des Fieberbrechers
+    notes: Nicht zu verwechseln mit der heiligen Tränenweide.
+    tags: [heilend, fieber]
+
+  - name: Linde
+    scientificName: Tilia cordata
+    category: flora
+    type: baum
+    regions: [Varethianische Ebenen, Westen & Westebenen, Süden]
+    locations: [Varethis, Helioris, Thesan-Hafen, Soranthis, Arendal]
+    continents: [Calythar]
+    habitat: Dorfplätze, Alleen, Mischwälder
+    bloom: Frühsommer
+    harvest: Blüten im Frühsommer
+    appearance: Großer Baum mit herzförmigen Blättern, duftende gelblich-weiße Blüten
+    effects:
+      - Blütentee schweißtreibend, gegen Fieber und Erkältung
+      - Beruhigend
+      - Schwer zu finden – ersatzweise mehr Kamille
+    notes: Traditioneller Dorfbaum; unter alten Linden wurde Recht gesprochen.
+    tags: [heilend]
+
+  - name: Walnussbaum
+    scientificName: Juglans regia
+    category: flora
+    type: baum
+    regions: [Süden, Varethianische Ebenen]
+    locations: [Soranthis, Veranthal, Lumendras, Varethis]
+    continents: [Calythar]
+    habitat: Sonnige Hänge, Gärten, Hofstellen
+    harvest: Nüsse im Herbst
+    appearance: Breitkroniger Baum, gefiederte Blätter, grüne Fruchthüllen um harte Nüsse
+    effects:
+      - Nüsse nahrhaft und ölreich
+      - Zerkleinerte Schalen gelten als gedächtnis- und konzentrationsfördernd
+      - Grüne Schalen färben Stoff und Haar tiefbraun
+    tags: [essbar, heilend, gewerblich]
+
+  - name: Olive
+    scientificName: Olea pacifica
+    category: flora
+    type: obst
+    regions: [Süden, Westen & Westebenen]
+    locations: [Soranthis, Lumendras, Veranthal, Calyra, Havelthen]
+    continents: [Calythar]
+    habitat: Trockene, sonnige Hänge des Südens
+    harvest: Spätherbst
+    appearance: Knorriger, langlebiger Baum mit silbrigen Blättern; grüne bis schwarze Früchte
+    effects:
+      - Reines Öl – Grundlage zahlloser Salben und Speisen
+      - Früchte eingelegt als Nahrung
+      - Öl brennt sauber in Lampen
+    cost: 6 Kupfer pro Becher (Öl)
+    tags: [essbar, gewerblich, kultiviert]
+
+  - name: Lein
+    scientificName: Linum usitatissimum
+    category: flora
+    type: nutzpflanze
+    regions: [Varethianische Ebenen, Westen & Westebenen, Calythische Höhen]
+    locations: [Varethis, Selhaven, Arendal, Thesan-Hafen, Haldorn]
+    continents: [Calythar]
+    habitat: Kühle Felder, kommt auch mit magerem Boden zurecht
+    bloom: Frühsommer
+    harvest: Samen und Stängel im Spätsommer
+    appearance: Schlanke Stängel, zarte hellblaue Blüten, glänzende braune Samen
+    effects:
+      - Samen gepresst zu reinem Leinöl (Heilkunde und Speise)
+      - Geschrotete Samen als Schleim gegen Husten und Verstopfung
+      - Fasern der Stängel zu Leinen versponnen
+    tags: [heilend, gewerblich, alltäglich]
+
+  - name: Hafer
+    scientificName: Avena calytharis
+    category: flora
+    type: nutzpflanze
+    regions: [Calythische Höhen, Varethianische Ebenen, Valdorn]
+    locations: [Haldorn, Felsmahr, Vindrath, Arendal, Bekannter Rand]
+    continents: [Calythar]
+    habitat: Kühle, feuchte Felder; gedeiht, wo Weizen versagt
+    harvest: Spätsommer
+    appearance: Lockere, nickende Rispen statt dichter Ähren
+    effects:
+      - Grütze und Brei – sättigende Grundnahrung
+      - Pferdefutter
+      - Haferstroh im Bad beruhigt gereizte, juckende Haut
+    cost: 6 Kupfer pro 10 Pfund
+    tags: [essbar, heilend, alltäglich]
+
+  - name: Zimt
+    scientificName: Cinnamomum australe
+    category: flora
+    type: gewuerz
+    regions: [Süden]
+    locations: [Soranthis, Lumendras]
+    continents: [Calythar]
+    habitat: Warme Gewächshäuser; die Rinde meist aus dem fernen Süden importiert
+    harvest: Rinde junger Triebe
+    appearance: Aufgerollte, rotbraune Rindenstücke, süß-warmer Duft
+    effects:
+      - Wärmend, durchblutungsfördernd
+      - Für Wintertränke gegen die Kälte
+      - Teures Festtagsgewürz
+    cost: 8 Kupfer pro Stange
+    tags: [kulinarisch, heilend, import, luxus]
+
+  - name: Gewürznelke
+    scientificName: Syzygium aromaticum
+    category: flora
+    type: gewuerz
+    regions: [Süden]
+    locations: [Soranthis, Lumendras]
+    continents: [Calythar]
+    habitat: Import; im Süden nur in Gewächshäusern gezogen
+    harvest: Ungeöffnete Blütenknospen, getrocknet
+    appearance: Kleine, nagelförmige dunkelbraune Knospen, intensiv-würziger Duft
+    effects:
+      - Betäubt Zahnschmerzen (auf den Zahn gelegt)
+      - Wärmend, in Wintertränken
+      - Konservierend und keimtötend
+    cost: 1 Silber pro Unze
+    tags: [kulinarisch, heilend, import]
+
+  - name: Alaun
+    scientificName: Sal adstringens
+    category: flora
+    type: gewuerz
+    regions: [Westen & Westebenen, Calythische Höhen]
+    locations: [Saltheris, Fendrak, Korvash, Tharumund]
+    continents: [Calythar]
+    appearance: Klare bis weißliche, glasige Kristalle; herb-zusammenziehender Geschmack
+    effects:
+      - Stark zusammenziehend – stillt Blutungen (Bestandteil des Blutstiller-Pulvers)
+      - Von Gerbern zum Beizen von Leder genutzt
+      - Klärt trübes Wasser
+    warning: Vom Arkanum verboten – Besitz und Handel gelten als Vergehen.
+    notes: Mineralsalz, kein Kraut. Das Arkanum hat Alaun (Alaunsalz) verboten; heute nur noch heimlich über Gerber und den Schwarzmarkt zu bekommen.
+    cost: 30 Gold (Schwarzmarkt)
+    tags: [heilend, mineral, verboten, arkanum, schwarzmarkt]
 
   # ─── FAUNA: Reittiere ─────────────────────────────────────────────────
   - name: Varethianisches Streitross
